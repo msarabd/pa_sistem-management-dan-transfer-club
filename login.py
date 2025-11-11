@@ -1,5 +1,5 @@
 import os
-from data import data_pengguna, data_pemain, semua_pemain, cek_pemain
+from data import data_pengguna, data_pemain, semua_pemain, cek_pemain, data_barcelona, data_club_pengguna
 from prettytable import PrettyTable
 import time
 
@@ -130,7 +130,7 @@ Management : "Selamat datang di Barcelona, {user}. Kontrak telah sah. Anda datan
             input("akhir")
 
         elif pilihan_4 == "2":
-            data_pengguna["user_biasa"][user].append("real madrid")
+            data_pengguna["user_biasa"][user].append("madrid")
             os.system("cls")
             teks = f"""
 Management : "Selamat datang di Madrid, {user}. Tidak ada kata 'transisi' di sini, hanya dominasi. Anggaran tersedia: Anda harus membeli pemain bintang dengan market value tertinggi yang sesuai dengan standar klub. Tugas utama Anda adalah memberikan trofi internasional (UCL) setiap musim. Kegagalan di panggung Eropa tidak dapat diterima. Jadilah raja, dan rekrut raja. ¡Hala Madrid!"
@@ -175,7 +175,7 @@ Management : "Selamat datang di Paris, {user}. Anda memiliki sumber daya yang me
             input("akhir")
         
         elif pilihan_4 == "5":
-            data_pengguna["user_biasa"][user].append("borussia dormund")
+            data_pengguna["user_biasa"][user].append("dormund")
             os.system("cls")
             teks = f"""
 Management : "Selamat datang di Dormund, {user}. Kami adalah klub gairah dan bisnis cerdas. Model kami adalah pengembangan: Anda harus membeli pemain muda atau hasil pencari bakat dengan potensi tinggi. Visi finansial adalah kunci: Perbesar keuangan klub secara signifikan dari penjualan pemain. Kualifikasi UCL harus dipastikan, sambil menjaga filosofi tim yang menyerang dan menghasilkan keuntungan. Echte Liebe!"

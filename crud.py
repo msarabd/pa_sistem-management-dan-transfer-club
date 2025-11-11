@@ -1,4 +1,4 @@
-from data import data_pemain, cek_pemain, semua_pemain
+from data import data_pemain, cek_pemain, semua_pemain, data_club_pengguna
 from prettytable import PrettyTable
 import os
 
@@ -28,29 +28,35 @@ def tampil_starting():
     print(tabel_starting)
 
 def tampil_cadangan():
-    data_cadangan = []
-    for i in range(len(data_pemain["gk_cadangan"])):
-        nomor = i + 1
-        pemain_cadangan = data_pemain["gk_cadangan"][i]
-        data_cadangan.append([f"{nomor}.", pemain_cadangan, "GK"])
-    for i in range(len(data_pemain["df_cadangan"])):
-        nomor = i + 1 + len(data_pemain["gk_cadangan"])
-        pemain_cadangan = data_pemain["df_cadangan"][i]
-        data_cadangan.append([f"{nomor}.", pemain_cadangan, "DF"])
-    for i in range(len(data_pemain["mf_cadangan"])):
-        nomor = i + 1 + len(data_pemain["gk_cadangan"] + data_pemain["df_cadangan"])
-        pemain_cadangan = data_pemain["mf_cadangan"][i]
-        data_cadangan.append([f"{nomor}.", pemain_cadangan, "MF"])
-    for i in range(len(data_pemain["fw_cadangan"])):
-        nomor = i + 1 + len(data_pemain["gk_cadangan"] + data_pemain["df_cadangan"] + data_pemain["mf_cadangan"])
-        pemain_cadangan = data_pemain["fw_cadangan"][i]
-        data_cadangan.append([f"{nomor}.", pemain_cadangan, "FW"])
+        data_cadangan = []
+        for i in range(len(data_club_pengguna["gk"])):
+            if i > 0:
+                nomor = i
+                data_cadangan.append([f"{nomor}.", data_club_pengguna["gk"][i][0], data_club_pengguna["gk"][i][1], data_club_pengguna["gk"][i][2], data_club_pengguna["gk"][i][3], data_club_pengguna["gk"][i][4], data_club_pengguna["gk"][i][5]])
+# def tampil_cadangan():
+#     data_cadangan = []
+#     for i in range(len(data_pemain["gk_cadangan"])):
+#         nomor = i + 1
+#         pemain_cadangan = data_pemain["gk_cadangan"][i]
+#         data_cadangan.append([f"{nomor}.", pemain_cadangan, "GK"])
+#     for i in range(len(data_pemain["df_cadangan"])):
+#         nomor = i + 1 + len(data_pemain["gk_cadangan"])
+#         pemain_cadangan = data_pemain["df_cadangan"][i]
+#         data_cadangan.append([f"{nomor}.", pemain_cadangan, "DF"])
+#     for i in range(len(data_pemain["mf_cadangan"])):
+#         nomor = i + 1 + len(data_pemain["gk_cadangan"] + data_pemain["df_cadangan"])
+#         pemain_cadangan = data_pemain["mf_cadangan"][i]
+#         data_cadangan.append([f"{nomor}.", pemain_cadangan, "MF"])
+#     for i in range(len(data_pemain["fw_cadangan"])):
+#         nomor = i + 1 + len(data_pemain["gk_cadangan"] + data_pemain["df_cadangan"] + data_pemain["mf_cadangan"])
+#         pemain_cadangan = data_pemain["fw_cadangan"][i]
+#         data_cadangan.append([f"{nomor}.", pemain_cadangan, "FW"])
 
-    tabel_cadangan = PrettyTable()
-    tabel_cadangan.title = "CADANGAN"
-    tabel_cadangan.field_names = ["NO.", "Nama Pemain", "Posisi"]
-    tabel_cadangan.add_rows(data_cadangan)
-    print(tabel_cadangan)
+#     tabel_cadangan = PrettyTable()
+#     tabel_cadangan.title = "CADANGAN"
+#     tabel_cadangan.field_names = ["NO.", "Nama Pemain", "Posisi"]
+#     tabel_cadangan.add_rows(data_cadangan)
+#     print(tabel_cadangan)
 
 def tambah_pemain():
     global data_pemain

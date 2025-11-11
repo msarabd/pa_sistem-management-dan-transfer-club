@@ -3,6 +3,7 @@ from login import input_biasa, input_mod, input_register
 from crud import tampil_starting, tampil_cadangan, tambah_pemain, ganti_pemain, hapus_pemain, tampilan_ubah_pemain
 from prettytable import PrettyTable
 import datetime as dt
+from data import data_club_pengguna, data_pengguna, data_barcelona
 
 login_mod = False
 login_biasa = False
@@ -42,20 +43,32 @@ while not awal_1:
     else:
         input("\n(Input tidak valid, ketuk enter untuk memilih kembali)")
 
-if login_mod:
-    while login_mod:
+if login_biasa:
+    if data_pengguna["user_biasa"][user][1] == "barcelona":
+        club = "Barcelona"
+        data_club_pengguna = data_barcelona.copy()
+    # if data_pengguna["user_biasa"][user][1] == "madrid":
+    #     data_club_pengguna = data_madrid.copy()
+    # if data_pengguna["user_biasa"][user][1] == "arsenal":
+    #     data_club_pengguna = data_arsenal.copy()
+    # if data_pengguna["user_biasa"][user][1] == "psg":
+    #     data_club_pengguna = data_psg.copy()
+    # if data_pengguna["user_biasa"][user][1] == "dormund":
+    #     data_club_pengguna = data_dormund.copy()
+
+    while login_biasa:
         os.system("cls")
-        print("=== Selamat Datang Tuan Admin ===\n")
+        print(f"=== Selamat Datang Tuan {user} ===\n")
         tabel_menu_admin = PrettyTable()
         tabel_menu_admin.title = "Mau ngapain hari ini?"
         tabel_menu_admin.field_names = ["kiri", "kanan"]
         tabel_menu_admin.header = False
         tabel_menu_admin.add_rows([
-            ["[1]", "Lihat Daftar Line Up"],
-            ["[2]", "Tambah Pemain Cadangan"],
-            ["[3]", "Ganti Starting Line Up"],
-            ["[4]", "Ganti Pemain Cadangan"],
-            ["[5]", "Hapus Pemain Cadangan"],
+            ["[1]", "Lihat Formasi"],
+            ["[2]", "Edit Squad"],
+            ["[3]", "keuangan club"],
+            ["[4]", "Transfer Pemain"],
+            ["[5]", "Jendela Transfer"],
             ["[6]", "Keluar"]
             ])
         print(tabel_menu_admin)
@@ -65,10 +78,11 @@ if login_mod:
         if pilihan_2 == "1":
             data_waktu = dt.datetime.now()
             os.system("cls")
-            print(f"Daftar Line Up Timnas Indonesia ({data_waktu.strftime("%A")}, {data_waktu.day} - {data_waktu.month} - {data_waktu.year})\n")
-            tampil_starting()
-            print()
-            tampil_cadangan()
+            print(f"Daftar Line Up {club} ({data_waktu.strftime("%A")}, {data_waktu.day} - {data_waktu.month} - {data_waktu.year})\n")
+            
+            # tampil_starting()
+            # print()
+            # tampil_cadangan()
             input("\n(Ketuk enter untuk kembali memilih menu)")
 
         elif pilihan_2 == "2":
@@ -103,13 +117,13 @@ if login_mod:
             tampilan_ubah_pemain(panggil_pemain, "menghapus")
                 
         elif pilihan_2 == "6":
-            login_mod = False
+            login_biasa = False
 
         else:
             input("\n(Input tidak valid, ketuk enter untuk kembali)")
 
-elif login_biasa:
-    while login_biasa:
+elif login_mod:
+    while login_mod:
         os.system("cls")
         print(f"=== Selamat Datang Tuan Muda {user} ===\n")
         tabel_menu_user = PrettyTable()
@@ -134,7 +148,7 @@ elif login_biasa:
             input("\n(Ketuk enter untuk kembali memilih menu)")
             
         elif pilihan_2 == "2":
-            login_biasa = False
+            login_mod = False
 
         else:
             input("\n(Input tidak valid, ketuk enter untuk kembali)")
