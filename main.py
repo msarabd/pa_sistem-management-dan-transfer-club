@@ -161,6 +161,7 @@ if login_biasa:
 elif login_mod:
     while login_mod:
         os.system("cls")
+        
         print(f"=== Selamat Datang Tuan Muda {user} ===\n")
         tabel_menu_user = PrettyTable()
         tabel_menu_user.title = "Mau ngapain hari ini?"
