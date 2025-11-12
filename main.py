@@ -3,7 +3,7 @@ from login import input_biasa, input_mod, input_register
 from crud import tampil_starting, tampil_cadangan, tambah_pemain, ganti_pemain, hapus_pemain, tampilan_ubah_pemain
 from prettytable import PrettyTable
 import datetime as dt
-from data import data_club_pengguna, data_pengguna, data_barcelona
+from data import data_club_pengguna, data_pengguna, data_barcelona, data_madrid
 
 login_mod = False
 login_biasa = False
@@ -162,10 +162,54 @@ if login_biasa:
                                 ["2.", "Arsenal"],
                                 ["3.", "PSG"],
                                 ["4.", "Borussia Dormund"],
+                                ["5.", "Kembali"]
                                 ])
                             print(tabel_pil_club)
 
-                            pilihan_4 = input("Pilih menu (1-4) = ").strip()
+                            pilihan_4 = input("Pilih menu (1-5) = ").strip()
+
+                            if pilihan_4 == "1":
+                                os.system("cls")
+                                tampil_starting(data_madrid)
+                                print()
+                                tampil_cadangan(data_madrid)
+                                print("\nLini tersedia: gk (kiper), df (bek), mf (gelandang), fw (penyerang)")
+                                lini = input("Masukkan lini yang ingin ditambah: ").strip().lower()
+                                
+                                try:
+                                    if lini not in data_madrid:
+                                        raise ValueError(f"Lini '{lini}' tidak tersedia.")
+                                        
+                                    daftar = data_madrid[lini]
+
+                                    print(f"\nDaftar pemain di lini {lini}:")
+                                    for i, p in enumerate(daftar):
+                                        print(f"{i+1}. {p[0]} (Rating: {p[1]}, Harga: {p[3]})")
+
+                                    idx_a = int(input("\nMasukkan nomor pemain: ")) - 1
+                                    
+                                    # Tambah pemain
+                                    tampung_pemain = daftar[idx_a].pop()
+                                    data_barcelona[lini].append(tampung_pemain)
+
+                                    print(f"\n✅ Pemain berhasil ditambahkan: {daftar[idx_a][0]} -> {club} di lini {lini}.")
+
+                                except Exception as e:
+                                    print()
+                                    input(e)
+
+                                input("akhir")
+                                break
+
+                            elif pilihan_4 == "2":
+                                pass
+                            elif pilihan_4 == "3":
+                                pass
+                            elif pilihan_4 == "4":
+                                pass
+                            elif pilihan_4 == "5":
+                                break
+
                     elif pilihan_3 == "2":
                         pass
                     elif pilihan_3 == "3":

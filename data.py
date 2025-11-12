@@ -90,7 +90,7 @@ data_barcelona = {
     "saldo": 120000000
 }
 
-data_realmadrid = {
+data_madrid = {
     "gk": [
         # Nama, Rating, Usia, Nilai Transfer (€), Tinggi (cm), Negara
         ['Thibaut Courtois', 7.1, 33, 19400000, 200, "Belgia"],
