@@ -137,12 +137,48 @@ if login_biasa:
             elif pilihan_2 == "4":
                 while True:
                     os.system("cls")
-                    tampil_cadangan()
-                    pemain_tukar, ulang_2 = ganti_pemain("gk_cadangan", "df_cadangan", "mf_cadangan", "fw_cadangan")
-                    if ulang_2 == True:
-                        break
+                    tabel_transfer = PrettyTable()
+                    tabel_transfer.title = "TRANSFER PEMAIN"
+                    tabel_transfer.field_names = ["kiri", "kanan"]
+                    tabel_transfer.header = False
+                    tabel_transfer.add_rows([
+                        ["1.", "Beli pemain"],
+                        ["2.", "Jual pemain"],
+                        ["3.", "Kembali"]
+                        ])
+                    print(tabel_transfer)
 
-                tampilan_ubah_pemain(pemain_tukar, "mengganti pemain cadangan dengan")
+                    pilihan_3 = input("Pilih menu (1-3) = ").strip()
+
+                    if pilihan_3 == "1":
+                        while True:
+                            os.system("cls")
+                            tabel_pil_club = PrettyTable()
+                            tabel_pil_club.title = "MAU BELI PEMAIN DARI:"
+                            tabel_pil_club.field_names = ["kiri", "kanan"]
+                            tabel_pil_club.header = False
+                            tabel_pil_club.add_rows([
+                                ["1.", "Real Madrid"],
+                                ["2.", "Arsenal"],
+                                ["3.", "PSG"],
+                                ["4.", "Borussia Dormund"],
+                                ])
+                            print(tabel_pil_club)
+
+                            pilihan_4 = input("Pilih menu (1-4) = ").strip()
+                    elif pilihan_3 == "2":
+                        pass
+                    elif pilihan_3 == "3":
+                        break
+                    else:
+                        input("\n(Input tidak valid, ketuk enter untuk kembali)")
+                #     os.system("cls")
+                #     tampil_cadangan()
+                #     pemain_tukar, ulang_2 = ganti_pemain("gk_cadangan", "df_cadangan", "mf_cadangan", "fw_cadangan")
+                #     if ulang_2 == True:
+                #         break
+
+                # tampilan_ubah_pemain(pemain_tukar, "mengganti pemain cadangan dengan")
                     
             elif pilihan_2 == "5":
                 while True:

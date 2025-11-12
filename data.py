@@ -86,7 +86,8 @@ data_barcelona = {
         ["Lamine Yamal", 7.8, 18, 215000000, 180, "Spanyol"],
         ["Raphinha", 7.6, 28, 81000000, 176, "Brasil"],
         ["Ferran Torres", 7.0, 25, 54000000, 184, "Spanyol"],
-    ]
+    ],
+    "saldo": 120000000
 }
 
 
