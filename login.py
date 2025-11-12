@@ -1,5 +1,5 @@
 import os
-from data import data_pengguna, data_pemain, semua_pemain, cek_pemain
+from data import data_pengguna, data_pemain, semua_pemain, cek_pemain, data_barcelona, data_club_pengguna
 from prettytable import PrettyTable
 import time
 
@@ -75,6 +75,8 @@ def input_mod():
 def input_register():
     global data_pengguna
     global user
+    global login_biasa
+    global awal_1
     
     while True:
         os.system("cls")
@@ -128,9 +130,12 @@ Management : "Selamat datang di Barcelona, {user}. Kontrak telah sah. Anda datan
 
             print()
             input("akhir")
+            login_biasa = True
+            awal_1 = True
+            return user, login_biasa, awal_1
 
         elif pilihan_4 == "2":
-            data_pengguna["user_biasa"][user].append("real madrid")
+            data_pengguna["user_biasa"][user].append("madrid")
             os.system("cls")
             teks = f"""
 Management : "Selamat datang di Madrid, {user}. Tidak ada kata 'transisi' di sini, hanya dominasi. Anggaran tersedia: Anda harus membeli pemain bintang dengan market value tertinggi yang sesuai dengan standar klub. Tugas utama Anda adalah memberikan trofi internasional (UCL) setiap musim. Kegagalan di panggung Eropa tidak dapat diterima. Jadilah raja, dan rekrut raja. ¡Hala Madrid!"
@@ -143,6 +148,9 @@ Management : "Selamat datang di Madrid, {user}. Tidak ada kata 'transisi' di sin
 
             print()
             input("akhir")
+            login_biasa = True
+            awal_1 = True
+            return user, login_biasa, awal_1
         
         elif pilihan_4 == "3":
             data_pengguna["user_biasa"][user].append("arsenal")
@@ -158,6 +166,9 @@ Management : "Selamat datang di London, {user}. Kami telah membangun fondasi yan
 
             print()
             input("akhir")
+            login_biasa = True
+            awal_1 = True
+            return user, login_biasa, awal_1
         
         elif pilihan_4 == "4":
             data_pengguna["user_biasa"][user].append("psg")
@@ -173,9 +184,12 @@ Management : "Selamat datang di Paris, {user}. Anda memiliki sumber daya yang me
 
             print()
             input("akhir")
+            login_biasa = True
+            awal_1 = True
+            return user, login_biasa, awal_1
         
         elif pilihan_4 == "5":
-            data_pengguna["user_biasa"][user].append("borussia dormund")
+            data_pengguna["user_biasa"][user].append("dormund")
             os.system("cls")
             teks = f"""
 Management : "Selamat datang di Dormund, {user}. Kami adalah klub gairah dan bisnis cerdas. Model kami adalah pengembangan: Anda harus membeli pemain muda atau hasil pencari bakat dengan potensi tinggi. Visi finansial adalah kunci: Perbesar keuangan klub secara signifikan dari penjualan pemain. Kualifikasi UCL harus dipastikan, sambil menjaga filosofi tim yang menyerang dan menghasilkan keuntungan. Echte Liebe!"
@@ -188,4 +202,7 @@ Management : "Selamat datang di Dormund, {user}. Kami adalah klub gairah dan bis
 
             print()
             input("akhir")
+            login_biasa = True
+            awal_1 = True
+            return user, login_biasa, awal_1
 
