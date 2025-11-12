@@ -90,4 +90,37 @@ data_barcelona = {
     "saldo": 120000000
 }
 
+data_realmadrid = {
+    "gk": [
+        # Nama, Rating, Usia, Nilai Transfer (€), Tinggi (cm), Negara
+        ['Thibaut Courtois', 7.1, 33, 19400000, 200, "Belgia"],
+        ['Andriy Lunin', 7.0, 26, 16900000, 191, "Ukraina"],
+        ['Fran Gonzales', 7.0, 20, 910000, 199, "Spanyol"]
+    ],
+    "df": [ # Centre-Back/Pemain Belakang (Saya menggunakan "cb" untuk seluruh pemain Back)
+        ["Antonio Rüdiger", 6.8, 32, 15500000, 190, "Jerman"],
+        ["Dani Carvajal", 6.7, 33, 7700000, 173, "Spanyol"],
+        ["Dean Huijsen", 7.3, 20, 77000000, 195, "Belanda/Spanyol"],
+        ["Éder Militão", 7.4, 27, 31000000, 186, "Brasil"],
+        ["Trent Alexander-Arnold", 7.1, 27, 77000000, 180, "Inggris"]
+    ],
+    "mf": [ # Midfield/Gelandang
+        ["Jude Bellingham", 7.4, 22, 170000000, 186, "Inggris"],
+        ["Arda Güler", 7.8, 20, 58000000, 176, "Turki"],
+        ["Federico Valverde", 7.3, 27, 126000000, 182, "Uruguay"],
+        ["Brahim Díaz", 6.9, 26, 42000000, 171, "Spanyol"],
+        ["Eduardo Camavinga", 7.0, 22, 48000000, 182, "Prancis"],
+        ["Aurélien Tchouaméni", 7.2, 25, 78000000, 187, "Prancis"],
+        ["Dani Ceballos", 7.0, 29, 8400000, 179, "Spanyol"],
+        ["Mario Martín", 6.7, 20, 3200000, 180, "Spanyol"],
 
+    ],
+    "fw": [ # Forward/Penyerang
+        ["Kylian Mbappé", 7.8, 26, 191000000, 178, "Prancis"],
+        ["Vinícius Júnior", 7.2, 25, 156000000, 176, "Brasil"],
+        ["Rodrygo", 7.2, 24, 85000000, 174, "Brasil"],
+        ["Endrick", 6.7, 19, 37000000, 173, "Brasil"],
+        ["Gonzalo Garcia", 7.0, 21, 15500000, 182, "Spanyol"],
+        ["Franco Mastantuono", 7.1, 18, 49000000, 177, "Argentina"]
+    ]
+}
