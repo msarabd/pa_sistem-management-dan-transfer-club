@@ -1,13 +1,176 @@
 import os
 from login import input_biasa, input_mod, input_register
-from crud import tampil_starting, tampil_cadangan, tambah_pemain, ganti_pemain, hapus_pemain, tampilan_ubah_pemain
+from crud import tampil_starting, tampil_cadangan, ganti_pemain, ganti_pemain, hapus_pemain, tampilan_ubah_pemain
 from prettytable import PrettyTable
 import datetime as dt
-from data import data_club_pengguna, data_pengguna, data_barcelona, data_madrid
+from data import data_club_pengguna, data_pengguna, data_barcelona, data_madrid, data_arsenal, data_psg, data_dortmund
 
 login_mod = False
 login_biasa = False
 
+def tampil_squad(data_club):
+    data_squad = []
+    for i in range(len(data_club["gk"])):
+        nomor = i + 1
+        data_squad.append([f"{nomor}.", data_club["gk"][i][0], "GK", data_club["gk"][i][1], data_club["gk"][i][2], f"€{data_club["gk"][i][3]}", data_club["gk"][i][4], data_club["gk"][i][5]])
+    for i in range(len(data_club["df"])):
+        nomor = i + 1 + len(data_club["gk"])
+        data_squad.append([f"{nomor}.", data_club["df"][i][0], "DF", data_club["df"][i][1], data_club["df"][i][2], f"€{data_club["df"][i][3]}", data_club["df"][i][4], data_club["df"][i][5]])
+    for i in range(len(data_club["mf"])):
+        nomor = i + 1 + len(data_club["gk"] + data_club["df"])
+        data_squad.append([f"{nomor}.", data_club["mf"][i][0], "MF", data_club["mf"][i][1], data_club["mf"][i][2], f"€{data_club["mf"][i][3]}", data_club["mf"][i][4], data_club["mf"][i][5]])
+    for i in range(len(data_club["fw"])):
+        nomor = i + 1 + len(data_club["gk"] + data_club["df"] + data_club["mf"])
+        data_squad.append([f"{nomor}.", data_club["fw"][i][0], "FW", data_club["fw"][i][1], data_club["fw"][i][2], f"€{data_club["fw"][i][3]}", data_club["fw"][i][4], data_club["fw"][i][5]])
+
+    tabel_squad = PrettyTable()
+    tabel_squad.field_names = ["NO.", "Nama Pemain", "Posisi", "Rating", "Umur", "MV", "Tinggi(cm)", "Negara"]
+    tabel_squad.add_rows(data_squad)
+    print(tabel_squad)
+
+def beli_pemain(data_club_masuk, data_club_keluar):
+    while True:
+        os.system("cls")
+        tampil_squad(data_club_keluar)
+        print("\nLini tersedia: gk (kiper), df (bek), mf (gelandang), fw (penyerang)")
+        lini = input("Masukkan lini yang ingin dibeli: ").strip().lower()
+
+        try:
+            if lini not in data_club_keluar:
+                raise ValueError(f"Lini '{lini}' tidak tersedia.")
+                
+            daftar = data_club_keluar[lini]
+
+            print(f"\nDaftar pemain di lini {lini}:")
+            for i, p in enumerate(daftar):
+                print(f"{i+1}. {p[0]} (Rating: {p[1]}, Harga: €{p[3]})")
+
+            idx_a = int(input("\nMasukkan nomor pemain: ")) - 1
+            
+            if idx_a < 0:
+                raise ValueError("Nomor pemain tidak tersedia")
+            
+            # Tambah pemain
+            tampung_pemain = daftar[idx_a]
+            data_club_masuk[lini].append(tampung_pemain)
+
+            # Harga beli (Market Value * 120%)
+            harga_beli = daftar[idx_a][3] * 120 / 100
+            data_club_masuk["saldo"] -= harga_beli
+
+            input(f"\n✅ Pemain berhasil dibeli: {daftar[idx_a][0]} -> {club} di lini {lini}, sisa saldo club: €{data_club_masuk["saldo"]}.")
+            del daftar[idx_a]
+            break
+
+        except Exception as e:
+            print()
+            input(f"({e})")
+            continue
+
+def jual_pemain(data_club):
+    while True:
+        os.system("cls")
+        print("Lini tersedia: gk (kiper), df (bek), mf (gelandang), fw (penyerang)")
+        lini = input("Masukkan lini yang ingin dijual: ").strip().lower()
+
+        try:
+            if lini not in data_club:
+                raise ValueError(f"Lini '{lini}' tidak tersedia.")
+                
+            daftar = data_club[lini]
+
+
+            print(f"\nDaftar pemain di lini {lini}:")
+            for i, p in enumerate(daftar):
+                print(f"{i+1}. {p[0]} (Rating: {p[1]}, Harga: €{p[3]})")
+
+            idx_a = int(input("\nMasukkan nomor pemain pertama: ")) - 1
+            
+            if lini == "gk":
+                if len(daftar) <= 1:
+                    raise ValueError(f"Jumlah pemain pada lini {lini} {club} tidak cukup")
+            elif lini == "df":
+                if len(daftar) <= 4:
+                    raise ValueError(f"Jumlah pemain pada lini {lini} {club} tidak cukup")
+            elif lini == "mf":
+                if len(daftar) <= 3:
+                    raise ValueError(f"Jumlah pemain pada lini {lini} {club} tidak cukup")
+            elif lini == "fw":
+                if len(daftar) <= 3:
+                    raise ValueError(f"Jumlah pemain pada lini {lini} {club} tidak cukup")
+            
+            if idx_a < 0:
+                raise ValueError("Nomor pemain tidak tersedia")
+            
+            # tambah pemain ke club random
+            import random
+            pilih_club = [data_barcelona, data_madrid, data_arsenal, data_psg, data_dortmund]
+            pilih_club.remove(data_club)
+            club_keluar = random.choice(pilih_club)
+            club_keluar[lini].append(daftar[idx_a])
+
+            if club_keluar == data_barcelona:
+                nama_club_keluar = "Barcelona"
+            elif club_keluar == data_madrid:
+                nama_club_keluar = "Real Madrid"
+            elif club_keluar == data_arsenal:
+                nama_club_keluar = "Arsenal"
+            elif club_keluar == data_psg:
+                nama_club_keluar = "PSG"
+            elif club_keluar == data_dortmund:
+                nama_club_keluar = "Borussia Dormunt"
+            
+            # Harga jual (Market Value * 80%)
+            harga_jual = daftar[idx_a][3] * 80 / 100
+            data_club["saldo"] += harga_jual
+
+            input(f"\n✅ Posisi berhasil dijual: {daftar[idx_a][0]} -> {nama_club_keluar} di lini {lini}, sisa saldo club: €{data_club["saldo"]}.")
+
+            # hapus pemain di club awal
+            del daftar[idx_a]
+            break
+
+        except Exception as e:
+            print()
+            input(f"({e})")
+            continue
+
+def ganti_pemain(data_club):
+    while True:
+        os.system("cls")
+        print("Lini tersedia: gk (kiper), df (bek), mf (gelandang), fw (penyerang)")
+        lini = input("Masukkan lini yang ingin ditukar: ").strip().lower()
+
+        try:
+            if lini not in data_club:
+                raise ValueError(f"Lini '{lini}' tidak tersedia.")
+                
+            daftar = data_club[lini]
+
+            print(f"\nDaftar pemain di lini {lini}:")
+            for i, p in enumerate(daftar):
+                print(f"{i+1}. {p[0]} (Rating: {p[1]})")
+
+            idx_a = int(input("\nMasukkan nomor pemain pertama: ")) - 1
+            idx_b = int(input("Masukkan nomor pemain kedua: ")) - 1
+
+            if idx_a or idx_b < 0:
+                raise ValueError("Nomor pemain tidak tersedia")
+            
+            if idx_a == idx_b:
+                raise ValueError("Nomor pemain tidak boleh sama")
+            
+            # Tukar posisi
+            daftar[idx_a], daftar[idx_b] = daftar[idx_b], daftar[idx_a]
+
+            input(f"\n✅ Posisi berhasil ditukar: {daftar[idx_b][0]} ⇄ {daftar[idx_a][0]} di lini {lini}.")
+            break
+
+        except Exception as e:
+            print()
+            input(f"({e})")
+            continue
+        
 awal_1 = False
 while not awal_1:
     os.system("cls")
@@ -83,46 +246,18 @@ if login_biasa:
                 tampil_starting(data_barcelona)
                 print()
                 tampil_cadangan(data_barcelona)
+                print()
+                tabel_saldo = PrettyTable()
+                tabel_saldo.field_names = ["Saldo Club"]
+                tabel_saldo.add_row([
+                    f"€{data_barcelona["saldo"]}"
+                    ])
+                print(tabel_saldo)
                 input("\n(Ketuk enter untuk kembali memilih menu)")
 
-            elif pilihan_2 == "2":
-                ulang_2 = False
-                while not ulang_2:
-                    os.system("cls")
-                    def ganti_pemain(data_club):
-                        global ulang_2
-
-                        print("Lini tersedia: gk (kiper), df (bek), mf (gelandang), fw (penyerang)")
-                        lini = input("Masukkan lini yang ingin ditukar: ").strip().lower()
-
-                        try:
-                            if lini not in data_club:
-                                raise ValueError(f"Lini '{lini}' tidak tersedia.")
-                                
-                            daftar = data_club[lini]
-
-                            print(f"\nDaftar pemain di lini {lini}:")
-                            for i, p in enumerate(daftar):
-                                print(f"{i+1}. {p[0]} (Rating: {p[1]})")
-
-                            idx_a = int(input("\nMasukkan nomor pemain pertama: ")) - 1
-                            idx_b = int(input("Masukkan nomor pemain kedua: ")) - 1
-
-                            if idx_a == idx_b:
-                                raise ValueError("Nomor pemain tidak boleh sama.")
-                            
-                            # Tukar posisi
-                            daftar[idx_a], daftar[idx_b] = daftar[idx_b], daftar[idx_a]
-
-                            print(f"\n✅ Posisi berhasil ditukar: {daftar[idx_b][0]} ⇄ {daftar[idx_a][0]} di lini {lini}.")
-                            ulang_2 = True
-
-                        except Exception as e:
-                            print()
-                            input(e)
-                            
-                    ganti_pemain(data_barcelona)
-                    # tambah_pemain()
+            elif pilihan_2 == "2":                         
+                ganti_pemain(data_barcelona)
+                    # beli_pemain()
 
             elif pilihan_2 == "3":
                 while True:
@@ -169,60 +304,30 @@ if login_biasa:
                             pilihan_4 = input("Pilih menu (1-5) = ").strip()
 
                             if pilihan_4 == "1":
-                                os.system("cls")
-                                tampil_starting(data_madrid)
-                                print()
-                                tampil_cadangan(data_madrid)
-                                print("\nLini tersedia: gk (kiper), df (bek), mf (gelandang), fw (penyerang)")
-                                lini = input("Masukkan lini yang ingin ditambah: ").strip().lower()
-                                
-                                try:
-                                    if lini not in data_madrid:
-                                        raise ValueError(f"Lini '{lini}' tidak tersedia.")
-                                        
-                                    daftar = data_madrid[lini]
-
-                                    print(f"\nDaftar pemain di lini {lini}:")
-                                    for i, p in enumerate(daftar):
-                                        print(f"{i+1}. {p[0]} (Rating: {p[1]}, Harga: {p[3]})")
-
-                                    idx_a = int(input("\nMasukkan nomor pemain: ")) - 1
-                                    
-                                    # Tambah pemain
-                                    tampung_pemain = daftar[idx_a].pop()
-                                    data_barcelona[lini].append(tampung_pemain)
-
-                                    print(f"\n✅ Pemain berhasil ditambahkan: {daftar[idx_a][0]} -> {club} di lini {lini}.")
-
-                                except Exception as e:
-                                    print()
-                                    input(e)
-
-                                input("akhir")
+                                beli_pemain(data_barcelona, data_madrid)
                                 break
-
                             elif pilihan_4 == "2":
-                                pass
+                                beli_pemain(data_barcelona, data_arsenal)
+                                break
                             elif pilihan_4 == "3":
-                                pass
+                                beli_pemain(data_barcelona, data_psg)
+                                break
                             elif pilihan_4 == "4":
-                                pass
+                                beli_pemain(data_barcelona, data_dortmund)
+                                break
                             elif pilihan_4 == "5":
                                 break
+                            else:
+                                input("\n(Input tidak valid, ketuk enter untuk kembali)")
 
-                    elif pilihan_3 == "2":
-                        pass
+                    elif pilihan_3 == "2":                                              
+                        jual_pemain(data_barcelona)
+
                     elif pilihan_3 == "3":
                         break
+                    
                     else:
                         input("\n(Input tidak valid, ketuk enter untuk kembali)")
-                #     os.system("cls")
-                #     tampil_cadangan()
-                #     pemain_tukar, ulang_2 = ganti_pemain("gk_cadangan", "df_cadangan", "mf_cadangan", "fw_cadangan")
-                #     if ulang_2 == True:
-                #         break
-
-                # tampilan_ubah_pemain(pemain_tukar, "mengganti pemain cadangan dengan")
                     
             elif pilihan_2 == "5":
                 while True:
