@@ -101,7 +101,7 @@ data_madrid = {
         ["Aurélien Tchouaméni", 7.2, 25, 78000000, 187, "Prancis"],
         ["Antonio Rüdiger", 6.8, 32, 15500000, 190, "Jerman"],
         ["Dean Huijsen", 7.3, 20, 77000000, 195, "Spanyol"],
-        ["Trent Alexander-Arnold", 7.1, 27, 77000000, 180, "Inggris"]
+        ["Trent Alexander-Arnold", 7.1, 27, 77000000, 180, "Inggris"],
         ["Éder Militão", 7.4, 27, 31000000, 186, "Brasil"],
         ["Dani Carvajal", 6.7, 33, 7700000, 173, "Spanyol"],
     ],
@@ -176,7 +176,7 @@ data_psg = {
     ],
     "mf": [ # Midfield/Gelandang
         ['Vitinha', 7.5, 25, 83000000, 172, "Portugal"],
-        ['Kang in Lee', 7.12, 24, 27000000, 174, "Korea Selatan"]
+        ['Kang in Lee', 7.12, 24, 27000000, 174, "Korea Selatan"],
         ['Fabián Ruiz', 7.3, 29, 39000000, 189, "Spanyol"],
         ['João Neves', 7.3, 21, 95000000, 174, "Portugal"],
         ['Senny Mayulu', 6.9, 19, 24000000, 183, "Prancis"],
@@ -209,13 +209,13 @@ data_dortmund = {
         ['Aaron Anselmino', 7.0, 20, 8500000, 186, "Argentina"]
     ],
     "mf": [ # Midfield/Gelandang
-        ['Daniel Svensson', 6.9, 23, 20000000, 183, "Swedia"]
+        ['Daniel Svensson', 6.9, 23, 20000000, 183, "Swedia"],
         ['Carney Chukwuemeka', 6.8, 22, 18100000, 187, "Inggris"],
         ['Jobe Bellingham', 7.0, 20, 29000000, 188, "Inggris"],
         ['Julian Brandt', 7.0, 29, 26000000, 185, "Jerman"],
         ['Marcel Sabitzer', 7.0, 31, 8300000, 178, "Austria"],
         ['Pascal Groß', 7.0, 34, 4500000, 181, "Jerman"],
-        ['Felix Nmecha', 7.0, 24, 34000000, 188, "Jerman"],
+        ['Felix Nmecha', 7.0, 24, 34000000, 188, "Jerman"]
     ],
     "fw": [ # Forward/Penyerang
         ['Karim Adeyemi', 6.9, 23, 62000000, 177, "Jerman"],
