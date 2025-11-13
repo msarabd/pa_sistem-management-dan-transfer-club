@@ -3,7 +3,7 @@ from login import input_biasa, input_mod, input_register
 from crud import tampil_starting, tampil_cadangan, ganti_pemain, ganti_pemain, hapus_pemain, tampilan_ubah_pemain
 from prettytable import PrettyTable
 import datetime as dt
-from data import data_club_pengguna, data_pengguna, data_barcelona, data_madrid, data_arsenal, data_psg, data_dortmund
+from data import data_club_pengguna, data_pengguna, data_barcelona, data_madrid, data_arsenal, data_psg, data_dortmund, data_gratisan, data_pemuda
 
 login_mod = False
 login_biasa = False
@@ -47,11 +47,30 @@ def beli_pemain(data_club_masuk, data_club_keluar):
 
             idx_a = int(input("\nMasukkan nomor pemain: ")) - 1
             
+            # Mencegah agar pemain pada lini club tidak habis
+            if lini == "gk":
+                if len(daftar) <= 1:
+                    raise ValueError(f"Jumlah pemain pada lini {lini} {club} tidak cukup")
+            elif lini == "df":
+                if len(daftar) <= 4:
+                    raise ValueError(f"Jumlah pemain pada lini {lini} {club} tidak cukup")
+            elif lini == "mf":
+                if len(daftar) <= 3:
+                    raise ValueError(f"Jumlah pemain pada lini {lini} {club} tidak cukup")
+            elif lini == "fw":
+                if len(daftar) <= 3:
+                    raise ValueError(f"Jumlah pemain pada lini {lini} {club} tidak cukup")
             if idx_a < 0:
                 raise ValueError("Nomor pemain tidak tersedia")
             
             # Tambah pemain
-            tampung_pemain = daftar[idx_a]
+            if data_club_keluar == data_gratisan:
+                tampung_pemain = daftar[idx_a][:6]
+            elif data_club_keluar == data_pemuda:
+                tampung_pemain = daftar[idx_a][:6]
+            else:
+                tampung_pemain = daftar[idx_a]
+            
             data_club_masuk[lini].append(tampung_pemain)
 
             # Harga beli (Market Value * 120%)
@@ -86,6 +105,7 @@ def jual_pemain(data_club):
 
             idx_a = int(input("\nMasukkan nomor pemain pertama: ")) - 1
             
+            # Mencegah agar pemain pada lini club tidak habis
             if lini == "gk":
                 if len(daftar) <= 1:
                     raise ValueError(f"Jumlah pemain pada lini {lini} {club} tidak cukup")
@@ -154,7 +174,7 @@ def ganti_pemain(data_club):
             idx_a = int(input("\nMasukkan nomor pemain pertama: ")) - 1
             idx_b = int(input("Masukkan nomor pemain kedua: ")) - 1
 
-            if idx_a or idx_b < 0:
+            if idx_a < 0 or idx_b < 0:
                 raise ValueError("Nomor pemain tidak tersedia")
             
             if idx_a == idx_b:
@@ -179,9 +199,9 @@ while not awal_1:
     tabel_menu.field_names = ["kiri", "kanan"]
     tabel_menu.header = False
     tabel_menu.add_rows([
-        ["1.", "Pengguna Biasa"],
-        ["2.", "Pengguna MOD"],
-        ["3.", "Daftar Sebagai Pengguna Baru"]
+        ["[1]", "Pengguna Biasa"],
+        ["[2]", "Pengguna MOD"],
+        ["[3]", "Daftar Sebagai Pengguna Baru"]
         ])
     print(tabel_menu)
 
@@ -216,8 +236,8 @@ if login_biasa:
     #     data_club_pengguna = data_arsenal.copy()
     # if data_pengguna["user_biasa"][user][1] == "psg":
     #     data_club_pengguna = data_psg.copy()
-    # if data_pengguna["user_biasa"][user][1] == "dormund":
-    #     data_club_pengguna = data_dormund.copy()
+    # if data_pengguna["user_biasa"][user][1] == "dortmund":
+    #     data_club_pengguna = data_dortmund.copy()
 
         while login_biasa:
             os.system("cls")
@@ -232,7 +252,7 @@ if login_biasa:
                 ["[3]", "keuangan club"],
                 ["[4]", "Transfer Pemain"],
                 ["[5]", "Jendela Transfer"],
-                ["[6]", "Keluar"]
+                ["[0]", "Keluar"]
                 ])
             print(tabel_menu_admin)
 
@@ -277,9 +297,9 @@ if login_biasa:
                     tabel_transfer.field_names = ["kiri", "kanan"]
                     tabel_transfer.header = False
                     tabel_transfer.add_rows([
-                        ["1.", "Beli pemain"],
-                        ["2.", "Jual pemain"],
-                        ["3.", "Kembali"]
+                        ["[1]", "Beli pemain"],
+                        ["[2]", "Jual pemain"],
+                        ["[0]", "Kembali"]
                         ])
                     print(tabel_transfer)
 
@@ -293,15 +313,17 @@ if login_biasa:
                             tabel_pil_club.field_names = ["kiri", "kanan"]
                             tabel_pil_club.header = False
                             tabel_pil_club.add_rows([
-                                ["1.", "Real Madrid"],
-                                ["2.", "Arsenal"],
-                                ["3.", "PSG"],
-                                ["4.", "Borussia Dormund"],
-                                ["5.", "Kembali"]
+                                ["[1]", "Real Madrid"],
+                                ["[2]", "Arsenal"],
+                                ["[3]", "PSG"],
+                                ["[4]", "Borussia Dortmund"],
+                                ["[5]", "Free Agent"],
+                                ["[6]", "Pencari Bakat"],
+                                ["[0]", "Kembali"]
                                 ])
                             print(tabel_pil_club)
 
-                            pilihan_4 = input("Pilih menu (1-5) = ").strip()
+                            pilihan_4 = input("Pilih menu (1-7) = ").strip()
 
                             if pilihan_4 == "1":
                                 beli_pemain(data_barcelona, data_madrid)
@@ -316,6 +338,12 @@ if login_biasa:
                                 beli_pemain(data_barcelona, data_dortmund)
                                 break
                             elif pilihan_4 == "5":
+                                beli_pemain(data_barcelona, data_gratisan)
+                                break
+                            elif pilihan_4 == "6":
+                                beli_pemain(data_barcelona, data_pemuda)
+                                break
+                            elif pilihan_4 == "0":
                                 break
                             else:
                                 input("\n(Input tidak valid, ketuk enter untuk kembali)")
@@ -323,7 +351,7 @@ if login_biasa:
                     elif pilihan_3 == "2":                                              
                         jual_pemain(data_barcelona)
 
-                    elif pilihan_3 == "3":
+                    elif pilihan_3 == "0":
                         break
                     
                     else:
@@ -337,7 +365,7 @@ if login_biasa:
 
                 tampilan_ubah_pemain(panggil_pemain, "menghapus")
                     
-            elif pilihan_2 == "6":
+            elif pilihan_2 == "0":
                 login_biasa = False
 
             else:
@@ -354,7 +382,7 @@ elif login_mod:
         tabel_menu_user.header = False
         tabel_menu_user.add_rows([
             ["[1]", "Lihat Daftar Line Up"],
-            ["[2]", "Keluar"]
+            ["[0]", "Keluar"]
             ])
         print(tabel_menu_user)
 

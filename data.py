@@ -335,7 +335,7 @@ data_gratisan = {
          ["Matthijs de Ligt", 6.9, 26, 0, 189, "Netherlands", "Manchester United"]
     ],
     'mf' : [ # Midfield/Gelandang
-         ["Neymar ", 7.3, 33, 0, 175, "Brasil", "Santos"],
+         ["Neymar", 7.3, 33, 0, 175, "Brasil", "Santos"],
          ["Kevin De Bruyne", 7.4, 34, 0, 181, "Belgium", "SSC Napoli"],
          ["Luka Modrić", 7.3, 40, 0, 172, "Kroasia", "AC Milan"],
          ["Toni Kroos", 7.7, 35, 0, 183, "Germany", "Real Madrid"]

@@ -106,11 +106,11 @@ def input_register():
         tabel_pil_club.field_names = ["kiri", "kanan"]
         tabel_pil_club.header = False
         tabel_pil_club.add_rows([
-            ["1.", "Barcelona"],
-            ["2.", "Real Madrid"],
-            ["3.", "Arsenal"],
-            ["4.", "PSG"],
-            ["5.", "Borussia Dormund"],
+            ["[1]", "Barcelona"],
+            ["[2]", "Real Madrid"],
+            ["[3]", "Arsenal"],
+            ["[4]", "PSG"],
+            ["[5]", "Borussia Dortmund"],
             ])
         print(tabel_pil_club)
 
@@ -174,7 +174,7 @@ Management : "Selamat datang di London, {user}. Kami telah membangun fondasi yan
             data_pengguna["user_biasa"][user].append("psg")
             os.system("cls")
             teks = f"""
-Management : "Selamat datang di Paris, {user}. Anda memiliki sumber daya yang melimpah. Tugas utama Anda: mempertahankan pemain bintang yang kami rekrut—mereka tidak untuk dijual. Dan satu-satunya ukuran di mata Pemilik adalah Eropa: Berikan trofi internasional (UCL) pertama. Liga domestik wajib menang; fokus total pada Liga Champions. Kegagalan akan dipertimbangkan. Ici c'est Paris!"
+Management : "Selamat datang di Paris, {user}. Anda memiliki sumber daya yang melimpah. Tugas utama Anda: mempertahankan pemain bintang yang kami rekrut—mereka tidak untuk dijual. Dan satu-satunya ukuran di mata Pemilik adalah Eropa: Berikan trofi internasional (UCL) kedua. Liga domestik wajib menang; fokus total pada Liga Champions. Kegagalan akan dipertimbangkan. Ici c'est Paris!"
 """
             kecepatan_ketik = 0.05
 
@@ -189,10 +189,10 @@ Management : "Selamat datang di Paris, {user}. Anda memiliki sumber daya yang me
             return user, login_biasa, awal_1
         
         elif pilihan_4 == "5":
-            data_pengguna["user_biasa"][user].append("dormund")
+            data_pengguna["user_biasa"][user].append("dortmund")
             os.system("cls")
             teks = f"""
-Management : "Selamat datang di Dormund, {user}. Kami adalah klub gairah dan bisnis cerdas. Model kami adalah pengembangan: Anda harus membeli pemain muda atau hasil pencari bakat dengan potensi tinggi. Visi finansial adalah kunci: Perbesar keuangan klub secara signifikan dari penjualan pemain. Kualifikasi UCL harus dipastikan, sambil menjaga filosofi tim yang menyerang dan menghasilkan keuntungan. Echte Liebe!"
+Management : "Selamat datang di Dortmund, {user}. Kami adalah klub gairah dan bisnis cerdas. Model kami adalah pengembangan: Anda harus membeli pemain muda atau hasil pencari bakat dengan potensi tinggi. Visi finansial adalah kunci: Perbesar keuangan klub secara signifikan dari penjualan pemain. Kualifikasi UCL harus dipastikan, sambil menjaga filosofi tim yang menyerang dan menghasilkan keuntungan. Echte Liebe!"
 """
             kecepatan_ketik = 0.05
 
