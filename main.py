@@ -230,7 +230,7 @@ while not awal_1:
         input("\n(Input tidak valid, ketuk enter untuk memilih kembali)")
 
 if login_biasa:
-    if data_pengguna["user_biasa"][user][1] == "barcelona":
+    if data_pengguna["user_biasa"][user][1] == "Barcelona":
         club = "Barcelona"
         data_club_pengguna = data_barcelona.copy()
     # if data_pengguna["user_biasa"][user][1] == "madrid":
@@ -402,7 +402,7 @@ if login_biasa:
 
                     #             # tampilan_ubah_pemain(panggil_pemain, "menghapus")
                 
-                buka_jendela_transfer("Barcelona")
+                buka_jendela_transfer(club)
  
             elif pilihan_2 == "0":
                 login_biasa = False

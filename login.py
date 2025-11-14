@@ -117,12 +117,12 @@ def input_register():
         pilihan_4 = input("Pilih menu (1-5) = ").strip()
 
         if pilihan_4 == "1":
-            data_pengguna["user_biasa"][user].append("barcelona")
+            data_pengguna["user_biasa"][user].append("Barcelona")
             os.system("cls")
             teks = f"""
 Management : "Selamat datang di Barcelona, {user}. Kontrak telah sah. Anda datang di era restrukturisasi, di mana keuangan adalah prioritas setara dengan trofi. Kami menuntut Anda memberikan 5 pemain muda (U-20) menit bermain signifikan untuk menjaga DNA klub. Sudah terlalu lama kami puasa Eropa; segera bawa pulang trofi internasional untuk mengembalikan kehormatan. Bekerja cerdas, dan jangan boros. Visca el Barça!"
 """
-            kecepatan_ketik = 0.05  # Jeda waktu antar karakter (dalam detik)
+            kecepatan_ketik = 0.01  # Jeda waktu antar karakter (dalam detik)
 
             for karakter in teks:
                 print(karakter, end='', flush=True)
@@ -135,12 +135,12 @@ Management : "Selamat datang di Barcelona, {user}. Kontrak telah sah. Anda datan
             return user, login_biasa, awal_1
 
         elif pilihan_4 == "2":
-            data_pengguna["user_biasa"][user].append("madrid")
+            data_pengguna["user_biasa"][user].append("Real Madrid")
             os.system("cls")
             teks = f"""
 Management : "Selamat datang di Madrid, {user}. Tidak ada kata 'transisi' di sini, hanya dominasi. Anggaran tersedia: Anda harus membeli pemain bintang dengan market value tertinggi yang sesuai dengan standar klub. Tugas utama Anda adalah memberikan trofi internasional (UCL) setiap musim. Kegagalan di panggung Eropa tidak dapat diterima. Jadilah raja, dan rekrut raja. ¡Hala Madrid!"
 """
-            kecepatan_ketik = 0.05
+            kecepatan_ketik = 0.01
 
             for karakter in teks:
                 print(karakter, end='', flush=True)
@@ -153,12 +153,12 @@ Management : "Selamat datang di Madrid, {user}. Tidak ada kata 'transisi' di sin
             return user, login_biasa, awal_1
         
         elif pilihan_4 == "3":
-            data_pengguna["user_biasa"][user].append("arsenal")
+            data_pengguna["user_biasa"][user].append("Arsenal")
             os.system("cls")
             teks = f"""
 Management : "Selamat datang di London, {user}. Kami telah membangun fondasi yang kuat, kini saatnya meraih gelar. Perekrutan harus cerdas: Prioritaskan pembelian dari akademi atau hasil jaringan pencari bakat kami. Dan yang paling penting: Akhiri penantian kami di level domestik! Bawa pulang trofi domestik musim ini. Tunjukkan bahwa kecerdasan finansial dapat menghasilkan kesuksesan sejati."
 """
-            kecepatan_ketik = 0.05
+            kecepatan_ketik = 0.01
 
             for karakter in teks:
                 print(karakter, end='', flush=True)
@@ -171,12 +171,12 @@ Management : "Selamat datang di London, {user}. Kami telah membangun fondasi yan
             return user, login_biasa, awal_1
         
         elif pilihan_4 == "4":
-            data_pengguna["user_biasa"][user].append("psg")
+            data_pengguna["user_biasa"][user].append("PSG")
             os.system("cls")
             teks = f"""
 Management : "Selamat datang di Paris, {user}. Anda memiliki sumber daya yang melimpah. Tugas utama Anda: mempertahankan pemain bintang yang kami rekrut—mereka tidak untuk dijual. Dan satu-satunya ukuran di mata Pemilik adalah Eropa: Berikan trofi internasional (UCL) kedua. Liga domestik wajib menang; fokus total pada Liga Champions. Kegagalan akan dipertimbangkan. Ici c'est Paris!"
 """
-            kecepatan_ketik = 0.05
+            kecepatan_ketik = 0.01
 
             for karakter in teks:
                 print(karakter, end='', flush=True)
@@ -189,12 +189,12 @@ Management : "Selamat datang di Paris, {user}. Anda memiliki sumber daya yang me
             return user, login_biasa, awal_1
         
         elif pilihan_4 == "5":
-            data_pengguna["user_biasa"][user].append("dortmund")
+            data_pengguna["user_biasa"][user].append("Borussia Dortmund")
             os.system("cls")
             teks = f"""
 Management : "Selamat datang di Dortmund, {user}. Kami adalah klub gairah dan bisnis cerdas. Model kami adalah pengembangan: Anda harus membeli pemain muda atau hasil pencari bakat dengan potensi tinggi. Visi finansial adalah kunci: Perbesar keuangan klub secara signifikan dari penjualan pemain. Kualifikasi UCL harus dipastikan, sambil menjaga filosofi tim yang menyerang dan menghasilkan keuntungan. Echte Liebe!"
 """
-            kecepatan_ketik = 0.05
+            kecepatan_ketik = 0.01
 
             for karakter in teks:
                 print(karakter, end='', flush=True)
@@ -206,3 +206,5 @@ Management : "Selamat datang di Dortmund, {user}. Kami adalah klub gairah dan bi
             awal_1 = True
             return user, login_biasa, awal_1
 
+        else:
+            input("\n(Input tidak valid, ketuk enter untuk kembali)")

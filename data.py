@@ -9,11 +9,11 @@
 
 data_pengguna =  {
     "user_biasa" : {
-        "mahdi" : ["mahdi123", "barcelona"],
-        "rahman" : ["rahman123", "madrid"]
+        "mahdi" : ["mahdi123", "Barcelona"],
+        "rahman" : ["rahman123", "Real Madrid"]
         },
     "user_mod" : {
-        "mbut" : ["mbut123", "barcelona"]
+        "mbut" : ["mbut123", "Barcelona"]
         }
 }
 
