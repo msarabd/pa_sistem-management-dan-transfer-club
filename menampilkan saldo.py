@@ -9,9 +9,8 @@ from data import data_barcelona
 
 def saldo_barca():
     global saldo
-    while True:
 
-        return
+    threading.Thread(target=saldo_barca, args=data["saldo"])
 
 
-thr = threading.Thread(target=saldo_barca, args=data["saldo"])
+print("a")
