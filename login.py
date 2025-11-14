@@ -3,6 +3,7 @@ from data import data_pengguna, data_pemain, semua_pemain, cek_pemain, data_barc
 from prettytable import PrettyTable
 import time
 
+
 def input_biasa():
     global awal_1
     global login_biasa
@@ -13,14 +14,15 @@ def input_biasa():
         awal_1 = False
         os.system("cls")
         print("=== Login Sebagai User Biasa ===\n")
-        
+
         try:
-            user = input("Masukkan username Anda = ").strip()
-            pw = input("Masukkan password Anda = ").strip()
+            user = input("Masukkan username Anda = ").strip().lower()
+            pw = input("Masukkan password Anda = ").strip().lower()
 
             if user == "" or pw == "":
-                raise ValueError("\n(Masukkan karakter, tekan enter untuk login kembali)")
-                
+                raise ValueError(
+                    "\n(Masukkan karakter, tekan enter untuk login kembali)")
+
             for i in data_pengguna["user_biasa"]:
                 if user == i and pw == data_pengguna["user_biasa"][i][0]:
                     input("\n(Login berhasil, ketuk enter untuk lanjut)")
@@ -28,16 +30,19 @@ def input_biasa():
                     ulang_1 = True
                     awal_1 = True
                     return user, login_biasa, awal_1
-                elif user == i: 
+                elif user == i:
                     awal_1 = True
-                    raise ValueError("\n(Password salah, ketuk enter untuk kembali)")
-                
+                    raise ValueError(
+                        "\n(Password salah, ketuk enter untuk kembali)")
+
             if awal_1 == False:
-                raise ValueError("\n(User tidak ditemukan, ketuk enter untuk login kembali)")
-        
+                raise ValueError(
+                    "\n(User tidak ditemukan, ketuk enter untuk login kembali)")
+
         except Exception as e:
             input(e)
             continue
+
 
 def input_mod():
     global user
@@ -55,29 +60,34 @@ def input_mod():
             for i in data_pengguna["user_mod"]:
                 if user != i or pw != data_pengguna["user_mod"][i][0]:
                     if user == "" or pw == "":
-                        raise ValueError("\n(Masukkan karakter, ketuk enter untuk kembali)")
+                        raise ValueError(
+                            "\n(Masukkan karakter, ketuk enter untuk kembali)")
                     elif user == i:
-                        raise ValueError("\n(Password salah, ketuk enter untuk kembali)")
+                        raise ValueError(
+                            "\n(Password salah, ketuk enter untuk kembali)")
                     elif pw == data_pengguna["user_mod"][i][0]:
-                        raise ValueError("\n(Username salah, ketuk enter untuk kembali)")
+                        raise ValueError(
+                            "\n(Username salah, ketuk enter untuk kembali)")
                     else:
-                        raise ValueError("\n(Username dan password salah, ketuk enter untuk kembali)")
-    
+                        raise ValueError(
+                            "\n(Username dan password salah, ketuk enter untuk kembali)")
+
         except Exception as e:
             input(e)
             continue
-    
+
         input("\n(Login berhasil, ketuk enter untuk lanjut)")
         login_mod = True
         awal_1 = True
         return user, login_mod, awal_1
+
 
 def input_register():
     global data_pengguna
     global user
     global login_biasa
     global awal_1
-    
+
     while True:
         os.system("cls")
         print("=== Menu Register ===\n")
@@ -87,10 +97,12 @@ def input_register():
             pw = input("Masukkan password Anda = ").strip()
 
             if user == "" or pw == "":
-                raise ValueError("\n(Masukkan karakter, ketuk enter untuk kembali)")
+                raise ValueError(
+                    "\n(Masukkan karakter, ketuk enter untuk kembali)")
             elif user in data_pengguna["user_biasa"]:
-                raise ValueError("\n(Pengguna sudah ada, harap ganti username Anda)")
-        
+                raise ValueError(
+                    "\n(Pengguna sudah ada, harap ganti username Anda)")
+
         except Exception as e:
             input(e)
             continue
@@ -111,7 +123,7 @@ def input_register():
             ["[3]", "Arsenal"],
             ["[4]", "PSG"],
             ["[5]", "Borussia Dortmund"],
-            ])
+        ])
         print(tabel_pil_club)
 
         pilihan_4 = input("Pilih menu (1-5) = ").strip()
@@ -151,7 +163,7 @@ Management : "Selamat datang di Madrid, {user}. Tidak ada kata 'transisi' di sin
             login_biasa = True
             awal_1 = True
             return user, login_biasa, awal_1
-        
+
         elif pilihan_4 == "3":
             data_pengguna["user_biasa"][user].append("Arsenal")
             os.system("cls")
@@ -169,7 +181,7 @@ Management : "Selamat datang di London, {user}. Kami telah membangun fondasi yan
             login_biasa = True
             awal_1 = True
             return user, login_biasa, awal_1
-        
+
         elif pilihan_4 == "4":
             data_pengguna["user_biasa"][user].append("PSG")
             os.system("cls")
@@ -187,7 +199,7 @@ Management : "Selamat datang di Paris, {user}. Anda memiliki sumber daya yang me
             login_biasa = True
             awal_1 = True
             return user, login_biasa, awal_1
-        
+
         elif pilihan_4 == "5":
             data_pengguna["user_biasa"][user].append("Borussia Dortmund")
             os.system("cls")
