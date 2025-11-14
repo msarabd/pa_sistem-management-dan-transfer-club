@@ -376,3 +376,14 @@ data_pemuda = {
          ["Rasmus Højlund", 6.7, 22, 0, 193, "Denmark", "Manchester United"]
     ]
 }
+
+data_transfer = []
+clubs = {
+    "Barcelona": data_barcelona,
+    "Real Madrid": data_madrid,
+    "Arsenal": data_arsenal,
+    "PSG": data_psg,
+    "Borussia Dortmunt": data_dortmund,
+    "Free Agent": data_gratisan,
+    "Pencari Bakat": data_pemuda
+}

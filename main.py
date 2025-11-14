@@ -3,7 +3,8 @@ from login import input_biasa, input_mod, input_register
 from crud import tampil_starting, tampil_cadangan, ganti_pemain, ganti_pemain, hapus_pemain, tampilan_ubah_pemain
 from prettytable import PrettyTable
 import datetime as dt
-from data import data_club_pengguna, data_pengguna, data_barcelona, data_madrid, data_arsenal, data_psg, data_dortmund, data_gratisan, data_pemuda
+from data import data_club_pengguna, data_pengguna, data_barcelona, data_madrid, data_arsenal, data_psg, data_dortmund, data_gratisan, data_pemuda, data_transfer, clubs
+import random
 
 login_mod = False
 login_biasa = False
@@ -73,6 +74,9 @@ def beli_pemain(data_club_masuk, data_club_keluar):
             
             data_club_masuk[lini].append(tampung_pemain)
 
+            # Masukkan ke data transfer
+            data_transfer.append([len(data_transfer) + 1, tampung_pemain[0], lini.upper(), tampung_pemain[1], tampung_pemain[2], tampung_pemain[3], tampung_pemain[4], tampung_pemain[5], club])
+
             # Harga beli (Market Value * 120%)
             harga_beli = daftar[idx_a][3] * 120 / 100
             data_club_masuk["saldo"] -= harga_beli
@@ -123,7 +127,6 @@ def jual_pemain(data_club):
                 raise ValueError("Nomor pemain tidak tersedia")
             
             # tambah pemain ke club random
-            import random
             pilih_club = [data_barcelona, data_madrid, data_arsenal, data_psg, data_dortmund]
             pilih_club.remove(data_club)
             club_keluar = random.choice(pilih_club)
@@ -358,13 +361,49 @@ if login_biasa:
                         input("\n(Input tidak valid, ketuk enter untuk kembali)")
                     
             elif pilihan_2 == "5":
-                while True:
-                    panggil_pemain, ulang_2 = hapus_pemain()
-                    if ulang_2 == True:
-                        break
+                def buka_jendela_transfer(club):
+                    os.system("cls")
+                    asal = random.choice([c for c in clubs.keys() if c != club])
+                    tujuan = random.choice([c for c in clubs.keys() if c not in [asal, club, "Pencari Bakat"]])
 
-                tampilan_ubah_pemain(panggil_pemain, "menghapus")
+                    # Pilih posisi dan pemain secara acak
+                    posisi = random.choice(["gk", "df", "mf", "fw"])
+                    pemain_list = clubs[asal][posisi]
+                    if not pemain_list:
+                        return "Tidak ada pemain di posisi ini."
                     
+                    pemain = random.choice(pemain_list)
+                    pemain_list.remove(pemain)  # Hapus dari klub asal
+                    clubs[tujuan][posisi].append(pemain)  # Tambah ke klub tujuan
+                    
+                    # Tambahkan ke data transfer
+                    data_transfer.append([f"{len(data_transfer) + 1}.", pemain[0], posisi.upper(), pemain[1], pemain[2], pemain[3], pemain[4], pemain[5], tujuan])
+                    
+                    # Tampilkan data transfer
+                    tabel_transfer = PrettyTable()
+                    tabel_transfer.title = "DATA TRANSFER"
+                    tabel_transfer.field_names = ["NO.", "Nama Pemain", "Posisi", "Rating", "Umur", "MV", "Tinggi(cm)", "Negara", "Club Tujuan/Status"]
+                    tabel_transfer.add_rows(data_transfer)
+                    print(tabel_transfer)
+                    input("\n(Ketuk enter untuk kembali memilih menu)")
+
+
+                    # Tampilkan laporan transfer
+                    # nama, rating, usia, harga, tinggi, negara = pemain
+                    # print(f"🔁 Transfer: {nama}")
+                    # print(f"   Dari: {asal}")
+                    # print(f"   Ke: {tujuan}")
+                    # print(f"   Posisi: {posisi.upper()}")
+                    # print(f"   Harga: €{harga:,}")
+                    #             # while True:
+                    #             #     panggil_pemain, ulang_2 = hapus_pemain()
+                    #             #     if ulang_2 == True:
+                    #             #         break
+
+                    #             # tampilan_ubah_pemain(panggil_pemain, "menghapus")
+                
+                buka_jendela_transfer("Barcelona")
+ 
             elif pilihan_2 == "0":
                 login_biasa = False
 
