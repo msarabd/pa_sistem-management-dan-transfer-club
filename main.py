@@ -144,7 +144,7 @@ def jual_pemain(data_club):
                 nama_club_keluar = "Borussia Dormunt"
             
             # Masukkan ke data transfer
-            data_transfer.append([len(data_transfer) + 1, daftar[idx_a][0], lini.upper(), daftar[idx_a][1], daftar[idx_a][2], daftar[idx_a][3], daftar[idx_a][4], daftar[idx_a][5], nama_club_keluar])
+            data_transfer.append([len(data_transfer) + 1, daftar[idx_a][0], lini.upper(), daftar[idx_a][1], daftar[idx_a][2], f"€{daftar[idx_a][3]:,}", daftar[idx_a][4], daftar[idx_a][5], nama_club_keluar])
 
             # Harga jual (Market Value * 80%)
             harga_jual = daftar[idx_a][3] * 80 / 100
