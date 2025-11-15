@@ -219,13 +219,9 @@ def ganti_pemain(data_club):
             continue
 
 
-saldoBarca = data_barcelona["saldo"]
-
-
 def saldoNyabarca():
-    global saldoBarca
     while True:
-        saldoBarca += 1000
+        data_barcelona["saldo"] += 1000
         time.sleep(1)
 
 
@@ -313,7 +309,7 @@ if login_biasa:
                 tabel_saldo = PrettyTable()
                 tabel_saldo.field_names = ["Saldo Club"]
                 tabel_saldo.add_row([
-                    f"€{saldoBarca}"
+                    f"€{data_barcelona["saldo"]}"
                 ])
                 print(tabel_saldo)
                 input("\n(Ketuk enter untuk kembali memilih menu)")
