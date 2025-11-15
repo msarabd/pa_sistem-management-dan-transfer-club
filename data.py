@@ -121,7 +121,8 @@ data_madrid = {
         ["Endrick", 6.7, 19, 37000000, 173, "Brasil"],
         ["Gonzalo Garcia", 7.0, 21, 15500000, 182, "Spanyol"],
         ["Franco Mastantuono", 7.1, 18, 49000000, 177, "Argentina"]
-    ]
+    ],
+    "saldo": 3000000000
 }
 
 data_arsenal = {
@@ -155,7 +156,8 @@ data_arsenal = {
         ["Kai Havertz", 7.0, 26, 60000000, 193, "Jerman"],
         ["Gabriel Martinelli", 6.9, 24, 70000000, 178, "Brasil"],
         ["Noni Madueke", 7.0, 23, 54000000, 182, "Inggris"]
-    ]
+    ],
+    "saldo": 400000000
 }
 
 data_psg = {
@@ -189,7 +191,8 @@ data_psg = {
         ["Gonçalo Ramos", 6.90, 24, 37000000, 185, "Portugal"],
         ['Ibrahim Mbaye', 6.7, 17, 14600000, 175, "Senegal"],
         ['Quentin Ndjantou', 6.5, 18, 3200000, 182, "Prancis"]
-    ]
+    ],
+    "saldo": 4000000000
 }
 
 data_dortmund = {
@@ -223,7 +226,8 @@ data_dortmund = {
         ['Fábio Silva', 6.9, 23, 27000000, 185, "Portugal"],
         ['Maximilianian Beier', 6.8, 23, 32000000, 185, "Jerman"],
         ['Julien Duranville', 6.6, 19, 9200000, 170, "Belgia"]
-    ]
+    ],
+    "saldo": 1000000000
 }
 
 data_nasr = {
@@ -383,7 +387,7 @@ clubs = {
     "Real Madrid": data_madrid,
     "Arsenal": data_arsenal,
     "PSG": data_psg,
-    "Borussia Dortmunt": data_dortmund,
+    "Borussia Dortmund": data_dortmund,
     "Free Agent": data_gratisan,
     "Pencari Bakat": data_pemuda
 }
