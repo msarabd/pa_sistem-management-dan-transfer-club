@@ -7,19 +7,19 @@ def tampil_starting(data_club):
     for i in range(len(data_club["gk"])):
         if i == 0:
             nomor = i + 1
-            data_starting.append([f"{nomor}.", data_club["gk"][i][0], "GK", data_club["gk"][i][1], data_club["gk"][i][2], f"€{data_club["gk"][i][3]}", data_club["gk"][i][4], data_club["gk"][i][5]])
+            data_starting.append([f"{nomor}.", data_club["gk"][i][0], "GK", data_club["gk"][i][1], data_club["gk"][i][2], f"€{data_club["gk"][i][3]:,}", data_club["gk"][i][4], data_club["gk"][i][5]])
     for i in range(len(data_club["df"])):
         if i <= 3:
             nomor = i + 2
-            data_starting.append([f"{nomor}.", data_club["df"][i][0], "DF", data_club["df"][i][1], data_club["df"][i][2], f"€{data_club["df"][i][3]}", data_club["df"][i][4], data_club["df"][i][5]])
+            data_starting.append([f"{nomor}.", data_club["df"][i][0], "DF", data_club["df"][i][1], data_club["df"][i][2], f"€{data_club["df"][i][3]:,}", data_club["df"][i][4], data_club["df"][i][5]])
     for i in range(len(data_club["mf"])):
         if i <= 2:
             nomor = i + 6
-            data_starting.append([f"{nomor}.", data_club["mf"][i][0], "MF", data_club["mf"][i][1], data_club["mf"][i][2], f"€{data_club["mf"][i][3]}", data_club["mf"][i][4], data_club["mf"][i][5]])
+            data_starting.append([f"{nomor}.", data_club["mf"][i][0], "MF", data_club["mf"][i][1], data_club["mf"][i][2], f"€{data_club["mf"][i][3]:,}", data_club["mf"][i][4], data_club["mf"][i][5]])
     for i in range(len(data_club["fw"])):
         if i <= 2:
             nomor = i + 10
-            data_starting.append([f"{nomor}.", data_club["fw"][i][0], "FW", data_club["fw"][i][1], data_club["fw"][i][2], f"€{data_club["fw"][i][3]}", data_club["fw"][i][4], data_club["fw"][i][5]])
+            data_starting.append([f"{nomor}.", data_club["fw"][i][0], "FW", data_club["fw"][i][1], data_club["fw"][i][2], f"€{data_club["fw"][i][3]:,}", data_club["fw"][i][4], data_club["fw"][i][5]])
     
     tabel_starting = PrettyTable()
     tabel_starting.title = "STARTING"
@@ -56,19 +56,19 @@ def tampil_cadangan(data_club):
     for i in range(len(data_club["gk"])):
         if i > 0:
             nomor = i
-            data_cadangan.append([f"{nomor}.", data_club["gk"][i][0], "GK", data_club["gk"][i][1], data_club["gk"][i][2], f"€{data_club["gk"][i][3]}", data_club["gk"][i][4], data_club["gk"][i][5]])
+            data_cadangan.append([f"{nomor}.", data_club["gk"][i][0], "GK", data_club["gk"][i][1], data_club["gk"][i][2], f"€{data_club["gk"][i][3]:,}", data_club["gk"][i][4], data_club["gk"][i][5]])
     for i in range(len(data_club["df"])):
         if i > 3:
             nomor = i - 3 + (len(data_club["gk"]) - 1)
-            data_cadangan.append([f"{nomor}.", data_club["df"][i][0], "DF", data_club["df"][i][1], data_club["df"][i][2], f"€{data_club["df"][i][3]}", data_club["df"][i][4], data_club["df"][i][5]])
+            data_cadangan.append([f"{nomor}.", data_club["df"][i][0], "DF", data_club["df"][i][1], data_club["df"][i][2], f"€{data_club["df"][i][3]:,}", data_club["df"][i][4], data_club["df"][i][5]])
     for i in range(len(data_club["mf"])):
         if i > 2:
             nomor = i - 3 + (len(data_club["gk"]) - 1) + (len(data_club["df"]) - 3) 
-            data_cadangan.append([f"{nomor}.", data_club["mf"][i][0], "MF", data_club["mf"][i][1], data_club["mf"][i][2], f"€{data_club["mf"][i][3]}", data_club["mf"][i][4], data_club["mf"][i][5]])
+            data_cadangan.append([f"{nomor}.", data_club["mf"][i][0], "MF", data_club["mf"][i][1], data_club["mf"][i][2], f"€{data_club["mf"][i][3]:,}", data_club["mf"][i][4], data_club["mf"][i][5]])
     for i in range(len(data_club["fw"])):
         if i > 2:
             nomor = i - 3 + (len(data_club["gk"]) - 1) + (len(data_club["df"]) - 3) + (len(data_club["mf"]) - 2)
-            data_cadangan.append([f"{nomor}.", data_club["fw"][i][0], "FW", data_club["fw"][i][1], data_club["fw"][i][2], f"€{data_club["fw"][i][3]}", data_club["fw"][i][4], data_club["fw"][i][5]])
+            data_cadangan.append([f"{nomor}.", data_club["fw"][i][0], "FW", data_club["fw"][i][1], data_club["fw"][i][2], f"€{data_club["fw"][i][3]:,}", data_club["fw"][i][4], data_club["fw"][i][5]])
 # def tampil_cadangan():
 #     data_cadangan = []
 #     for i in range(len(data_pemain["gk_cadangan"])):

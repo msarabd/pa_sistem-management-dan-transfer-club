@@ -13,16 +13,16 @@ def tampil_squad(data_club):
     data_squad = []
     for i in range(len(data_club["gk"])):
         nomor = i + 1
-        data_squad.append([f"{nomor}.", data_club["gk"][i][0], "GK", data_club["gk"][i][1], data_club["gk"][i][2], f"€{data_club["gk"][i][3]}", data_club["gk"][i][4], data_club["gk"][i][5]])
+        data_squad.append([f"{nomor}.", data_club["gk"][i][0], "GK", data_club["gk"][i][1], data_club["gk"][i][2], f"€{data_club["gk"][i][3]:,}", data_club["gk"][i][4], data_club["gk"][i][5]])
     for i in range(len(data_club["df"])):
         nomor = i + 1 + len(data_club["gk"])
-        data_squad.append([f"{nomor}.", data_club["df"][i][0], "DF", data_club["df"][i][1], data_club["df"][i][2], f"€{data_club["df"][i][3]}", data_club["df"][i][4], data_club["df"][i][5]])
+        data_squad.append([f"{nomor}.", data_club["df"][i][0], "DF", data_club["df"][i][1], data_club["df"][i][2], f"€{data_club["df"][i][3]:,}", data_club["df"][i][4], data_club["df"][i][5]])
     for i in range(len(data_club["mf"])):
         nomor = i + 1 + len(data_club["gk"] + data_club["df"])
-        data_squad.append([f"{nomor}.", data_club["mf"][i][0], "MF", data_club["mf"][i][1], data_club["mf"][i][2], f"€{data_club["mf"][i][3]}", data_club["mf"][i][4], data_club["mf"][i][5]])
+        data_squad.append([f"{nomor}.", data_club["mf"][i][0], "MF", data_club["mf"][i][1], data_club["mf"][i][2], f"€{data_club["mf"][i][3]:,}", data_club["mf"][i][4], data_club["mf"][i][5]])
     for i in range(len(data_club["fw"])):
         nomor = i + 1 + len(data_club["gk"] + data_club["df"] + data_club["mf"])
-        data_squad.append([f"{nomor}.", data_club["fw"][i][0], "FW", data_club["fw"][i][1], data_club["fw"][i][2], f"€{data_club["fw"][i][3]}", data_club["fw"][i][4], data_club["fw"][i][5]])
+        data_squad.append([f"{nomor}.", data_club["fw"][i][0], "FW", data_club["fw"][i][1], data_club["fw"][i][2], f"€{data_club["fw"][i][3]:,}", data_club["fw"][i][4], data_club["fw"][i][5]])
 
     tabel_squad = PrettyTable()
     tabel_squad.field_names = ["NO.", "Nama Pemain", "Posisi", "Rating", "Umur", "MV", "Tinggi(cm)", "Negara"]
@@ -44,7 +44,7 @@ def beli_pemain(data_club_masuk, data_club_keluar):
 
             print(f"\nDaftar pemain di lini {lini}:")
             for i, p in enumerate(daftar):
-                print(f"{i+1}. {p[0]} (Rating: {p[1]}, Harga: €{p[3]})")
+                print(f"{i+1}. {p[0]} (Rating: {p[1]}, Harga: €{p[3]}:,)")
 
             idx_a = int(input("\nMasukkan nomor pemain: ")) - 1
             
@@ -81,7 +81,7 @@ def beli_pemain(data_club_masuk, data_club_keluar):
             harga_beli = daftar[idx_a][3] * 120 / 100
             data_club_masuk["saldo"] -= harga_beli
 
-            input(f"\n✅ Pemain berhasil dibeli: {daftar[idx_a][0]} -> {club} di lini {lini}, sisa saldo club: €{data_club_masuk["saldo"]}.")
+            input(f"\n✅ Pemain berhasil dibeli: {daftar[idx_a][0]} -> {club} di lini {lini}, sisa saldo club: €{data_club_masuk["saldo"]:,}.")
             del daftar[idx_a]
             break
 
@@ -105,9 +105,9 @@ def jual_pemain(data_club):
 
             print(f"\nDaftar pemain di lini {lini}:")
             for i, p in enumerate(daftar):
-                print(f"{i+1}. {p[0]} (Rating: {p[1]}, Harga: €{p[3]})")
+                print(f"{i+1}. {p[0]} (Rating: {p[1]}, Harga: €{p[3]:,})")
 
-            idx_a = int(input("\nMasukkan nomor pemain pertama: ")) - 1
+            idx_a = int(input("\nMasukkan nomor pemain: ")) - 1
             
             # Mencegah agar pemain pada lini club tidak habis
             if lini == "gk":
@@ -143,11 +143,14 @@ def jual_pemain(data_club):
             elif club_keluar == data_dortmund:
                 nama_club_keluar = "Borussia Dormunt"
             
+            # Masukkan ke data transfer
+            data_transfer.append([len(data_transfer) + 1, daftar[idx_a][0], lini.upper(), daftar[idx_a][1], daftar[idx_a][2], daftar[idx_a][3], daftar[idx_a][4], daftar[idx_a][5], nama_club_keluar])
+
             # Harga jual (Market Value * 80%)
             harga_jual = daftar[idx_a][3] * 80 / 100
             data_club["saldo"] += harga_jual
 
-            input(f"\n✅ Posisi berhasil dijual: {daftar[idx_a][0]} -> {nama_club_keluar} di lini {lini}, sisa saldo club: €{data_club["saldo"]}.")
+            input(f"\n✅ Posisi berhasil dijual: {daftar[idx_a][0]} -> {nama_club_keluar} di lini {lini}, sisa saldo club: €{data_club["saldo"]:,}.")
 
             # hapus pemain di club awal
             del daftar[idx_a]
@@ -270,12 +273,14 @@ if login_biasa:
                 print()
                 tampil_cadangan(data_barcelona)
                 print()
-                tabel_saldo = PrettyTable()
-                tabel_saldo.field_names = ["Saldo Club"]
-                tabel_saldo.add_row([
-                    f"€{data_barcelona["saldo"]}"
-                    ])
-                print(tabel_saldo)
+                def tampil_saldo(data_club):
+                    tabel_saldo = PrettyTable()
+                    tabel_saldo.field_names = ["Saldo Club"]
+                    tabel_saldo.add_row([
+                        f"€{data_club["saldo"]:,}"
+                        ])
+                    print(tabel_saldo)
+                tampil_saldo(data_barcelona)
                 input("\n(Ketuk enter untuk kembali memilih menu)")
 
             elif pilihan_2 == "2":                         
@@ -366,18 +371,18 @@ if login_biasa:
                     asal = random.choice([c for c in clubs.keys() if c != club])
                     tujuan = random.choice([c for c in clubs.keys() if c not in [asal, club, "Pencari Bakat"]])
 
-                    # Pilih posisi dan pemain secara acak
-                    posisi = random.choice(["gk", "df", "mf", "fw"])
-                    pemain_list = clubs[asal][posisi]
+                    # Pilih lini dan pemain secara acak
+                    lini = random.choice(["gk", "df", "mf", "fw"])
+                    pemain_list = clubs[asal][lini]
                     if not pemain_list:
-                        return "Tidak ada pemain di posisi ini."
+                        return "Tidak ada pemain di lini ini."
                     
                     pemain = random.choice(pemain_list)
                     pemain_list.remove(pemain)  # Hapus dari klub asal
-                    clubs[tujuan][posisi].append(pemain)  # Tambah ke klub tujuan
+                    clubs[tujuan][lini].append(pemain)  # Tambah ke klub tujuan
                     
                     # Tambahkan ke data transfer
-                    data_transfer.append([f"{len(data_transfer) + 1}.", pemain[0], posisi.upper(), pemain[1], pemain[2], pemain[3], pemain[4], pemain[5], tujuan])
+                    data_transfer.append([f"{len(data_transfer) + 1}.", pemain[0], lini.upper(), pemain[1], pemain[2], f"€{pemain[3]:,}", pemain[4], pemain[5], tujuan])
                     
                     # Tampilkan data transfer
                     tabel_transfer = PrettyTable()
@@ -393,7 +398,7 @@ if login_biasa:
                     # print(f"🔁 Transfer: {nama}")
                     # print(f"   Dari: {asal}")
                     # print(f"   Ke: {tujuan}")
-                    # print(f"   Posisi: {posisi.upper()}")
+                    # print(f"   lini: {posisi.upper()}")
                     # print(f"   Harga: €{harga:,}")
                     #             # while True:
                     #             #     panggil_pemain, ulang_2 = hapus_pemain()
