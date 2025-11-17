@@ -277,7 +277,7 @@ while not awal_1:
     else:
         input("\n(Input tidak valid, ketuk enter untuk memilih kembali)")
 
-if login_biasa:
+if login_biasa: # test
     club_pengguna = data_pengguna["user_biasa"][user][1]
     data_club_pengguna = clubs[club_pengguna]
 
