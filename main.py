@@ -3,7 +3,8 @@ from login import input_biasa, input_mod, input_register
 from crud import tampil_starting, tampil_cadangan, ganti_pemain, ganti_pemain, hapus_pemain, tampilan_ubah_pemain
 from prettytable import PrettyTable
 import datetime as dt
-from data import data_club_pengguna, data_pengguna, data_barcelona, data_madrid, data_arsenal, data_psg, data_dortmund
+from data import data_club_pengguna, data_pengguna, data_barcelona, data_madrid, data_arsenal, data_psg, data_dortmund, data_gratisan, data_pemuda, data_transfer, clubs
+import random
 
 login_mod = False
 login_biasa = False
@@ -12,23 +13,43 @@ def tampil_squad(data_club):
     data_squad = []
     for i in range(len(data_club["gk"])):
         nomor = i + 1
-        data_squad.append([f"{nomor}.", data_club["gk"][i][0], "GK", data_club["gk"][i][1], data_club["gk"][i][2], f"€{data_club["gk"][i][3]}", data_club["gk"][i][4], data_club["gk"][i][5]])
+        data_squad.append([f"{nomor}.", data_club["gk"][i][0], "GK", data_club["gk"][i][1], data_club["gk"][i][2], f"€{data_club["gk"][i][3]:,}", data_club["gk"][i][4], data_club["gk"][i][5]])
     for i in range(len(data_club["df"])):
         nomor = i + 1 + len(data_club["gk"])
-        data_squad.append([f"{nomor}.", data_club["df"][i][0], "DF", data_club["df"][i][1], data_club["df"][i][2], f"€{data_club["df"][i][3]}", data_club["df"][i][4], data_club["df"][i][5]])
+        data_squad.append([f"{nomor}.", data_club["df"][i][0], "DF", data_club["df"][i][1], data_club["df"][i][2], f"€{data_club["df"][i][3]:,}", data_club["df"][i][4], data_club["df"][i][5]])
     for i in range(len(data_club["mf"])):
         nomor = i + 1 + len(data_club["gk"] + data_club["df"])
-        data_squad.append([f"{nomor}.", data_club["mf"][i][0], "MF", data_club["mf"][i][1], data_club["mf"][i][2], f"€{data_club["mf"][i][3]}", data_club["mf"][i][4], data_club["mf"][i][5]])
+        data_squad.append([f"{nomor}.", data_club["mf"][i][0], "MF", data_club["mf"][i][1], data_club["mf"][i][2], f"€{data_club["mf"][i][3]:,}", data_club["mf"][i][4], data_club["mf"][i][5]])
     for i in range(len(data_club["fw"])):
         nomor = i + 1 + len(data_club["gk"] + data_club["df"] + data_club["mf"])
-        data_squad.append([f"{nomor}.", data_club["fw"][i][0], "FW", data_club["fw"][i][1], data_club["fw"][i][2], f"€{data_club["fw"][i][3]}", data_club["fw"][i][4], data_club["fw"][i][5]])
+        data_squad.append([f"{nomor}.", data_club["fw"][i][0], "FW", data_club["fw"][i][1], data_club["fw"][i][2], f"€{data_club["fw"][i][3]:,}", data_club["fw"][i][4], data_club["fw"][i][5]])
 
     tabel_squad = PrettyTable()
     tabel_squad.field_names = ["NO.", "Nama Pemain", "Posisi", "Rating", "Umur", "MV", "Tinggi(cm)", "Negara"]
     tabel_squad.add_rows(data_squad)
     print(tabel_squad)
 
-def beli_pemain(data_club_masuk, data_club_keluar):
+def tampil_saldo(data_club):
+                    tabel_saldo = PrettyTable()
+                    tabel_saldo.field_names = ["Saldo Club"]
+                    tabel_saldo.add_row([
+                        f"€{data_club["saldo"]:,}"
+                        ])
+                    print(tabel_saldo)
+
+def tampil_formasi(club_pengguna, data_club_pengguna):
+                    data_waktu = dt.datetime.now()
+                    os.system("cls")
+                    print(f"Daftar Line Up {club_pengguna} ({data_waktu.strftime("%A")}, {data_waktu.day} - {data_waktu.month} - {data_waktu.year})\n")
+                    
+                    tampil_starting(data_club_pengguna)
+                    print()
+                    tampil_cadangan(data_club_pengguna)
+                    print()
+                    tampil_saldo(data_club_pengguna)
+                    input("\n(Ketuk enter untuk kembali memilih menu)")
+                
+def beli_pemain(club_masuk, club_keluar, data_club_masuk, data_club_keluar):
     while True:
         os.system("cls")
         tampil_squad(data_club_keluar)
@@ -43,22 +64,44 @@ def beli_pemain(data_club_masuk, data_club_keluar):
 
             print(f"\nDaftar pemain di lini {lini}:")
             for i, p in enumerate(daftar):
-                print(f"{i+1}. {p[0]} (Rating: {p[1]}, Harga: €{p[3]})")
+                print(f"{i+1}. {p[0]} (Rating: {p[1]}, Harga: €{p[3]:,})")
 
             idx_a = int(input("\nMasukkan nomor pemain: ")) - 1
             
+            # Mencegah agar pemain pada lini club tidak habis
+            if lini == "gk":
+                if len(daftar) <= 1:
+                    raise ValueError(f"Jumlah pemain pada lini {lini} {club_keluar} tidak cukup")
+            elif lini == "df":
+                if len(daftar) <= 4:
+                    raise ValueError(f"Jumlah pemain pada lini {lini} {club_keluar} tidak cukup")
+            elif lini == "mf":
+                if len(daftar) <= 3:
+                    raise ValueError(f"Jumlah pemain pada lini {lini} {club_keluar} tidak cukup")
+            elif lini == "fw":
+                if len(daftar) <= 3:
+                    raise ValueError(f"Jumlah pemain pada lini {lini} {club_keluar} tidak cukup")
             if idx_a < 0:
                 raise ValueError("Nomor pemain tidak tersedia")
             
             # Tambah pemain
-            tampung_pemain = daftar[idx_a]
+            if data_club_keluar == data_gratisan:
+                tampung_pemain = daftar[idx_a][:6]
+            elif data_club_keluar == data_pemuda:
+                tampung_pemain = daftar[idx_a][:6]
+            else:
+                tampung_pemain = daftar[idx_a]
+            
             data_club_masuk[lini].append(tampung_pemain)
+
+            # Masukkan ke data transfer
+            data_transfer.append([len(data_transfer) + 1, tampung_pemain[0], lini.upper(), tampung_pemain[1], tampung_pemain[2], f"€{tampung_pemain[3]:,}", tampung_pemain[4], tampung_pemain[5], club_masuk])
 
             # Harga beli (Market Value * 120%)
             harga_beli = daftar[idx_a][3] * 120 / 100
             data_club_masuk["saldo"] -= harga_beli
 
-            input(f"\n✅ Pemain berhasil dibeli: {daftar[idx_a][0]} -> {club} di lini {lini}, sisa saldo club: €{data_club_masuk["saldo"]}.")
+            input(f"\n✅ Pemain berhasil dibeli: {daftar[idx_a][0]} -> {club_masuk} di lini {lini}, sisa saldo club: €{data_club_masuk["saldo"]:,}.")
             del daftar[idx_a]
             break
 
@@ -67,7 +110,7 @@ def beli_pemain(data_club_masuk, data_club_keluar):
             input(f"({e})")
             continue
 
-def jual_pemain(data_club):
+def jual_pemain(club, data_club):
     while True:
         os.system("cls")
         print("Lini tersedia: gk (kiper), df (bek), mf (gelandang), fw (penyerang)")
@@ -79,13 +122,13 @@ def jual_pemain(data_club):
                 
             daftar = data_club[lini]
 
-
             print(f"\nDaftar pemain di lini {lini}:")
             for i, p in enumerate(daftar):
-                print(f"{i+1}. {p[0]} (Rating: {p[1]}, Harga: €{p[3]})")
+                print(f"{i+1}. {p[0]} (Rating: {p[1]}, Harga: €{p[3]:,})")
 
-            idx_a = int(input("\nMasukkan nomor pemain pertama: ")) - 1
+            idx_a = int(input("\nMasukkan nomor pemain: ")) - 1
             
+            # Mencegah agar pemain pada lini club tidak habis
             if lini == "gk":
                 if len(daftar) <= 1:
                     raise ValueError(f"Jumlah pemain pada lini {lini} {club} tidak cukup")
@@ -103,28 +146,30 @@ def jual_pemain(data_club):
                 raise ValueError("Nomor pemain tidak tersedia")
             
             # tambah pemain ke club random
-            import random
             pilih_club = [data_barcelona, data_madrid, data_arsenal, data_psg, data_dortmund]
             pilih_club.remove(data_club)
-            club_keluar = random.choice(pilih_club)
-            club_keluar[lini].append(daftar[idx_a])
+            data_club_masuk = random.choice(pilih_club)
+            data_club_masuk[lini].append(daftar[idx_a])
 
-            if club_keluar == data_barcelona:
-                nama_club_keluar = "Barcelona"
-            elif club_keluar == data_madrid:
-                nama_club_keluar = "Real Madrid"
-            elif club_keluar == data_arsenal:
-                nama_club_keluar = "Arsenal"
-            elif club_keluar == data_psg:
-                nama_club_keluar = "PSG"
-            elif club_keluar == data_dortmund:
-                nama_club_keluar = "Borussia Dormunt"
+            if data_club_masuk == data_barcelona:
+                club_masuk = "Barcelona"
+            elif data_club_masuk == data_madrid:
+                club_masuk = "Barcelona"
+            elif data_club_masuk == data_arsenal:
+                club_masuk = "Arsenal"
+            elif data_club_masuk == data_psg:
+                club_masuk = "PSG"
+            elif data_club_masuk == data_dortmund:
+                club_masuk = "Borussia Dortmund"
             
+            # Masukkan ke data transfer
+            data_transfer.append([len(data_transfer) + 1, daftar[idx_a][0], lini.upper(), daftar[idx_a][1], daftar[idx_a][2], f"€{daftar[idx_a][3]:,}", daftar[idx_a][4], daftar[idx_a][5], club_masuk])
+
             # Harga jual (Market Value * 80%)
             harga_jual = daftar[idx_a][3] * 80 / 100
             data_club["saldo"] += harga_jual
 
-            input(f"\n✅ Posisi berhasil dijual: {daftar[idx_a][0]} -> {nama_club_keluar} di lini {lini}, sisa saldo club: €{data_club["saldo"]}.")
+            input(f"\n✅ Posisi berhasil dijual: {daftar[idx_a][0]} -> {club_masuk} di lini {lini}, sisa saldo club: €{data_club["saldo"]:,}.")
 
             # hapus pemain di club awal
             del daftar[idx_a]
@@ -170,6 +215,32 @@ def ganti_pemain(data_club):
             print()
             input(f"({e})")
             continue
+
+def buka_jendela_transfer(club):
+    os.system("cls")
+    asal = random.choice([c for c in clubs.keys() if c != club])
+    tujuan = random.choice([c for c in clubs.keys() if c not in [asal, club, "Pencari Bakat"]])
+
+    # Pilih lini dan pemain secara acak
+    lini = random.choice(["gk", "df", "mf", "fw"])
+    pemain_list = clubs[asal][lini]
+    if not pemain_list:
+        return "Tidak ada pemain di lini ini."
+    
+    pemain = random.choice(pemain_list)
+    pemain_list.remove(pemain)  # Hapus dari klub asal
+    clubs[tujuan][lini].append(pemain)  # Tambah ke klub tujuan
+    
+    # Tambahkan ke data transfer
+    data_transfer.append([f"{len(data_transfer) + 1}.", pemain[0], lini.upper(), pemain[1], pemain[2], f"€{pemain[3]:,}", pemain[4], pemain[5], tujuan])
+    
+    # Tampilkan data transfer
+    tabel_transfer = PrettyTable()
+    tabel_transfer.title = "DATA TRANSFER"
+    tabel_transfer.field_names = ["NO.", "Nama Pemain", "Posisi", "Rating", "Umur", "MV", "Tinggi(cm)", "Negara", "Club Tujuan/Status"]
+    tabel_transfer.add_rows(data_transfer)
+    print(tabel_transfer)
+    input("\n(Ketuk enter untuk kembali memilih menu)")
         
 awal_1 = False
 while not awal_1:
@@ -179,9 +250,9 @@ while not awal_1:
     tabel_menu.field_names = ["kiri", "kanan"]
     tabel_menu.header = False
     tabel_menu.add_rows([
-        ["1.", "Pengguna Biasa"],
-        ["2.", "Pengguna MOD"],
-        ["3.", "Daftar Sebagai Pengguna Baru"]
+        ["[1]", "Pengguna Biasa"],
+        ["[2]", "Pengguna MOD"],
+        ["[3]", "Daftar Sebagai Pengguna Baru"]
         ])
     print(tabel_menu)
 
@@ -206,142 +277,545 @@ while not awal_1:
     else:
         input("\n(Input tidak valid, ketuk enter untuk memilih kembali)")
 
-if login_biasa:
-    if data_pengguna["user_biasa"][user][1] == "barcelona":
-        club = "Barcelona"
-        data_club_pengguna = data_barcelona.copy()
-    # if data_pengguna["user_biasa"][user][1] == "madrid":
-    #     data_club_pengguna = data_madrid.copy()
-    # if data_pengguna["user_biasa"][user][1] == "arsenal":
-    #     data_club_pengguna = data_arsenal.copy()
-    # if data_pengguna["user_biasa"][user][1] == "psg":
-    #     data_club_pengguna = data_psg.copy()
-    # if data_pengguna["user_biasa"][user][1] == "dormund":
-    #     data_club_pengguna = data_dormund.copy()
+if login_biasa: # test
+    club_pengguna = data_pengguna["user_biasa"][user][1]
+    data_club_pengguna = clubs[club_pengguna]
 
-        while login_biasa:
-            os.system("cls")
-            print(f"=== Selamat Datang Tuan {user} ===\n")
-            tabel_menu_admin = PrettyTable()
-            tabel_menu_admin.title = "Mau ngapain hari ini?"
-            tabel_menu_admin.field_names = ["kiri", "kanan"]
-            tabel_menu_admin.header = False
-            tabel_menu_admin.add_rows([
-                ["[1]", "Lihat Formasi"],
-                ["[2]", "Edit Squad"],
-                ["[3]", "keuangan club"],
-                ["[4]", "Transfer Pemain"],
-                ["[5]", "Jendela Transfer"],
-                ["[6]", "Keluar"]
-                ])
-            print(tabel_menu_admin)
-
-            pilihan_2 = input("Pilih menu (1-6) = ").strip()
-            
-            if pilihan_2 == "1":
-                data_waktu = dt.datetime.now()
+    def menu_login_biasa(user, club_pengguna, data_club_pengguna):
+        global login_biasa
+        
+        if club_pengguna == "Barcelona":
+            while login_biasa:
                 os.system("cls")
-                print(f"Daftar Line Up {club} ({data_waktu.strftime("%A")}, {data_waktu.day} - {data_waktu.month} - {data_waktu.year})\n")
-                
-                tampil_starting(data_barcelona)
-                print()
-                tampil_cadangan(data_barcelona)
-                print()
-                tabel_saldo = PrettyTable()
-                tabel_saldo.field_names = ["Saldo Club"]
-                tabel_saldo.add_row([
-                    f"€{data_barcelona["saldo"]}"
+                print(f"=== Selamat Datang Tuan {user} ===\n")
+                tabel_menu_admin = PrettyTable()
+                tabel_menu_admin.title = "Mau ngapain hari ini?"
+                tabel_menu_admin.field_names = ["kiri", "kanan"]
+                tabel_menu_admin.header = False
+                tabel_menu_admin.add_rows([
+                    ["[1]", "Lihat Formasi"],
+                    ["[2]", "Edit Squad"],
+                    ["[3]", "Keuangan Club"],
+                    ["[4]", "Transfer Pemain"],
+                    ["[5]", "Jendela Transfer"],
+                    ["[0]", "Keluar"]
                     ])
-                print(tabel_saldo)
-                input("\n(Ketuk enter untuk kembali memilih menu)")
+                print(tabel_menu_admin)
 
-            elif pilihan_2 == "2":                         
-                ganti_pemain(data_barcelona)
-                    # beli_pemain()
-
-            elif pilihan_2 == "3":
-                while True:
-                    os.system("cls")
-                    tampil_starting()
-                    pemain_tukar, ulang_2 = ganti_pemain("gk_utama", "df_utama", "mf_utama", "fw_utama")
-                    if ulang_2 == True:
-                        break
+                pilihan_2 = input("Pilih menu (1-5) = ").strip()
                 
-                tampilan_ubah_pemain(pemain_tukar, "mengganti pemain starting dengan")
-                    
-            elif pilihan_2 == "4":
-                while True:
-                    os.system("cls")
-                    tabel_transfer = PrettyTable()
-                    tabel_transfer.title = "TRANSFER PEMAIN"
-                    tabel_transfer.field_names = ["kiri", "kanan"]
-                    tabel_transfer.header = False
-                    tabel_transfer.add_rows([
-                        ["1.", "Beli pemain"],
-                        ["2.", "Jual pemain"],
-                        ["3.", "Kembali"]
-                        ])
-                    print(tabel_transfer)
+                if pilihan_2 == "1":
+                    tampil_formasi(club_pengguna, data_club_pengguna)
 
-                    pilihan_3 = input("Pilih menu (1-3) = ").strip()
+                elif pilihan_2 == "2":                         
+                    ganti_pemain(data_club_pengguna)
 
-                    if pilihan_3 == "1":
-                        while True:
-                            os.system("cls")
-                            tabel_pil_club = PrettyTable()
-                            tabel_pil_club.title = "MAU BELI PEMAIN DARI:"
-                            tabel_pil_club.field_names = ["kiri", "kanan"]
-                            tabel_pil_club.header = False
-                            tabel_pil_club.add_rows([
-                                ["1.", "Real Madrid"],
-                                ["2.", "Arsenal"],
-                                ["3.", "PSG"],
-                                ["4.", "Borussia Dormund"],
-                                ["5.", "Kembali"]
-                                ])
-                            print(tabel_pil_club)
+                elif pilihan_2 == "3":
+                    pass
+        
+                elif pilihan_2 == "4":
+                    while True:
+                        os.system("cls")
+                        tabel_transfer = PrettyTable()
+                        tabel_transfer.title = "TRANSFER PEMAIN"
+                        tabel_transfer.field_names = ["kiri", "kanan"]
+                        tabel_transfer.header = False
+                        tabel_transfer.add_rows([
+                            ["[1]", "Beli pemain"],
+                            ["[2]", "Jual pemain"],
+                            ["[0]", "Kembali"]
+                            ])
+                        print(tabel_transfer)
 
-                            pilihan_4 = input("Pilih menu (1-5) = ").strip()
+                        pilihan_3 = input("Pilih menu (1-2) = ").strip()
 
-                            if pilihan_4 == "1":
-                                beli_pemain(data_barcelona, data_madrid)
-                                break
-                            elif pilihan_4 == "2":
-                                beli_pemain(data_barcelona, data_arsenal)
-                                break
-                            elif pilihan_4 == "3":
-                                beli_pemain(data_barcelona, data_psg)
-                                break
-                            elif pilihan_4 == "4":
-                                beli_pemain(data_barcelona, data_dortmund)
-                                break
-                            elif pilihan_4 == "5":
-                                break
-                            else:
-                                input("\n(Input tidak valid, ketuk enter untuk kembali)")
+                        if pilihan_3 == "1":
+                            while True:
+                                os.system("cls")
+                                tabel_pil_club = PrettyTable()
+                                tabel_pil_club.title = "MAU BELI PEMAIN DARI:"
+                                tabel_pil_club.field_names = ["kiri", "kanan"]
+                                tabel_pil_club.header = False
+                                tabel_pil_club.add_rows([
+                                    ["[1]", "Real Madrid"],
+                                    ["[2]", "Arsenal"],
+                                    ["[3]", "PSG"],
+                                    ["[4]", "Borussia Dortmund"],
+                                    ["[5]", "Free Agent"],
+                                    ["[6]", "Pencari Bakat"],
+                                    ["[0]", "Kembali"]
+                                    ])
+                                print(tabel_pil_club)
 
-                    elif pilihan_3 == "2":                                              
-                        jual_pemain(data_barcelona)
+                                pilihan_4 = input("Pilih menu (1-6) = ").strip()
 
-                    elif pilihan_3 == "3":
-                        break
-                    
-                    else:
-                        input("\n(Input tidak valid, ketuk enter untuk kembali)")
-                    
-            elif pilihan_2 == "5":
-                while True:
-                    panggil_pemain, ulang_2 = hapus_pemain()
-                    if ulang_2 == True:
-                        break
+                                if pilihan_4 == "1":
+                                    beli_pemain(club_pengguna, "Real Madrid", data_club_pengguna, data_madrid)
+                                    break
+                                elif pilihan_4 == "2":
+                                    beli_pemain(club_pengguna, "Arsenal", data_club_pengguna, data_arsenal)
+                                    break
+                                elif pilihan_4 == "3":
+                                    beli_pemain(club_pengguna, "PSG", data_club_pengguna, data_psg)
+                                    break
+                                elif pilihan_4 == "4":
+                                    beli_pemain(club_pengguna, "Borussia Dortmund",  data_club_pengguna, data_dortmund)
+                                    break
+                                elif pilihan_4 == "5":
+                                    beli_pemain(club_pengguna, "Free Agent", data_club_pengguna, data_gratisan)
+                                    break
+                                elif pilihan_4 == "6":
+                                    beli_pemain(club_pengguna, "Pencari Bakat", data_club_pengguna, data_pemuda)
+                                    break
+                                elif pilihan_4 == "0":
+                                    break
+                                else:
+                                    input("\n(Input tidak valid, ketuk enter untuk kembali)")
 
-                tampilan_ubah_pemain(panggil_pemain, "menghapus")
-                    
-            elif pilihan_2 == "6":
-                login_biasa = False
+                        elif pilihan_3 == "2":                                              
+                            jual_pemain(club_pengguna, data_club_pengguna)
 
-            else:
-                input("\n(Input tidak valid, ketuk enter untuk kembali)")
+                        elif pilihan_3 == "0":
+                            break
+                        
+                        else:
+                            input("\n(Input tidak valid, ketuk enter untuk kembali)")
+                        
+                elif pilihan_2 == "5":
+                    buka_jendela_transfer(club_pengguna)
+    
+                elif pilihan_2 == "0":
+                    login_biasa = False
+
+                else:
+                    input("\n(Input tidak valid, ketuk enter untuk kembali)")
+
+        elif club_pengguna == "Real Madrid":
+            while login_biasa:
+                os.system("cls")
+                print(f"=== Selamat Datang Tuan {user} ===\n")
+                tabel_menu_admin = PrettyTable()
+                tabel_menu_admin.title = "Mau ngapain hari ini?"
+                tabel_menu_admin.field_names = ["kiri", "kanan"]
+                tabel_menu_admin.header = False
+                tabel_menu_admin.add_rows([
+                    ["[1]", "Lihat Formasi"],
+                    ["[2]", "Edit Squad"],
+                    ["[3]", "Keuangan Club"],
+                    ["[4]", "Transfer Pemain"],
+                    ["[5]", "Jendela Transfer"],
+                    ["[0]", "Keluar"]
+                    ])
+                print(tabel_menu_admin)
+
+                pilihan_2 = input("Pilih menu (1-5) = ").strip()
+                
+                if pilihan_2 == "1":
+                    tampil_formasi(club_pengguna, data_club_pengguna)
+
+                elif pilihan_2 == "2":                         
+                    ganti_pemain(data_club_pengguna)
+
+                elif pilihan_2 == "3":
+                    pass
+        
+                elif pilihan_2 == "4":
+                    while True:
+                        os.system("cls")
+                        tabel_transfer = PrettyTable()
+                        tabel_transfer.title = "TRANSFER PEMAIN"
+                        tabel_transfer.field_names = ["kiri", "kanan"]
+                        tabel_transfer.header = False
+                        tabel_transfer.add_rows([
+                            ["[1]", "Beli pemain"],
+                            ["[2]", "Jual pemain"],
+                            ["[0]", "Kembali"]
+                            ])
+                        print(tabel_transfer)
+
+                        pilihan_3 = input("Pilih menu (1-2) = ").strip()
+
+                        if pilihan_3 == "1":
+                            while True:
+                                os.system("cls")
+                                tabel_pil_club = PrettyTable()
+                                tabel_pil_club.title = "MAU BELI PEMAIN DARI:"
+                                tabel_pil_club.field_names = ["kiri", "kanan"]
+                                tabel_pil_club.header = False
+                                tabel_pil_club.add_rows([
+                                    ["[1]", "Barcelona"],
+                                    ["[2]", "Arsenal"],
+                                    ["[3]", "PSG"],
+                                    ["[4]", "Borussia Dortmund"],
+                                    ["[5]", "Free Agent"],
+                                    ["[6]", "Pencari Bakat"],
+                                    ["[0]", "Kembali"]
+                                    ])
+                                print(tabel_pil_club)
+
+                                pilihan_4 = input("Pilih menu (1-6) = ").strip()
+
+                                if pilihan_4 == "1":
+                                    beli_pemain(club_pengguna, "Barcelona", data_club_pengguna, data_barcelona)
+                                    break
+                                elif pilihan_4 == "2":
+                                    beli_pemain(club_pengguna, "Arsenal", data_club_pengguna, data_arsenal)
+                                    break
+                                elif pilihan_4 == "3":
+                                    beli_pemain(club_pengguna, "PSG", data_club_pengguna, data_psg)
+                                    break
+                                elif pilihan_4 == "4":
+                                    beli_pemain(club_pengguna, "Borussia Dortmund",  data_club_pengguna, data_dortmund)
+                                    break
+                                elif pilihan_4 == "5":
+                                    beli_pemain(club_pengguna, "Free Agent", data_club_pengguna, data_gratisan)
+                                    break
+                                elif pilihan_4 == "6":
+                                    beli_pemain(club_pengguna, "Pencari Bakat", data_club_pengguna, data_pemuda)
+                                    break
+                                elif pilihan_4 == "0":
+                                    break
+                                else:
+                                    input("\n(Input tidak valid, ketuk enter untuk kembali)")
+
+                        elif pilihan_3 == "2":                                              
+                            jual_pemain(club_pengguna, data_club_pengguna)
+
+                        elif pilihan_3 == "0":
+                            break
+                        
+                        else:
+                            input("\n(Input tidak valid, ketuk enter untuk kembali)")
+                        
+                elif pilihan_2 == "5":
+                    buka_jendela_transfer(club_pengguna)
+    
+                elif pilihan_2 == "0":
+                    login_biasa = False
+
+                else:
+                    input("\n(Input tidak valid, ketuk enter untuk kembali)")
+
+        elif club_pengguna == "Arsenal":
+            while login_biasa:
+                os.system("cls")
+                print(f"=== Selamat Datang Tuan {user} ===\n")
+                tabel_menu_admin = PrettyTable()
+                tabel_menu_admin.title = "Mau ngapain hari ini?"
+                tabel_menu_admin.field_names = ["kiri", "kanan"]
+                tabel_menu_admin.header = False
+                tabel_menu_admin.add_rows([
+                    ["[1]", "Lihat Formasi"],
+                    ["[2]", "Edit Squad"],
+                    ["[3]", "Keuangan Club"],
+                    ["[4]", "Transfer Pemain"],
+                    ["[5]", "Jendela Transfer"],
+                    ["[0]", "Keluar"]
+                    ])
+                print(tabel_menu_admin)
+
+                pilihan_2 = input("Pilih menu (1-5) = ").strip()
+                
+                if pilihan_2 == "1":
+                    tampil_formasi(club_pengguna, data_club_pengguna)
+
+                elif pilihan_2 == "2":                         
+                    ganti_pemain(data_club_pengguna)
+
+                elif pilihan_2 == "3":
+                    pass
+        
+                elif pilihan_2 == "4":
+                    while True:
+                        os.system("cls")
+                        tabel_transfer = PrettyTable()
+                        tabel_transfer.title = "TRANSFER PEMAIN"
+                        tabel_transfer.field_names = ["kiri", "kanan"]
+                        tabel_transfer.header = False
+                        tabel_transfer.add_rows([
+                            ["[1]", "Beli pemain"],
+                            ["[2]", "Jual pemain"],
+                            ["[0]", "Kembali"]
+                            ])
+                        print(tabel_transfer)
+
+                        pilihan_3 = input("Pilih menu (1-2) = ").strip()
+
+                        if pilihan_3 == "1":
+                            while True:
+                                os.system("cls")
+                                tabel_pil_club = PrettyTable()
+                                tabel_pil_club.title = "MAU BELI PEMAIN DARI:"
+                                tabel_pil_club.field_names = ["kiri", "kanan"]
+                                tabel_pil_club.header = False
+                                tabel_pil_club.add_rows([
+                                    ["[1]", "Barcelona"],
+                                    ["[2]", "Real Madrid"],
+                                    ["[3]", "PSG"],
+                                    ["[4]", "Borussia Dortmund"],
+                                    ["[5]", "Free Agent"],
+                                    ["[6]", "Pencari Bakat"],
+                                    ["[0]", "Kembali"]
+                                    ])
+                                print(tabel_pil_club)
+
+                                pilihan_4 = input("Pilih menu (1-6) = ").strip()
+
+                                if pilihan_4 == "1":
+                                    beli_pemain(club_pengguna, "Barcelona", data_club_pengguna, data_barcelona)
+                                    break
+                                elif pilihan_4 == "2":
+                                    beli_pemain(club_pengguna, "Real Madrid", data_club_pengguna, data_madrid)
+                                    break
+                                elif pilihan_4 == "3":
+                                    beli_pemain(club_pengguna, "PSG", data_club_pengguna, data_psg)
+                                    break
+                                elif pilihan_4 == "4":
+                                    beli_pemain(club_pengguna, "Borussia Dortmund",  data_club_pengguna, data_dortmund)
+                                    break
+                                elif pilihan_4 == "5":
+                                    beli_pemain(club_pengguna, "Free Agent", data_club_pengguna, data_gratisan)
+                                    break
+                                elif pilihan_4 == "6":
+                                    beli_pemain(club_pengguna, "Pencari Bakat", data_club_pengguna, data_pemuda)
+                                    break
+                                elif pilihan_4 == "0":
+                                    break
+                                else:
+                                    input("\n(Input tidak valid, ketuk enter untuk kembali)")
+
+                        elif pilihan_3 == "2":                                              
+                            jual_pemain(club_pengguna, data_club_pengguna)
+
+                        elif pilihan_3 == "0":
+                            break
+                        
+                        else:
+                            input("\n(Input tidak valid, ketuk enter untuk kembali)")
+                        
+                elif pilihan_2 == "5":
+                    buka_jendela_transfer(club_pengguna)
+    
+                elif pilihan_2 == "0":
+                    login_biasa = False
+
+                else:
+                    input("\n(Input tidak valid, ketuk enter untuk kembali)")
+        
+        elif club_pengguna == "PSG":
+            while login_biasa:
+                os.system("cls")
+                print(f"=== Selamat Datang Tuan {user} ===\n")
+                tabel_menu_admin = PrettyTable()
+                tabel_menu_admin.title = "Mau ngapain hari ini?"
+                tabel_menu_admin.field_names = ["kiri", "kanan"]
+                tabel_menu_admin.header = False
+                tabel_menu_admin.add_rows([
+                    ["[1]", "Lihat Formasi"],
+                    ["[2]", "Edit Squad"],
+                    ["[3]", "Keuangan Club"],
+                    ["[4]", "Transfer Pemain"],
+                    ["[5]", "Jendela Transfer"],
+                    ["[0]", "Keluar"]
+                    ])
+                print(tabel_menu_admin)
+
+                pilihan_2 = input("Pilih menu (1-5) = ").strip()
+                
+                if pilihan_2 == "1":
+                    tampil_formasi(club_pengguna, data_club_pengguna)
+
+                elif pilihan_2 == "2":                         
+                    ganti_pemain(data_club_pengguna)
+
+                elif pilihan_2 == "3":
+                    pass
+        
+                elif pilihan_2 == "4":
+                    while True:
+                        os.system("cls")
+                        tabel_transfer = PrettyTable()
+                        tabel_transfer.title = "TRANSFER PEMAIN"
+                        tabel_transfer.field_names = ["kiri", "kanan"]
+                        tabel_transfer.header = False
+                        tabel_transfer.add_rows([
+                            ["[1]", "Beli pemain"],
+                            ["[2]", "Jual pemain"],
+                            ["[0]", "Kembali"]
+                            ])
+                        print(tabel_transfer)
+
+                        pilihan_3 = input("Pilih menu (1-2) = ").strip()
+
+                        if pilihan_3 == "1":
+                            while True:
+                                os.system("cls")
+                                tabel_pil_club = PrettyTable()
+                                tabel_pil_club.title = "MAU BELI PEMAIN DARI:"
+                                tabel_pil_club.field_names = ["kiri", "kanan"]
+                                tabel_pil_club.header = False
+                                tabel_pil_club.add_rows([
+                                    ["[1]", "Barcelona"],
+                                    ["[2]", "Real Madrid"],
+                                    ["[3]", "Arsenal"],
+                                    ["[4]", "Borussia Dortmund"],
+                                    ["[5]", "Free Agent"],
+                                    ["[6]", "Pencari Bakat"],
+                                    ["[0]", "Kembali"]
+                                    ])
+                                print(tabel_pil_club)
+
+                                pilihan_4 = input("Pilih menu (1-6) = ").strip()
+
+                                if pilihan_4 == "1":
+                                    beli_pemain(club_pengguna, "Barcelona", data_club_pengguna, data_barcelona)
+                                    break
+                                elif pilihan_4 == "2":
+                                    beli_pemain(club_pengguna, "Real Madrid", data_club_pengguna, data_madrid)
+                                    break
+                                elif pilihan_4 == "3":
+                                    beli_pemain(club_pengguna, "Arsenal", data_club_pengguna, data_arsenal)
+                                    break
+                                elif pilihan_4 == "4":
+                                    beli_pemain(club_pengguna, "Borussia Dortmund",  data_club_pengguna, data_dortmund)
+                                    break
+                                elif pilihan_4 == "5":
+                                    beli_pemain(club_pengguna, "Free Agent", data_club_pengguna, data_gratisan)
+                                    break
+                                elif pilihan_4 == "6":
+                                    beli_pemain(club_pengguna, "Pencari Bakat", data_club_pengguna, data_pemuda)
+                                    break
+                                elif pilihan_4 == "0":
+                                    break
+                                else:
+                                    input("\n(Input tidak valid, ketuk enter untuk kembali)")
+
+                        elif pilihan_3 == "2":                                              
+                            jual_pemain(club_pengguna, data_club_pengguna)
+
+                        elif pilihan_3 == "0":
+                            break
+                        
+                        else:
+                            input("\n(Input tidak valid, ketuk enter untuk kembali)")
+                        
+                elif pilihan_2 == "5":
+                    buka_jendela_transfer(club_pengguna)
+    
+                elif pilihan_2 == "0":
+                    login_biasa = False
+
+                else:
+                    input("\n(Input tidak valid, ketuk enter untuk kembali)")
+        
+        elif club_pengguna == "Borussia Dortmund":
+            while login_biasa:
+                os.system("cls")
+                print(f"=== Selamat Datang Tuan {user} ===\n")
+                tabel_menu_admin = PrettyTable()
+                tabel_menu_admin.title = "Mau ngapain hari ini?"
+                tabel_menu_admin.field_names = ["kiri", "kanan"]
+                tabel_menu_admin.header = False
+                tabel_menu_admin.add_rows([
+                    ["[1]", "Lihat Formasi"],
+                    ["[2]", "Edit Squad"],
+                    ["[3]", "Keuangan Club"],
+                    ["[4]", "Transfer Pemain"],
+                    ["[5]", "Jendela Transfer"],
+                    ["[0]", "Keluar"]
+                    ])
+                print(tabel_menu_admin)
+
+                pilihan_2 = input("Pilih menu (1-5) = ").strip()
+                
+                if pilihan_2 == "1":
+                    tampil_formasi(club_pengguna, data_club_pengguna)
+
+                elif pilihan_2 == "2":                         
+                    ganti_pemain(data_club_pengguna)
+
+                elif pilihan_2 == "3":
+                    pass
+        
+                elif pilihan_2 == "4":
+                    while True:
+                        os.system("cls")
+                        tabel_transfer = PrettyTable()
+                        tabel_transfer.title = "TRANSFER PEMAIN"
+                        tabel_transfer.field_names = ["kiri", "kanan"]
+                        tabel_transfer.header = False
+                        tabel_transfer.add_rows([
+                            ["[1]", "Beli pemain"],
+                            ["[2]", "Jual pemain"],
+                            ["[0]", "Kembali"]
+                            ])
+                        print(tabel_transfer)
+
+                        pilihan_3 = input("Pilih menu (1-2) = ").strip()
+
+                        if pilihan_3 == "1":
+                            while True:
+                                os.system("cls")
+                                tabel_pil_club = PrettyTable()
+                                tabel_pil_club.title = "MAU BELI PEMAIN DARI:"
+                                tabel_pil_club.field_names = ["kiri", "kanan"]
+                                tabel_pil_club.header = False
+                                tabel_pil_club.add_rows([
+                                    ["[1]", "Barcelona"],
+                                    ["[2]", "Real Madrid"],
+                                    ["[3]", "Arsenal"],
+                                    ["[4]", "PSG"],
+                                    ["[5]", "Free Agent"],
+                                    ["[6]", "Pencari Bakat"],
+                                    ["[0]", "Kembali"]
+                                    ])
+                                print(tabel_pil_club)
+
+                                pilihan_4 = input("Pilih menu (1-6) = ").strip()
+
+                                if pilihan_4 == "1":
+                                    beli_pemain(club_pengguna, "Barcelona", data_club_pengguna, data_barcelona)
+                                    break
+                                elif pilihan_4 == "2":
+                                    beli_pemain(club_pengguna, "Real Madrid", data_club_pengguna, data_madrid)
+                                    break
+                                elif pilihan_4 == "3":
+                                    beli_pemain(club_pengguna, "Arsenal", data_club_pengguna, data_arsenal)
+                                    break
+                                elif pilihan_4 == "4":
+                                    beli_pemain(club_pengguna, "PSG",  data_club_pengguna, data_psg)
+                                    break
+                                elif pilihan_4 == "5":
+                                    beli_pemain(club_pengguna, "Free Agent", data_club_pengguna, data_gratisan)
+                                    break
+                                elif pilihan_4 == "6":
+                                    beli_pemain(club_pengguna, "Pencari Bakat", data_club_pengguna, data_pemuda)
+                                    break
+                                elif pilihan_4 == "0":
+                                    break
+                                else:
+                                    input("\n(Input tidak valid, ketuk enter untuk kembali)")
+
+                        elif pilihan_3 == "2":                                              
+                            jual_pemain(club_pengguna, data_club_pengguna)
+
+                        elif pilihan_3 == "0":
+                            break
+                        
+                        else:
+                            input("\n(Input tidak valid, ketuk enter untuk kembali)")
+                        
+                elif pilihan_2 == "5":
+                    buka_jendela_transfer(club_pengguna)
+    
+                elif pilihan_2 == "0":
+                    login_biasa = False
+
+                else:
+                    input("\n(Input tidak valid, ketuk enter untuk kembali)")
+
+
+    menu_login_biasa(user, club_pengguna, data_club_pengguna)
 
 elif login_mod:
     while login_mod:
@@ -354,7 +828,7 @@ elif login_mod:
         tabel_menu_user.header = False
         tabel_menu_user.add_rows([
             ["[1]", "Lihat Daftar Line Up"],
-            ["[2]", "Keluar"]
+            ["[0]", "Keluar"]
             ])
         print(tabel_menu_user)
 
