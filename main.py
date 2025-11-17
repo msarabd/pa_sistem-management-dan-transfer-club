@@ -7,6 +7,7 @@ from data import data_club_pengguna, data_pengguna, data_barcelona, data_madrid,
 import random
 import threading
 import time
+import streamlit as st
 
 login_mod = False
 login_biasa = False
@@ -231,17 +232,8 @@ t1.start()
 
 awal_1 = False
 while not awal_1:
-    os.system("cls")
-    tabel_menu = PrettyTable()
-    tabel_menu.title = "ANDA INGIN LOGIN SEBAGAI:"
-    tabel_menu.field_names = ["kiri", "kanan"]
-    tabel_menu.header = False
-    tabel_menu.add_rows([
-        ["[1]", "Pengguna Biasa"],
-        ["[2]", "Pengguna MOD"],
-        ["[3]", "Daftar Sebagai Pengguna Baru"]
-    ])
-    print(tabel_menu)
+    st.title("ANDA INGIN LOGIN SEBGAI?")
+    st.divider()
 
     pilihan_1 = input("Pilih menu (1-3) = ").strip()
 
