@@ -87,7 +87,9 @@ data_barcelona = {
         ["Raphinha", 7.6, 28, 81000000, 176, "Brasil"],
         ["Ferran Torres", 7.0, 25, 54000000, 184, "Spanyol"],
     ],
-    "saldo": 120000000
+    "saldo": -12000000,
+    "stadion": 180000000,
+    "jersey": 150000000
 }
 
 data_madrid = {
@@ -122,7 +124,9 @@ data_madrid = {
         ["Gonzalo Garcia", 7.0, 21, 15500000, 182, "Spanyol"],
         ["Franco Mastantuono", 7.1, 18, 49000000, 177, "Argentina"]
     ],
-    "saldo": 3000000000
+    "saldo": 150000000,
+    "stadion": 180000000,
+    "jersey": 150000000
 }
 
 data_arsenal = {
@@ -157,7 +161,9 @@ data_arsenal = {
         ["Gabriel Martinelli", 6.9, 24, 70000000, 178, "Brasil"],
         ["Noni Madueke", 7.0, 23, 54000000, 182, "Inggris"]
     ],
-    "saldo": 400000000
+    "saldo": 80000000,
+    "stadion": 100000000,
+    "jersey": 80000000
 }
 
 data_psg = {
@@ -192,7 +198,9 @@ data_psg = {
         ['Ibrahim Mbaye', 6.7, 17, 14600000, 175, "Senegal"],
         ['Quentin Ndjantou', 6.5, 18, 3200000, 182, "Prancis"]
     ],
-    "saldo": 4000000000
+    "saldo": 200000000,
+    "stadion": 80000000,
+    "jersey": 80000000
 }
 
 data_dortmund = {
@@ -227,7 +235,9 @@ data_dortmund = {
         ['Maximilianian Beier', 6.8, 23, 32000000, 185, "Jerman"],
         ['Julien Duranville', 6.6, 19, 9200000, 170, "Belgia"]
     ],
-    "saldo": 1000000000
+    "saldo": 30000000,
+    "stadion": 60000000,
+    "jersey": 30000000
 }
 
 data_nasr = {
@@ -259,7 +269,10 @@ data_nasr = {
         ["Haroune Camara", 6.6, 27, 425000, 183, "Arab Saudi"],
         ["Ayman Yahya", 7.0, 24, 1200000, 165, "Arab Saudi"],
         ["Wesley", 6.8, 20, 4100000, 180, "Brasil"]
-    ]
+    ],
+    "saldo": 300000000,
+    "stadion": 3000000,
+    "jersey": 5000000
 }
 
 data_miami = {
@@ -293,7 +306,10 @@ data_miami = {
         ["Lionel Messi", 8.3, 38, 19600000, 170, "Argentina"],
         ["Tadeo Allende", 6.9, 26, 2900000, 185, "Argentina"],
         ["Fafà Picault", 6.8, 34, 480000, 173, "USA"]
-    ]
+    ],
+    "saldo": 50000000,
+    "stadion": 10000000,
+    "jersey": 15000000
 }
 
 data_borneo = {
@@ -325,7 +341,10 @@ data_borneo = {
         ["Maicon de Souza da Silva", 6.8, 29, 185000, 180, "Brasil"],
         ["Douglas Coutinho", 6.8, 31, 180000, 180, "Brasil"],
         ["Habibi Jusuf", 6.7, 27, 97000, 179, "Indonesia"]
-    ]
+    ],
+    "saldo": 5000000,
+    "stadion": 2000000,
+    "jersey": 500000
 }
 
 data_gratisan = {
