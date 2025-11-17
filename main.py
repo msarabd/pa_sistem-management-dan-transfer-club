@@ -154,7 +154,7 @@ def ganti_pemain(data_club):
             idx_a = int(input("\nMasukkan nomor pemain pertama: ")) - 1
             idx_b = int(input("Masukkan nomor pemain kedua: ")) - 1
 
-            if idx_a or idx_b < 0:
+            if idx_a < 0 or idx_b < 0:
                 raise ValueError("Nomor pemain tidak tersedia")
             
             if idx_a == idx_b:
