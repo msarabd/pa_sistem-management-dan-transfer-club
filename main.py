@@ -5,9 +5,13 @@ from prettytable import PrettyTable
 import datetime as dt
 from data import data_club_pengguna, data_pengguna, data_barcelona, data_madrid, data_arsenal, data_psg, data_dortmund, data_gratisan, data_pemuda, data_transfer, clubs
 import random
+import threading
+import time
+import streamlit as st
 
 login_mod = False
 login_biasa = False
+
 
 def tampil_squad(data_club):
     data_squad = []
@@ -25,7 +29,8 @@ def tampil_squad(data_club):
         data_squad.append([f"{nomor}.", data_club["fw"][i][0], "FW", data_club["fw"][i][1], data_club["fw"][i][2], f"€{data_club["fw"][i][3]:,}", data_club["fw"][i][4], data_club["fw"][i][5]])
 
     tabel_squad = PrettyTable()
-    tabel_squad.field_names = ["NO.", "Nama Pemain", "Posisi", "Rating", "Umur", "MV", "Tinggi(cm)", "Negara"]
+    tabel_squad.field_names = [
+        "NO.", "Nama Pemain", "Posisi", "Rating", "Umur", "MV", "Tinggi(cm)", "Negara"]
     tabel_squad.add_rows(data_squad)
     print(tabel_squad)
 
@@ -59,7 +64,7 @@ def beli_pemain(club_masuk, club_keluar, data_club_masuk, data_club_keluar):
         try:
             if lini not in data_club_keluar:
                 raise ValueError(f"Lini '{lini}' tidak tersedia.")
-                
+
             daftar = data_club_keluar[lini]
 
             print(f"\nDaftar pemain di lini {lini}:")
@@ -67,7 +72,7 @@ def beli_pemain(club_masuk, club_keluar, data_club_masuk, data_club_keluar):
                 print(f"{i+1}. {p[0]} (Rating: {p[1]}, Harga: €{p[3]:,})")
 
             idx_a = int(input("\nMasukkan nomor pemain: ")) - 1
-            
+
             # Mencegah agar pemain pada lini club tidak habis
             if lini == "gk":
                 if len(daftar) <= 1:
@@ -83,7 +88,7 @@ def beli_pemain(club_masuk, club_keluar, data_club_masuk, data_club_keluar):
                     raise ValueError(f"Jumlah pemain pada lini {lini} {club_keluar} tidak cukup")
             if idx_a < 0:
                 raise ValueError("Nomor pemain tidak tersedia")
-            
+
             # Tambah pemain
             if data_club_keluar == data_gratisan:
                 tampung_pemain = daftar[idx_a][:6]
@@ -91,7 +96,7 @@ def beli_pemain(club_masuk, club_keluar, data_club_masuk, data_club_keluar):
                 tampung_pemain = daftar[idx_a][:6]
             else:
                 tampung_pemain = daftar[idx_a]
-            
+
             data_club_masuk[lini].append(tampung_pemain)
 
             # Masukkan ke data transfer
@@ -119,7 +124,7 @@ def jual_pemain(club, data_club):
         try:
             if lini not in data_club:
                 raise ValueError(f"Lini '{lini}' tidak tersedia.")
-                
+
             daftar = data_club[lini]
 
             print(f"\nDaftar pemain di lini {lini}:")
@@ -131,22 +136,27 @@ def jual_pemain(club, data_club):
             # Mencegah agar pemain pada lini club tidak habis
             if lini == "gk":
                 if len(daftar) <= 1:
-                    raise ValueError(f"Jumlah pemain pada lini {lini} {club} tidak cukup")
+                    raise ValueError(
+                        f"Jumlah pemain pada lini {lini} {club} tidak cukup")
             elif lini == "df":
                 if len(daftar) <= 4:
-                    raise ValueError(f"Jumlah pemain pada lini {lini} {club} tidak cukup")
+                    raise ValueError(
+                        f"Jumlah pemain pada lini {lini} {club} tidak cukup")
             elif lini == "mf":
                 if len(daftar) <= 3:
-                    raise ValueError(f"Jumlah pemain pada lini {lini} {club} tidak cukup")
+                    raise ValueError(
+                        f"Jumlah pemain pada lini {lini} {club} tidak cukup")
             elif lini == "fw":
                 if len(daftar) <= 3:
-                    raise ValueError(f"Jumlah pemain pada lini {lini} {club} tidak cukup")
-            
+                    raise ValueError(
+                        f"Jumlah pemain pada lini {lini} {club} tidak cukup")
+
             if idx_a < 0:
                 raise ValueError("Nomor pemain tidak tersedia")
-            
+
             # tambah pemain ke club random
-            pilih_club = [data_barcelona, data_madrid, data_arsenal, data_psg, data_dortmund]
+            pilih_club = [data_barcelona, data_madrid,
+                          data_arsenal, data_psg, data_dortmund]
             pilih_club.remove(data_club)
             data_club_masuk = random.choice(pilih_club)
             data_club_masuk[lini].append(daftar[idx_a])
@@ -180,6 +190,7 @@ def jual_pemain(club, data_club):
             input(f"({e})")
             continue
 
+
 def ganti_pemain(data_club):
     while True:
         os.system("cls")
@@ -189,7 +200,7 @@ def ganti_pemain(data_club):
         try:
             if lini not in data_club:
                 raise ValueError(f"Lini '{lini}' tidak tersedia.")
-                
+
             daftar = data_club[lini]
 
             print(f"\nDaftar pemain di lini {lini}:")
@@ -201,14 +212,15 @@ def ganti_pemain(data_club):
 
             if idx_a < 0 or idx_b < 0:
                 raise ValueError("Nomor pemain tidak tersedia")
-            
+
             if idx_a == idx_b:
                 raise ValueError("Nomor pemain tidak boleh sama")
-            
+
             # Tukar posisi
             daftar[idx_a], daftar[idx_b] = daftar[idx_b], daftar[idx_a]
 
-            input(f"\n✅ Posisi berhasil ditukar: {daftar[idx_b][0]} ⇄ {daftar[idx_a][0]} di lini {lini}.")
+            input(
+                f"\n✅ Posisi berhasil ditukar: {daftar[idx_b][0]} ⇄ {daftar[idx_a][0]} di lini {lini}.")
             break
 
         except Exception as e:
@@ -244,17 +256,8 @@ def buka_jendela_transfer(club):
         
 awal_1 = False
 while not awal_1:
-    os.system("cls")
-    tabel_menu = PrettyTable()
-    tabel_menu.title = "ANDA INGIN LOGIN SEBAGAI:"
-    tabel_menu.field_names = ["kiri", "kanan"]
-    tabel_menu.header = False
-    tabel_menu.add_rows([
-        ["[1]", "Pengguna Biasa"],
-        ["[2]", "Pengguna MOD"],
-        ["[3]", "Daftar Sebagai Pengguna Baru"]
-        ])
-    print(tabel_menu)
+    st.title("ANDA INGIN LOGIN SEBGAI?")
+    st.divider()
 
     pilihan_1 = input("Pilih menu (1-3) = ").strip()
 
@@ -264,7 +267,7 @@ while not awal_1:
     elif not pilihan_1.isdigit() or pilihan_1 == "0":
         input("\n(Masukkan angka sesuai pilihan, ketuk enter untuk memilih kembali)")
         continue
-    
+
     elif pilihan_1 == "1":
         user, login_biasa, awal_1 = input_biasa()
 
@@ -820,7 +823,7 @@ if login_biasa: # test
 elif login_mod:
     while login_mod:
         os.system("cls")
-        
+
         print(f"=== Selamat Datang Tuan Muda {user} ===\n")
         tabel_menu_user = PrettyTable()
         tabel_menu_user.title = "Mau ngapain hari ini?"
@@ -829,20 +832,21 @@ elif login_mod:
         tabel_menu_user.add_rows([
             ["[1]", "Lihat Daftar Line Up"],
             ["[0]", "Keluar"]
-            ])
+        ])
         print(tabel_menu_user)
 
         pilihan_2 = input("Pilih menu (1-2) = ").strip()
-        
+
         if pilihan_2 == "1":
             data_waktu = dt.datetime.now()
             os.system("cls")
-            print(f"Daftar Line Up Timnas Indonesia ({data_waktu.strftime("%A")}, {data_waktu.day} - {data_waktu.month} - {data_waktu.year})\n")
+            print(
+                f"Daftar Line Up Timnas Indonesia ({data_waktu.strftime("%A")}, {data_waktu.day} - {data_waktu.month} - {data_waktu.year})\n")
             tampil_starting()
             print()
             tampil_cadangan()
             input("\n(Ketuk enter untuk kembali memilih menu)")
-            
+
         elif pilihan_2 == "2":
             login_mod = False
 
@@ -850,4 +854,5 @@ elif login_mod:
             input("\n(Input tidak valid, ketuk enter untuk kembali)")
 
 os.system("cls")
-print(f"✨ Terima kasih atas waktunya, {user}. Sampai jumpa di lain kesempatan! Selamat tinggal. 👋")
+print(
+    f"✨ Terima kasih atas waktunya, {user}. Sampai jumpa di lain kesempatan! Selamat tinggal. 👋")
