@@ -1,5 +1,5 @@
 import os
-from data import data_pengguna, data_pemain, semua_pemain, cek_pemain, data_barcelona, data_club_pengguna
+from data import data_pengguna
 from prettytable import PrettyTable
 import time
 

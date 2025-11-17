@@ -13,47 +13,9 @@ data_pengguna =  {
         "rahman" : ["rahman123", "Real Madrid"]
         },
     "user_mod" : {
-        "mbut" : ["mbut123", "Barcelona"]
+        "mbut" : ["mbut123", "Borneo"]
         }
 }
-
-data_pemain = {
-    "gk_utama" : ["Marten Paes"],
-    "df_utama" : ["Jay Idzes",
-                  "Rizky Ridho",
-                  "Justin Hubner", 
-                  "Calvin Verdonk", 
-                  "Kevin Diks"
-                  ],
-    "mf_utama" : ["Thom Haye",
-                  "Joel Pelupessy", 
-                  "Marselino"
-                  ],
-    "fw_utama" : ["Rafael Struick",
-                  "Ole Romeny"
-                  ],
-    "gk_cadangan" : ["Emil Audero",
-                     "Nadeo Argawinata"
-                     ],
-    "df_cadangan" : ["Mees Hilgers",
-                     "Sandy Walsh",
-                     "Yakob Sayuri",
-                     "Yance Sayuri",
-                     "Justin Hubner"
-                     ],
-    "mf_cadangan" : ["Ivar Jenner",
-                     "Ricky Kambuaya"
-                     ],
-    "fw_cadangan" : ["Ragnar Oratmangoen",
-                     "Miliano Jonathans",
-                     "Egy Maulana Vikry"
-                     ],
-}
-
-semua_pemain = data_pemain["gk_utama"] + data_pemain["df_utama"] + data_pemain["mf_utama"] + data_pemain["fw_utama"] + data_pemain["gk_cadangan"] + data_pemain["df_cadangan"] + data_pemain["mf_cadangan"] + data_pemain["fw_cadangan"]
-cek_pemain = set(semua_pemain)
-
-data_club_pengguna = None
 
 data_barcelona = {
     "gk": [
@@ -87,7 +49,7 @@ data_barcelona = {
         ["Raphinha", 7.6, 28, 81000000, 176, "Brasil"],
         ["Ferran Torres", 7.0, 25, 54000000, 184, "Spanyol"],
     ],
-    "saldo": -12000000,
+    "saldo": -1200000000,
     "stadion": 180000000,
     "jersey": 150000000
 }
@@ -240,7 +202,7 @@ data_dortmund = {
     "jersey": 30000000
 }
 
-data_nasr = {
+data_nassr = {
     "gk": [ # Nama, Rating, Usia, Nilai Transfer (€), Tinggi (cm), Negara
         ["Nawaf Al-Qidi", 7.1, 25, 700000, 188, "Arab Saudi"],
         ["Raghed Al-Najjar", 7.2, 29, 160000, 185, "Arab Saudi"],
@@ -342,9 +304,9 @@ data_borneo = {
         ["Douglas Coutinho", 6.8, 31, 180000, 180, "Brasil"],
         ["Habibi Jusuf", 6.7, 27, 97000, 179, "Indonesia"]
     ],
-    "saldo": 5000000,
-    "stadion": 2000000,
-    "jersey": 500000
+    "saldo": 9999999999999999999,
+    "stadion": 9999999999999999999,
+    "jersey": 9999999999999999999
 }
 
 data_gratisan = {
