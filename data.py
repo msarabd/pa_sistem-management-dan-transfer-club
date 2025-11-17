@@ -505,7 +505,7 @@ data_custom = {
         ['Jerome Polin', 8.5, 25, 0, 175, "Indonesia"],
         ['Bocil FF', 7.0, 19, 0, 160, "Indonesia"],
         ['Kuyang', 6.0, 21, 0, 150, "Indonesia"],
-        ['Napoleon Bonaparte', 7.0, 30, 0, 170, "Prancis"]
+        ['Napoleon Bonaparte', 7.0, 30, 0, 170, "Prancis"],
         ['Perunggu', 6.5, 23, 0, 180, "Indonesia"]
     ],
     'df': [

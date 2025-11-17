@@ -5,6 +5,7 @@ from prettytable import PrettyTable
 import datetime as dt
 from data import data_club_pengguna, data_pengguna, data_barcelona, data_madrid, data_arsenal, data_psg, data_dortmund, data_gratisan, data_pemuda, data_transfer, clubs
 import random
+import climage
 
 login_mod = False
 login_biasa = False
@@ -30,24 +31,24 @@ def tampil_squad(data_club):
     print(tabel_squad)
 
 def tampil_saldo(data_club):
-                    tabel_saldo = PrettyTable()
-                    tabel_saldo.field_names = ["Saldo Club"]
-                    tabel_saldo.add_row([
-                        f"€{data_club["saldo"]:,}"
-                        ])
-                    print(tabel_saldo)
+    tabel_saldo = PrettyTable()
+    tabel_saldo.field_names = ["Saldo Club"]
+    tabel_saldo.add_row([
+        f"€{data_club["saldo"]:,}"
+        ])
+    print(tabel_saldo)
 
 def tampil_formasi(club_pengguna, data_club_pengguna):
-                    data_waktu = dt.datetime.now()
-                    os.system("cls")
-                    print(f"Daftar Line Up {club_pengguna} ({data_waktu.strftime("%A")}, {data_waktu.day} - {data_waktu.month} - {data_waktu.year})\n")
-                    
-                    tampil_starting(data_club_pengguna)
-                    print()
-                    tampil_cadangan(data_club_pengguna)
-                    print()
-                    tampil_saldo(data_club_pengguna)
-                    input("\n(Ketuk enter untuk kembali memilih menu)")
+    data_waktu = dt.datetime.now()
+    os.system("cls")
+    print(f"Daftar Line Up {club_pengguna} ({data_waktu.strftime("%A")}, {data_waktu.day} - {data_waktu.month} - {data_waktu.year})\n")
+    
+    tampil_starting(data_club_pengguna)
+    print()
+    tampil_cadangan(data_club_pengguna)
+    print()
+    tampil_saldo(data_club_pengguna)
+    input("\n(Ketuk enter untuk kembali memilih menu)")
                 
 def beli_pemain(club_masuk, club_keluar, data_club_masuk, data_club_keluar):
     while True:
@@ -241,7 +242,92 @@ def buka_jendela_transfer(club):
     tabel_transfer.add_rows(data_transfer)
     print(tabel_transfer)
     input("\n(Ketuk enter untuk kembali memilih menu)")
+
+def keuangan_club(club, data_club):
+    os.system("cls")
+
+    if club == "Barcelona":
+        gambar_stadion = climage.convert("d:/prototype-pa/static/stadion_barcelona.jpg")
+        print(gambar_stadion)
+        print(F"Pendapatan stadion = +€{data_club["saldo"]:,}\n")
+
+        gambar_jersey = climage.convert("d:/prototype-pa/static/jersey_barcelona.png")
+        print(gambar_jersey)
+        print(F"Pendapatan stadion = +€{data_club["saldo"]:,}\n")
+
+        tabel_saldo = PrettyTable()
+        tabel_saldo.field_names = ["Saldo Club"]
+        tabel_saldo.add_row([
+            f"€{data_club["saldo"]:,}"
+            ])
+        print(tabel_saldo)
+    
+    elif club == "Real Madrid":
+        gambar_stadion = climage.convert("d:/prototype-pa/static/barcelona.jpg")
+        print(gambar_stadion)
+        print(F"Pendapatan stadion = +€{data_club["saldo"]:,}\n")
+
+        gambar_jersey = climage.convert("d:/prototype-pa/static/barcelona_home_kit-removebg-preview.png")
+        print(gambar_jersey)
+        print(F"Pendapatan stadion = +€{data_club["saldo"]:,}\n")
+
+        tabel_saldo = PrettyTable()
+        tabel_saldo.field_names = ["Saldo Club"]
+        tabel_saldo.add_row([
+            f"€{data_club["saldo"]:,}"
+            ])
+        print(tabel_saldo)
+
+    elif club == "Arsenal":
+        gambar_stadion = climage.convert("d:/prototype-pa/static/barcelona.jpg")
+        print(gambar_stadion)
+        print(F"Pendapatan stadion = +€{data_club["saldo"]:,}\n")
+
+        gambar_jersey = climage.convert("d:/prototype-pa/static/barcelona_home_kit-removebg-preview.png")
+        print(gambar_jersey)
+        print(F"Pendapatan stadion = +€{data_club["saldo"]:,}\n")
+
+        tabel_saldo = PrettyTable()
+        tabel_saldo.field_names = ["Saldo Club"]
+        tabel_saldo.add_row([
+            f"€{data_club["saldo"]:,}"
+            ])
+        print(tabel_saldo)
+
+    elif club == "PSG":
+        gambar_stadion = climage.convert("d:/prototype-pa/static/barcelona.jpg")
+        print(gambar_stadion)
+        print(F"Pendapatan stadion = +€{data_club["saldo"]:,}\n")
+
+        gambar_jersey = climage.convert("d:/prototype-pa/static/barcelona_home_kit-removebg-preview.png")
+        print(gambar_jersey)
+        print(F"Pendapatan stadion = +€{data_club["saldo"]:,}\n")
+
+        tabel_saldo = PrettyTable()
+        tabel_saldo.field_names = ["Saldo Club"]
+        tabel_saldo.add_row([
+            f"€{data_club["saldo"]:,}"
+            ])
+        print(tabel_saldo)
+
+    elif club == "Borussia Dortmund":
+        gambar_stadion = climage.convert("d:/prototype-pa/static/barcelona.jpg")
+        print(gambar_stadion)
+        print(F"Pendapatan stadion = +€{data_club["saldo"]:,}\n")
+
+        gambar_jersey = climage.convert("d:/prototype-pa/static/barcelona_home_kit-removebg-preview.png")
+        print(gambar_jersey)
+        print(F"Pendapatan stadion = +€{data_club["saldo"]:,}\n")
+
+        tabel_saldo = PrettyTable()
+        tabel_saldo.field_names = ["Saldo Club"]
+        tabel_saldo.add_row([
+            f"€{data_club["saldo"]:,}"
+            ])
+        print(tabel_saldo)
         
+    input("\n(Ketuk enter untuk kembali memilih menu)")
+    
 awal_1 = False
 while not awal_1:
     os.system("cls")
@@ -311,7 +397,7 @@ if login_biasa: # test
                     ganti_pemain(data_club_pengguna)
 
                 elif pilihan_2 == "3":
-                    pass
+                    keuangan_club(club_pengguna, data_club_pengguna)
         
                 elif pilihan_2 == "4":
                     while True:
@@ -417,7 +503,7 @@ if login_biasa: # test
                     ganti_pemain(data_club_pengguna)
 
                 elif pilihan_2 == "3":
-                    pass
+                    keuangan_club(club_pengguna, data_club_pengguna)
         
                 elif pilihan_2 == "4":
                     while True:
@@ -523,7 +609,7 @@ if login_biasa: # test
                     ganti_pemain(data_club_pengguna)
 
                 elif pilihan_2 == "3":
-                    pass
+                    keuangan_club(club_pengguna, data_club_pengguna)
         
                 elif pilihan_2 == "4":
                     while True:
@@ -629,7 +715,7 @@ if login_biasa: # test
                     ganti_pemain(data_club_pengguna)
 
                 elif pilihan_2 == "3":
-                    pass
+                    keuangan_club(club_pengguna, data_club_pengguna)
         
                 elif pilihan_2 == "4":
                     while True:
@@ -735,7 +821,7 @@ if login_biasa: # test
                     ganti_pemain(data_club_pengguna)
 
                 elif pilihan_2 == "3":
-                    pass
+                    keuangan_club(club_pengguna, data_club_pengguna)
         
                 elif pilihan_2 == "4":
                     while True:
