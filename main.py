@@ -31,24 +31,24 @@ def tampil_squad(data_club):
     print(tabel_squad)
 
 def tampil_saldo(data_club):
-    tabel_saldo = PrettyTable()
-    tabel_saldo.field_names = ["Saldo Club"]
-    tabel_saldo.add_row([
-        f"€{data_club["saldo"]:,}"
-        ])
-    print(tabel_saldo)
+                    tabel_saldo = PrettyTable()
+                    tabel_saldo.field_names = ["Saldo Club"]
+                    tabel_saldo.add_row([
+                        f"€{data_club["saldo"]:,}"
+                        ])
+                    print(tabel_saldo)
 
 def tampil_formasi(club_pengguna, data_club_pengguna):
-    data_waktu = dt.datetime.now()
-    os.system("cls")
-    print(f"Daftar Line Up {club_pengguna} ({data_waktu.strftime("%A")}, {data_waktu.day} - {data_waktu.month} - {data_waktu.year})\n")
-    
-    tampil_starting(data_club_pengguna)
-    print()
-    tampil_cadangan(data_club_pengguna)
-    print()
-    tampil_saldo(data_club_pengguna)
-    input("\n(Ketuk enter untuk kembali memilih menu)")
+                    data_waktu = dt.datetime.now()
+                    os.system("cls")
+                    print(f"Daftar Line Up {club_pengguna} ({data_waktu.strftime("%A")}, {data_waktu.day} - {data_waktu.month} - {data_waktu.year})\n")
+                    
+                    tampil_starting(data_club_pengguna)
+                    print()
+                    tampil_cadangan(data_club_pengguna)
+                    print()
+                    tampil_saldo(data_club_pengguna)
+                    input("\n(Ketuk enter untuk kembali memilih menu)")
                 
 def beli_pemain(club_masuk, club_keluar, data_club_masuk, data_club_keluar):
     while True:
@@ -325,9 +325,7 @@ def keuangan_club(club, data_club):
             f"€{data_club["saldo"]:,}"
             ])
         print(tabel_saldo)
-        
-    input("\n(Ketuk enter untuk kembali memilih menu)")
-    
+
 awal_1 = False
 while not awal_1:
     os.system("cls")
