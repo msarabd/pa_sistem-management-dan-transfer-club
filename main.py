@@ -1,6 +1,6 @@
 import os
 from login import input_biasa, input_mod, input_register
-from crud import tampil_starting, tampil_cadangan, ganti_pemain, ganti_pemain, hapus_pemain, tampilan_ubah_pemain
+from crud import tampil_starting, tampil_cadangan, ganti_pemain
 from prettytable import PrettyTable
 import datetime as dt
 from data import data_club_pengguna, data_pengguna, data_barcelona, data_madrid, data_arsenal, data_psg, data_dortmund, data_gratisan, data_pemuda, data_transfer, clubs
@@ -31,24 +31,24 @@ def tampil_squad(data_club):
     print(tabel_squad)
 
 def tampil_saldo(data_club):
-                    tabel_saldo = PrettyTable()
-                    tabel_saldo.field_names = ["Saldo Club"]
-                    tabel_saldo.add_row([
-                        f"€{data_club["saldo"]:,}"
-                        ])
-                    print(tabel_saldo)
+    tabel_saldo = PrettyTable()
+    tabel_saldo.field_names = ["Saldo Club"]
+    tabel_saldo.add_row([
+        f"€{data_club["saldo"]:,}"
+        ])
+    print(tabel_saldo)
 
 def tampil_formasi(club_pengguna, data_club_pengguna):
-                    data_waktu = dt.datetime.now()
-                    os.system("cls")
-                    print(f"Daftar Line Up {club_pengguna} ({data_waktu.strftime("%A")}, {data_waktu.day} - {data_waktu.month} - {data_waktu.year})\n")
-                    
-                    tampil_starting(data_club_pengguna)
-                    print()
-                    tampil_cadangan(data_club_pengguna)
-                    print()
-                    tampil_saldo(data_club_pengguna)
-                    input("\n(Ketuk enter untuk kembali memilih menu)")
+    data_waktu = dt.datetime.now()
+    os.system("cls")
+    print(f"Daftar Line Up {club_pengguna} ({data_waktu.strftime("%A")}, {data_waktu.day} - {data_waktu.month} - {data_waktu.year})\n")
+    
+    tampil_starting(data_club_pengguna)
+    print()
+    tampil_cadangan(data_club_pengguna)
+    print()
+    tampil_saldo(data_club_pengguna)
+    input("\n(Ketuk enter untuk kembali memilih menu)")
                 
 def beli_pemain(club_masuk, club_keluar, data_club_masuk, data_club_keluar):
     while True:
@@ -70,20 +70,22 @@ def beli_pemain(club_masuk, club_keluar, data_club_masuk, data_club_keluar):
             idx_a = int(input("\nMasukkan nomor pemain: ")) - 1
             
             # Mencegah agar pemain pada lini club tidak habis
-            if lini == "gk":
-                if len(daftar) <= 1:
-                    raise ValueError(f"Jumlah pemain pada lini {lini} {club_keluar} tidak cukup")
-            elif lini == "df":
-                if len(daftar) <= 4:
-                    raise ValueError(f"Jumlah pemain pada lini {lini} {club_keluar} tidak cukup")
-            elif lini == "mf":
-                if len(daftar) <= 3:
-                    raise ValueError(f"Jumlah pemain pada lini {lini} {club_keluar} tidak cukup")
-            elif lini == "fw":
-                if len(daftar) <= 3:
-                    raise ValueError(f"Jumlah pemain pada lini {lini} {club_keluar} tidak cukup")
-            if idx_a < 0:
-                raise ValueError("Nomor pemain tidak tersedia")
+            if data_club_keluar in [data_barcelona, data_madrid, data_arsenal, data_psg, data_dortmund]:
+                if lini == "gk":
+                    if len(daftar) <= 1:
+                        raise ValueError(f"Jumlah pemain pada lini {lini} {club_keluar} tidak cukup")
+                elif lini == "df":
+                    if len(daftar) <= 4:
+                        raise ValueError(f"Jumlah pemain pada lini {lini} {club_keluar} tidak cukup")
+                elif lini == "mf":
+                    if len(daftar) <= 3:
+                        raise ValueError(f"Jumlah pemain pada lini {lini} {club_keluar} tidak cukup")
+                elif lini == "fw":
+                    if len(daftar) <= 3:
+                        raise ValueError(f"Jumlah pemain pada lini {lini} {club_keluar} tidak cukup")
+                if idx_a < 0:
+                    raise ValueError("Nomor pemain tidak tersedia")
+            
             
             # Tambah pemain
             if data_club_keluar == data_gratisan:
@@ -129,7 +131,7 @@ def jual_pemain(club, data_club):
 
             idx_a = int(input("\nMasukkan nomor pemain: ")) - 1
             
-            # Mencegah agar pemain pada lini club tidak habis
+            # Mencegah agar pemain pada lini club tidak habis (khusus untuk club, free agent dan pencari bakat tidak berlaku)
             if lini == "gk":
                 if len(daftar) <= 1:
                     raise ValueError(f"Jumlah pemain pada lini {lini} {club} tidak cukup")
@@ -141,7 +143,7 @@ def jual_pemain(club, data_club):
                     raise ValueError(f"Jumlah pemain pada lini {lini} {club} tidak cukup")
             elif lini == "fw":
                 if len(daftar) <= 3:
-                    raise ValueError(f"Jumlah pemain pada lini {lini} {club} tidak cukup")
+                        raise ValueError(f"Jumlah pemain pada lini {lini} {club} tidak cukup")
             
             if idx_a < 0:
                 raise ValueError("Nomor pemain tidak tersedia")
@@ -249,83 +251,71 @@ def keuangan_club(club, data_club):
     if club == "Barcelona":
         gambar_stadion = climage.convert("d:/prototype-pa/static/stadion_barcelona.jpg")
         print(gambar_stadion)
-        print(F"Pendapatan stadion = +€{data_club["saldo"]:,}\n")
+        print(F"Pendapatan Stadion = +€{data_club["stadion"]:,}\n")
 
         gambar_jersey = climage.convert("d:/prototype-pa/static/jersey_barcelona.png")
         print(gambar_jersey)
-        print(F"Pendapatan stadion = +€{data_club["saldo"]:,}\n")
+        print(F"Pendapatan Merchandise = +€{data_club["jersey"]:,}\n")
 
-        tabel_saldo = PrettyTable()
-        tabel_saldo.field_names = ["Saldo Club"]
-        tabel_saldo.add_row([
-            f"€{data_club["saldo"]:,}"
-            ])
-        print(tabel_saldo)
+        tampil_saldo(data_club)
     
     elif club == "Real Madrid":
-        gambar_stadion = climage.convert("d:/prototype-pa/static/barcelona.jpg")
+        gambar_stadion = climage.convert("d:/prototype-pa/static/stadion_madrid.jpg")
         print(gambar_stadion)
-        print(F"Pendapatan stadion = +€{data_club["saldo"]:,}\n")
+        print(F"Pendapatan stadion = +€{data_club["stadion"]:,}\n")
 
-        gambar_jersey = climage.convert("d:/prototype-pa/static/barcelona_home_kit-removebg-preview.png")
+        gambar_jersey = climage.convert("d:/prototype-pa/static/jersey_madrid.png")
         print(gambar_jersey)
-        print(F"Pendapatan stadion = +€{data_club["saldo"]:,}\n")
+        print(F"Pendapatan Merchandise = +€{data_club["jersey"]:,}\n")
 
-        tabel_saldo = PrettyTable()
-        tabel_saldo.field_names = ["Saldo Club"]
-        tabel_saldo.add_row([
-            f"€{data_club["saldo"]:,}"
-            ])
-        print(tabel_saldo)
+        tampil_saldo(data_club)
 
     elif club == "Arsenal":
-        gambar_stadion = climage.convert("d:/prototype-pa/static/barcelona.jpg")
+        gambar_stadion = climage.convert("d:/prototype-pa/static/stadion_arsenal.jpg")
         print(gambar_stadion)
-        print(F"Pendapatan stadion = +€{data_club["saldo"]:,}\n")
+        print(F"Pendapatan stadion = +€{data_club["stadion"]:,}\n")
 
-        gambar_jersey = climage.convert("d:/prototype-pa/static/barcelona_home_kit-removebg-preview.png")
+        gambar_jersey = climage.convert("d:/prototype-pa/static/jersey_arsenal.png")
         print(gambar_jersey)
-        print(F"Pendapatan stadion = +€{data_club["saldo"]:,}\n")
+        print(F"Pendapatan Merchandise = +€{data_club["jersey"]:,}\n")
 
-        tabel_saldo = PrettyTable()
-        tabel_saldo.field_names = ["Saldo Club"]
-        tabel_saldo.add_row([
-            f"€{data_club["saldo"]:,}"
-            ])
-        print(tabel_saldo)
+        tampil_saldo(data_club)
 
     elif club == "PSG":
-        gambar_stadion = climage.convert("d:/prototype-pa/static/barcelona.jpg")
+        gambar_stadion = climage.convert("d:/prototype-pa/static/stadion_psg.jpg")
         print(gambar_stadion)
-        print(F"Pendapatan stadion = +€{data_club["saldo"]:,}\n")
+        print(F"Pendapatan stadion = +€{data_club["stadion"]:,}\n")
 
-        gambar_jersey = climage.convert("d:/prototype-pa/static/barcelona_home_kit-removebg-preview.png")
+        gambar_jersey = climage.convert("d:/prototype-pa/static/jersey_psg.png")
         print(gambar_jersey)
-        print(F"Pendapatan stadion = +€{data_club["saldo"]:,}\n")
+        print(F"Pendapatan Merchandise = +€{data_club["jersey"]:,}\n")
 
-        tabel_saldo = PrettyTable()
-        tabel_saldo.field_names = ["Saldo Club"]
-        tabel_saldo.add_row([
-            f"€{data_club["saldo"]:,}"
-            ])
-        print(tabel_saldo)
+        tampil_saldo(data_club)
 
     elif club == "Borussia Dortmund":
-        gambar_stadion = climage.convert("d:/prototype-pa/static/barcelona.jpg")
+        gambar_stadion = climage.convert("d:/prototype-pa/static/stadion_dortmund.jpg")
         print(gambar_stadion)
-        print(F"Pendapatan stadion = +€{data_club["saldo"]:,}\n")
+        print(F"Pendapatan stadion = +€{data_club["stadion"]:,}\n")
 
-        gambar_jersey = climage.convert("d:/prototype-pa/static/barcelona_home_kit-removebg-preview.png")
+        gambar_jersey = climage.convert("d:/prototype-pa/static/jersey_dortmund.png")
         print(gambar_jersey)
-        print(F"Pendapatan stadion = +€{data_club["saldo"]:,}\n")
+        print(F"Pendapatan Merchandise = +€{data_club["jersey"]:,}\n")
 
-        tabel_saldo = PrettyTable()
-        tabel_saldo.field_names = ["Saldo Club"]
-        tabel_saldo.add_row([
-            f"€{data_club["saldo"]:,}"
-            ])
-        print(tabel_saldo)
+        tampil_saldo(data_club)
 
+    elif club == "Borneo":
+        gambar_stadion = climage.convert("d:/prototype-pa/static/stadion_borneo.jpg")
+        print(gambar_stadion)
+        print(F"Pendapatan stadion = +€{data_club["stadion"]:,}\n")
+
+        gambar_jersey = climage.convert("d:/prototype-pa/static/jersey_borneo.png")
+        print(gambar_jersey)
+        print(F"Pendapatan Merchandise = +€{data_club["jersey"]:,}\n")
+
+        tampil_saldo(data_club)
+
+    input("\n(Ketuk enter untuk kembali memilih menu)")
+                
 awal_1 = False
 while not awal_1:
     os.system("cls")
