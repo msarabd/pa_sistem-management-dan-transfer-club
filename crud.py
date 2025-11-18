@@ -133,7 +133,10 @@ def beli_pemain(club_masuk, club_keluar, data_club_masuk, data_club_keluar):
                 if idx_a < 0:
                     raise ValueError("Nomor pemain tidak tersedia")
             
-            
+            # Mencegah agar tidak bisa membeli pemain saat saldo tidak cukup
+            if daftar[idx_a][3] > data_club_masuk["saldo"]:
+                raise ValueError(f"Saldo club tidak cukup untuk membeli pemain ini")
+
             # Tambah pemain
             if data_club_keluar == data_gratisan:
                 tampung_pemain = daftar[idx_a][:6]
