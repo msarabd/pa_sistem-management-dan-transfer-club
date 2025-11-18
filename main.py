@@ -4,9 +4,6 @@ from crud import menu_login_biasa, menu_login_mod
 from prettytable import PrettyTable
 from data import data_pengguna, data_borneo, clubs
 
-login_mod = False
-login_biasa = False
-
 awal_1 = False
 while not awal_1:
     os.system("cls")
@@ -42,7 +39,7 @@ while not awal_1:
     else:
         input("\n(Input tidak valid, ketuk enter untuk memilih kembali)")
 
-if login_biasa: # test
+if login_biasa:
     club_pengguna = data_pengguna["user_biasa"][user][1]
     data_club_pengguna = clubs[club_pengguna]
     menu_login_biasa(user, club_pengguna, data_club_pengguna)

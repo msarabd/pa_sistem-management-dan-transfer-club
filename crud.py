@@ -7,7 +7,6 @@ import climage
 import time
 import threading
 
-
 def tampil_starting(data_club):
     data_starting = []
     for i in range(len(data_club["gk"])):
@@ -157,9 +156,11 @@ def beli_pemain(club_masuk, club_keluar, data_club_masuk, data_club_keluar):
             break
 
         except Exception as e:
-            print()
-            input(f"({e})")
-            continue
+            tekan = input(f"\n({e})")
+            if tekan == "0":
+                break
+            else:
+                continue
 
 def jual_pemain(club, data_club):
     while True:
@@ -227,9 +228,11 @@ def jual_pemain(club, data_club):
             break
 
         except Exception as e:
-            print()
-            input(f"({e})")
-            continue
+            tekan = input(f"\n({e})")
+            if tekan == "0":
+                break
+            else:
+                continue
 
 def ganti_pemain(data_club):
     while True:
@@ -263,9 +266,11 @@ def ganti_pemain(data_club):
             break
 
         except Exception as e:
-            print()
-            input(f"({e})")
-            continue
+            tekan = input(f"\n({e})")
+            if tekan == "0":
+                break
+            else:
+                continue
 
 def buka_jendela_transfer(club):
     os.system("cls")

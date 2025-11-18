@@ -9,6 +9,7 @@ def input_biasa():
     global login_biasa
     global user
 
+    login_biasa = False
     ulang_1 = False
     while not ulang_1:
         awal_1 = False
@@ -40,15 +41,19 @@ def input_biasa():
                     "\n(User tidak ditemukan, ketuk enter untuk login kembali)")
 
         except Exception as e:
-            input(e)
-            continue
-
+            tekan = input(e)
+            if tekan == "0":
+                return user, login_biasa, awal_1
+            else:
+                continue
 
 def input_mod():
     global user
     global login_mod
     global awal_1
 
+    login_mod = False
+    awal_1 = False
     while True:
         os.system("cls")
         print("=== Login Sebagai User MOD ===\n")
@@ -73,8 +78,11 @@ def input_mod():
                             "\n(Username dan password salah, ketuk enter untuk kembali)")
 
         except Exception as e:
-            input(e)
-            continue
+            tekan = input(e)
+            if tekan == "0":
+                return user, login_mod, awal_1
+            else:
+                continue
 
         input("\n(Login berhasil, ketuk enter untuk lanjut)")
         login_mod = True
@@ -88,6 +96,8 @@ def input_register():
     global login_biasa
     global awal_1
 
+    login_biasa = False
+    awal_1 = False
     while True:
         os.system("cls")
         print("=== Menu Register ===\n")
@@ -104,8 +114,11 @@ def input_register():
                     "\n(Pengguna sudah ada, harap ganti username Anda)")
 
         except Exception as e:
-            input(e)
-            continue
+            tekan = input(e)
+            if tekan == "0":
+                return user, login_biasa, awal_1
+            else:
+                continue
 
         data_pengguna["user_biasa"][user] = [pw]
         input("\n(Register berhasil, ketuk enter untuk memilih club)")
