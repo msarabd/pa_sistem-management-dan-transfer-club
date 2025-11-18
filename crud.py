@@ -133,8 +133,12 @@ def beli_pemain(club_masuk, club_keluar, data_club_masuk, data_club_keluar):
                 if idx_a < 0:
                     raise ValueError("Nomor pemain tidak tersedia")
             
+            # Pengecualian jika pemain yang dibeli itu harganya 0 atau gratis 
+            if daftar[idx_a][3] == 0:
+                pass
+
             # Mencegah agar tidak bisa membeli pemain saat saldo tidak cukup
-            if daftar[idx_a][3] > data_club_masuk["saldo"]:
+            elif daftar[idx_a][3] > data_club_masuk["saldo"]:
                 raise ValueError(f"Saldo club tidak cukup untuk membeli pemain ini")
 
             # Tambah pemain
@@ -305,66 +309,66 @@ def keuangan_club(club, data_club):
     os.system("cls")
 
     if club == "Barcelona":
-        gambar_stadion = climage.convert("d:/prototype-pa/static/stadion_barcelona.jpg")
+        gambar_stadion = climage.convert("static/stadion_barcelona.jpg")
         print(gambar_stadion)
         print(F"Pendapatan Stadion = +€{data_club["stadion"]:,}\n")
 
-        gambar_jersey = climage.convert("d:/prototype-pa/static/jersey_barcelona.png")
+        gambar_jersey = climage.convert("static/jersey_barcelona.png")
         print(gambar_jersey)
         print(F"Pendapatan Merchandise = +€{data_club["jersey"]:,}\n")
 
         tampil_saldo(data_club)
     
     elif club == "Real Madrid":
-        gambar_stadion = climage.convert("d:/prototype-pa/static/stadion_madrid.jpg")
+        gambar_stadion = climage.convert("static/stadion_madrid.jpg")
         print(gambar_stadion)
         print(F"Pendapatan Stadion = +€{data_club["stadion"]:,}\n")
 
-        gambar_jersey = climage.convert("d:/prototype-pa/static/jersey_madrid.png")
+        gambar_jersey = climage.convert("static/jersey_madrid.png")
         print(gambar_jersey)
         print(F"Pendapatan Merchandise = +€{data_club["jersey"]:,}\n")
 
         tampil_saldo(data_club)
 
     elif club == "Arsenal":
-        gambar_stadion = climage.convert("d:/prototype-pa/static/stadion_arsenal.jpg")
+        gambar_stadion = climage.convert("static/stadion_arsenal.jpg")
         print(gambar_stadion)
         print(F"Pendapatan Stadion = +€{data_club["stadion"]:,}\n")
 
-        gambar_jersey = climage.convert("d:/prototype-pa/static/jersey_arsenal.png")
+        gambar_jersey = climage.convert("static/jersey_arsenal.png")
         print(gambar_jersey)
         print(F"Pendapatan Merchandise = +€{data_club["jersey"]:,}\n")
 
         tampil_saldo(data_club)
 
     elif club == "PSG":
-        gambar_stadion = climage.convert("d:/prototype-pa/static/stadion_psg.jpg")
+        gambar_stadion = climage.convert("static/stadion_psg.jpg")
         print(gambar_stadion)
         print(F"Pendapatan Stadion = +€{data_club["stadion"]:,}\n")
 
-        gambar_jersey = climage.convert("d:/prototype-pa/static/jersey_psg.png")
+        gambar_jersey = climage.convert("static/jersey_psg.png")
         print(gambar_jersey)
         print(F"Pendapatan Merchandise = +€{data_club["jersey"]:,}\n")
 
         tampil_saldo(data_club)
 
     elif club == "Borussia Dortmund":
-        gambar_stadion = climage.convert("d:/prototype-pa/static/stadion_dortmund.jpg")
+        gambar_stadion = climage.convert("static/stadion_dortmund.jpg")
         print(gambar_stadion)
         print(F"Pendapatan Stadion = +€{data_club["stadion"]:,}\n")
 
-        gambar_jersey = climage.convert("d:/prototype-pa/static/jersey_dortmund.png")
+        gambar_jersey = climage.convert("static/jersey_dortmund.png")
         print(gambar_jersey)
         print(F"Pendapatan Merchandise = +€{data_club["jersey"]:,}\n")
 
         tampil_saldo(data_club)
 
     elif club == "Borneo":
-        gambar_stadion = climage.convert("d:/prototype-pa/static/stadion_borneo.jpeg")
+        gambar_stadion = climage.convert("static/stadion_borneo.jpeg")
         print(gambar_stadion)
         print(F"Pendapatan Stadion = +€{data_club["stadion"]:,}\n")
 
-        gambar_jersey = climage.convert("d:/prototype-pa/static/jersey_borneo.png")
+        gambar_jersey = climage.convert("static/jersey_borneo.png")
         print(gambar_jersey)
         print(F"Pendapatan Merchandise = +€{data_club["jersey"]:,}\n")
 
