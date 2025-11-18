@@ -4,6 +4,9 @@ from crud import menu_login_biasa, menu_login_mod
 from prettytable import PrettyTable
 from data import data_pengguna, data_borneo, clubs
 
+login_biasa = False
+login_mod = False
+
 awal_1 = False
 while not awal_1:
     os.system("cls")
