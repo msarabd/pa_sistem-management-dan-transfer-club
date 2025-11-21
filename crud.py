@@ -110,6 +110,10 @@ def beli_pemain(club_masuk, club_keluar, data_club_masuk, data_club_keluar):
                 
             daftar = data_club_keluar[lini]
 
+            # Mencegah membeli pemain dari lini yang tidak memiliki pemain
+            if daftar == []:
+                raise ValueError(f"Pemain di lini ini tidak tersedia.")
+            
             print(f"\nDaftar pemain di lini {lini}:")
             for i, p in enumerate(daftar):
                 print(f"{i+1}. {p[0]} (Rating: {p[1]}, Harga: €{p[3]:,})")
@@ -299,7 +303,7 @@ def buka_jendela_transfer(club):
     
     # Tampilkan data transfer
     tabel_transfer = PrettyTable()
-    tabel_transfer.title = "DATA TRANSFER"
+    tabel_transfer.title = "JENDELA TRANSFER"
     tabel_transfer.field_names = ["NO.", "Nama Pemain", "Posisi", "Rating", "Umur", "MV", "Tinggi(cm)", "Negara", "Club Tujuan/Status"]
     tabel_transfer.add_rows(data_transfer)
     print(tabel_transfer)
