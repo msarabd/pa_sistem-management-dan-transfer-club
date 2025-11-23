@@ -209,7 +209,11 @@ def jual_pemain(club, data_club):
                 raise ValueError("Nomor pemain tidak tersedia")
             
             # tambah pemain ke club random
-            pilih_club = [data_barcelona, data_madrid, data_arsenal, data_psg, data_dortmund]
+            if club == "Borneo":
+                pilih_club = [data_barcelona, data_madrid, data_arsenal, data_psg, data_dortmund, data_gratisan, data_nassr, data_miami, data_borneo]
+            else:
+                pilih_club = [data_barcelona, data_madrid, data_arsenal, data_psg, data_dortmund, data_gratisan]
+
             pilih_club.remove(data_club)
             data_club_masuk = random.choice(pilih_club)
             data_club_masuk[lini].append(daftar[idx_a])
@@ -224,6 +228,14 @@ def jual_pemain(club, data_club):
                 club_masuk = "PSG"
             elif data_club_masuk == data_dortmund:
                 club_masuk = "Borussia Dortmund"
+            elif data_club_masuk == data_gratisan:
+                club_masuk = "Free Agent"
+            elif data_club_masuk == data_nassr:
+                club_masuk = "Al Nassr"
+            elif data_club_masuk == data_miami:
+                club_masuk = "Inter Miami"
+            elif data_club_masuk == data_borneo:
+                club_masuk = "Borneo"
             
             # Masukkan ke data transfer
             data_transfer.append([len(data_transfer) + 1, daftar[idx_a][0], lini.upper(), daftar[idx_a][1], daftar[idx_a][2], f"€{daftar[idx_a][3]:,}", daftar[idx_a][4], daftar[idx_a][5], club_masuk])
