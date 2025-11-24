@@ -1,6 +1,7 @@
 from data import data_pemain, cek_pemain, semua_pemain, data_club_pengguna
 from prettytable import PrettyTable
 import os
+import time
 from rich.progress import Progress
 
 def bersih():
