@@ -1,6 +1,17 @@
 from data import data_pemain, cek_pemain, semua_pemain, data_club_pengguna
 from prettytable import PrettyTable
 import os
+from rich.progress import Progress
+
+def bersih():
+    os.system('cls')
+
+def bar_progres(detik, pesan="Loading"):
+    with Progress() as p:
+        rahman = p.add_task(f"[green]{pesan}", total=detik)
+        for i in range(detik):
+            time.sleep(1)
+            p.update(rahman, advance=1)
 
 def tampil_starting(data_club):
     data_starting = []
