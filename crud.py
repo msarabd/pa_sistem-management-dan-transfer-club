@@ -9,7 +9,7 @@ def bersih():
 
 def bar_progres(detik, pesan="Loading"):
     with Progress() as p:
-        rahman = p.add_task(f"[green]{pesan}", total=detik)
+        rahman = p.add_task(f"[yellow]{pesan}", total=detik)
         for i in range(detik):
             time.sleep(1)
             p.update(rahman, advance=1)
