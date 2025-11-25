@@ -462,7 +462,7 @@ def menu_login_biasa(user, club_pengguna, data_club_pengguna):
                         ["[2]", "Jual pemain"],
                         ["[0]", "Kembali"]
                         ])
-                    print(tabel_transfer, "dark_grey")
+                    print(colored(tabel_transfer, "dark_grey"))
 
                     pilihan_3 = input("Pilih menu (1-2) = ").strip()
 
