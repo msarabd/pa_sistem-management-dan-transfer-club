@@ -18,7 +18,7 @@ while not awal_1:
         ["[1]", "Pengguna Biasa"],
         ["[2]", "Pengguna MOD"],
         ["[3]", "Daftar Sebagai Pengguna Baru"]
-        ])
+    ])
     print(tabel_menu)
 
     pilihan_1 = input("Pilih menu (1-3) = ").strip()
@@ -29,7 +29,7 @@ while not awal_1:
     elif not pilihan_1.isdigit() or pilihan_1 == "0":
         input("\n(Masukkan angka sesuai pilihan, ketuk enter untuk memilih kembali)")
         continue
-    
+
     elif pilihan_1 == "1":
         user, login_biasa, awal_1 = input_biasa()
 
@@ -53,4 +53,5 @@ elif login_mod:
     menu_login_mod(user, club_pengguna, data_club_pengguna)
 
 os.system("cls")
-print(f"✨ Terima kasih atas waktunya, {user}. Sampai jumpa di lain kesempatan! Selamat tinggal. 👋")
+print(
+    f"✨ Terima kasih atas waktunya, {user}. Sampai jumpa di lain kesempatan! Selamat tinggal. 👋")
