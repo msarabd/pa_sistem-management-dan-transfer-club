@@ -9,15 +9,13 @@ import threading
 from rich.progress import Progress
 from termcolor import colored
 
-def jeda():
-    time.sleep(1)
-
 def bar_progres(detik, pesan="Loading"):
     with Progress() as p:
         rahman = p.add_task(f"[yellow]{pesan}", total=detik)
         for i in range(detik):
             time.sleep(1)
             p.update(rahman, advance=1)
+        time.sleep(1)
 
 def kuning():
     pass
@@ -45,7 +43,7 @@ def tampil_starting(data_club):
     tabel_starting.title = "STARTING"
     tabel_starting.field_names = ["NO.", "Nama Pemain", "Posisi", "Rating", "Umur", "MV", "Tinggi(cm)", "Negara"]
     tabel_starting.add_rows(data_starting)
-    print(tabel_starting)
+    print(colored(tabel_starting, "green"))
 
 def tampil_cadangan(data_club):
     data_cadangan = []
@@ -70,7 +68,7 @@ def tampil_cadangan(data_club):
     tabel_cadangan.title = "CADANGAN"
     tabel_cadangan.field_names = ["NO.", "Nama Pemain", "Posisi", "Rating", "Umur", "MV", "Tinggi(cm)", "Negara"]
     tabel_cadangan.add_rows(data_cadangan)
-    print(tabel_cadangan)
+    print(colored(tabel_cadangan, "green"))
 
 def tampil_squad(data_club):
     data_squad = []
@@ -90,7 +88,7 @@ def tampil_squad(data_club):
     tabel_squad = PrettyTable()
     tabel_squad.field_names = ["NO.", "Nama Pemain", "Posisi", "Rating", "Umur", "MV", "Tinggi(cm)", "Negara"]
     tabel_squad.add_rows(data_squad)
-    print(tabel_squad)
+    print(colored(tabel_squad, "green"))
 
 def tampil_saldo(data_club):
     tabel_saldo = PrettyTable()
@@ -98,19 +96,19 @@ def tampil_saldo(data_club):
     tabel_saldo.add_row([
         f"€{data_club["saldo"]:,}"
         ])
-    print(tabel_saldo)
+    print(colored(tabel_saldo, "green"))
 
 def tampil_formasi(club_pengguna, data_club_pengguna):
     data_waktu = dt.datetime.now()
     os.system("cls")
-    print(colored(f"Daftar Line Up {club_pengguna} ({data_waktu.strftime("%A")}, {data_waktu.day} - {data_waktu.month} - {data_waktu.year})\n", attrs=["bold"]))
+    print(colored(f"Daftar Line Up {club_pengguna} ({data_waktu.strftime("%A")}, {data_waktu.day} - {data_waktu.month} - {data_waktu.year})\n", "green"))
     
     tampil_starting(data_club_pengguna)
     print()
     tampil_cadangan(data_club_pengguna)
     print()
     tampil_saldo(data_club_pengguna)
-    input("\n(Ketuk enter untuk kembali memilih menu)")
+    input(colored("\n(Ketuk enter untuk kembali memilih menu)", "light_yellow"))
                 
 def beli_pemain(club_masuk, club_keluar, data_club_masuk, data_club_keluar):
     while True:
@@ -177,14 +175,14 @@ def beli_pemain(club_masuk, club_keluar, data_club_masuk, data_club_keluar):
             harga_beli = daftar[idx_a][3] * 120 / 100
             data_club_masuk["saldo"] -= harga_beli
 
-            input(f"\n✅ Pemain berhasil dibeli: {daftar[idx_a][0]} -> {club_masuk} di lini {lini}, sisa saldo club: €{data_club_masuk["saldo"]:,}.")
-            del daftar[idx_a]
+            print()
             bar_progres(3, "Memproses pembelian")
-            jeda()
+            input(f"✅ Pemain berhasil dibeli: {daftar[idx_a][0]} -> {club_masuk} di lini {lini}, sisa saldo club: €{data_club_masuk["saldo"]:,}.")
+            del daftar[idx_a]
             break
 
         except Exception as e:
-            tekan = input(f"\n({e})")
+            tekan = input(colored(f"\n({e})", "red"))
             if tekan == "0":
                 break
             else:
@@ -261,15 +259,15 @@ def jual_pemain(club, data_club):
             harga_jual = daftar[idx_a][3] * 80 / 100
             data_club["saldo"] += harga_jual
 
-            input(f"\n✅ Posisi berhasil dijual: {daftar[idx_a][0]} -> {club_masuk} di lini {lini}, sisa saldo club: €{data_club["saldo"]:,}.")
+            print()
             bar_progres(3, "Memproses penjualan")
-            jeda()
+            input(f"✅ Pemain berhasil dijual: {daftar[idx_a][0]} -> {club_masuk} di lini {lini}, sisa saldo club: €{data_club["saldo"]:,}.")
             # hapus pemain di club awal
             del daftar[idx_a]
             break
 
         except Exception as e:
-            tekan = input(f"\n({e})")
+            tekan = input(colored(f"\n({e})", "red"))
             if tekan == "0":
                 break
             else:
@@ -302,14 +300,14 @@ def ganti_pemain(data_club):
             
             # Tukar posisi
             daftar[idx_a], daftar[idx_b] = daftar[idx_b], daftar[idx_a]
-
-            input(f"\n✅ Posisi berhasil ditukar: {daftar[idx_b][0]} ⇄ {daftar[idx_a][0]} di lini {lini}.")
+            
+            print()
             bar_progres(3, "Memproses perubahan")
-            jeda()
+            input(f"✅ Posisi berhasil ditukar: {daftar[idx_b][0]} ⇄ {daftar[idx_a][0]} di lini {lini}.")
             break
 
         except Exception as e:
-            tekan = input(f"\n({e})")
+            tekan = input(colored(f"\n({e})", "red"))
             if tekan == "0":
                 break
             else:
@@ -338,8 +336,8 @@ def buka_jendela_transfer(club):
     tabel_transfer.title = "JENDELA TRANSFER"
     tabel_transfer.field_names = ["NO.", "Nama Pemain", "Posisi", "Rating", "Umur", "MV", "Tinggi(cm)", "Negara", "Club Tujuan/Status"]
     tabel_transfer.add_rows(data_transfer)
-    print(tabel_transfer)
-    input("\n(Ketuk enter untuk kembali memilih menu)")
+    print(colored(tabel_transfer, "green"))
+    input(colored("\n(Ketuk enter untuk kembali memilih menu)", "light_yellow"))
 
 def keuangan_club(club, data_club):
     os.system("cls")
@@ -347,70 +345,70 @@ def keuangan_club(club, data_club):
     if club == "Barcelona":
         gambar_stadion = climage.convert("static/stadion_barcelona.jpg")
         print(gambar_stadion)
-        print(F"Pendapatan Stadion = +€{data_club["stadion"]:,}\n")
+        print(colored(F"Pendapatan Stadion = +€{data_club["stadion"]:,}\n", "green"))
 
         gambar_jersey = climage.convert("static/jersey_barcelona.png")
         print(gambar_jersey)
-        print(F"Pendapatan Merchandise = +€{data_club["jersey"]:,}\n")
+        print(colored(F"Pendapatan Merchandise = +€{data_club["jersey"]:,}\n", "green"))
 
         tampil_saldo(data_club)
     
     elif club == "Real Madrid":
         gambar_stadion = climage.convert("static/stadion_madrid.jpg")
         print(gambar_stadion)
-        print(F"Pendapatan Stadion = +€{data_club["stadion"]:,}\n")
+        print(colored(F"Pendapatan Stadion = +€{data_club["stadion"]:,}\n", "green"))
 
         gambar_jersey = climage.convert("static/jersey_madrid.png")
         print(gambar_jersey)
-        print(F"Pendapatan Merchandise = +€{data_club["jersey"]:,}\n")
+        print(colored(F"Pendapatan Merchandise = +€{data_club["jersey"]:,}\n", "green"))
 
         tampil_saldo(data_club)
 
     elif club == "Arsenal":
         gambar_stadion = climage.convert("static/stadion_arsenal.jpg")
         print(gambar_stadion)
-        print(F"Pendapatan Stadion = +€{data_club["stadion"]:,}\n")
+        print(colored(F"Pendapatan Stadion = +€{data_club["stadion"]:,}\n", "green"))
 
         gambar_jersey = climage.convert("static/jersey_arsenal.png")
         print(gambar_jersey)
-        print(F"Pendapatan Merchandise = +€{data_club["jersey"]:,}\n")
+        print(colored(F"Pendapatan Merchandise = +€{data_club["jersey"]:,}\n", "green"))
 
         tampil_saldo(data_club)
 
     elif club == "PSG":
         gambar_stadion = climage.convert("static/stadion_psg.jpg")
         print(gambar_stadion)
-        print(F"Pendapatan Stadion = +€{data_club["stadion"]:,}\n")
+        print(colored(F"Pendapatan Stadion = +€{data_club["stadion"]:,}\n", "green"))
 
         gambar_jersey = climage.convert("static/jersey_psg.png")
         print(gambar_jersey)
-        print(F"Pendapatan Merchandise = +€{data_club["jersey"]:,}\n")
+        print(colored(F"Pendapatan Merchandise = +€{data_club["jersey"]:,}\n", "green"))
 
         tampil_saldo(data_club)
 
     elif club == "Borussia Dortmund":
         gambar_stadion = climage.convert("static/stadion_dortmund.jpg")
         print(gambar_stadion)
-        print(F"Pendapatan Stadion = +€{data_club["stadion"]:,}\n")
+        print(colored(F"Pendapatan Stadion = +€{data_club["stadion"]:,}\n", "green"))
 
         gambar_jersey = climage.convert("static/jersey_dortmund.png")
         print(gambar_jersey)
-        print(F"Pendapatan Merchandise = +€{data_club["jersey"]:,}\n")
+        print(colored(F"Pendapatan Merchandise = +€{data_club["jersey"]:,}\n", "green"))
 
         tampil_saldo(data_club)
 
     elif club == "Borneo":
         gambar_stadion = climage.convert("static/stadion_borneo.jpeg")
         print(gambar_stadion)
-        print(F"Pendapatan Stadion = +€{data_club["stadion"]:,}\n")
+        print(colored(F"Pendapatan Stadion = +€{data_club["stadion"]:,}\n", "green"))
 
         gambar_jersey = climage.convert("static/jersey_borneo.png")
         print(gambar_jersey)
-        print(F"Pendapatan Merchandise = +€{data_club["jersey"]:,}\n")
+        print(colored(F"Pendapatan Merchandise = +€{data_club["jersey"]:,}\n", "green"))
 
         tampil_saldo(data_club)
 
-    input("\n(Ketuk enter untuk kembali memilih menu)")
+    input(colored("\n(Ketuk enter untuk kembali memilih menu)", "light_yellow"))
 
 def pendapatan_club(data_club):
     while True:
@@ -437,7 +435,7 @@ def menu_login_biasa(user, club_pengguna, data_club_pengguna):
                 ["[5]", "Jendela Transfer"],
                 ["[0]", "Keluar"]
                 ])
-            print(tabel_menu_admin)
+            print(colored(tabel_menu_admin, "green"))
 
             pilihan_2 = input("Pilih menu (1-5) = ").strip()
             
@@ -462,7 +460,7 @@ def menu_login_biasa(user, club_pengguna, data_club_pengguna):
                         ["[2]", "Jual pemain"],
                         ["[0]", "Kembali"]
                         ])
-                    print(colored(tabel_transfer, "dark_grey"))
+                    print(colored(tabel_transfer, "green"))
 
                     pilihan_3 = input("Pilih menu (1-2) = ").strip()
 
@@ -482,7 +480,7 @@ def menu_login_biasa(user, club_pengguna, data_club_pengguna):
                                 ["[6]", "Pencari Bakat"],
                                 ["[0]", "Kembali"]
                                 ])
-                            print(tabel_pil_club)
+                            print(colored(tabel_pil_club, "green"))
 
                             pilihan_4 = input("Pilih menu (1-6) = ").strip()
 
@@ -507,7 +505,7 @@ def menu_login_biasa(user, club_pengguna, data_club_pengguna):
                             elif pilihan_4 == "0":
                                 break
                             else:
-                                input("\n(Input tidak valid, ketuk enter untuk kembali)")
+                                input(colored("\n(Input tidak valid, ketuk enter untuk kembali)", "red"))
 
                     elif pilihan_3 == "2":                                              
                         jual_pemain(club_pengguna, data_club_pengguna)
@@ -516,18 +514,17 @@ def menu_login_biasa(user, club_pengguna, data_club_pengguna):
                         break
                     
                     else:
-                        input("\n(Input tidak valid, ketuk enter untuk kembali)")
+                        input(colored("\n(Input tidak valid, ketuk enter untuk kembali)", "red"))
                     
             elif pilihan_2 == "5":
                 buka_jendela_transfer(club_pengguna)
 
             elif pilihan_2 == "0":
                 bar_progres(3, "Keluar dari menu")
-                jeda()
                 break
 
             else:
-                input("\n(Input tidak valid, ketuk enter untuk kembali)")
+                input(colored("\n(Input tidak valid, ketuk enter untuk kembali)", "red"))
 
     elif club_pengguna == "Real Madrid":
         while True:
@@ -545,7 +542,7 @@ def menu_login_biasa(user, club_pengguna, data_club_pengguna):
                 ["[5]", "Jendela Transfer"],
                 ["[0]", "Keluar"]
                 ])
-            print(tabel_menu_admin)
+            print(colored(tabel_menu_admin, "green"))
 
             pilihan_2 = input("Pilih menu (1-5) = ").strip()
             
@@ -570,7 +567,7 @@ def menu_login_biasa(user, club_pengguna, data_club_pengguna):
                         ["[2]", "Jual pemain"],
                         ["[0]", "Kembali"]
                         ])
-                    print(tabel_transfer)
+                    print(colored(tabel_transfer, "green"))
 
                     pilihan_3 = input("Pilih menu (1-2) = ").strip()
 
@@ -590,7 +587,7 @@ def menu_login_biasa(user, club_pengguna, data_club_pengguna):
                                 ["[6]", "Pencari Bakat"],
                                 ["[0]", "Kembali"]
                                 ])
-                            print(tabel_pil_club)
+                            print(colored(tabel_pil_club, "green"))
 
                             pilihan_4 = input("Pilih menu (1-6) = ").strip()
 
@@ -615,7 +612,7 @@ def menu_login_biasa(user, club_pengguna, data_club_pengguna):
                             elif pilihan_4 == "0":
                                 break
                             else:
-                                input("\n(Input tidak valid, ketuk enter untuk kembali)")
+                                input(colored("\n(Input tidak valid, ketuk enter untuk kembali)", "red"))
 
                     elif pilihan_3 == "2":                                              
                         jual_pemain(club_pengguna, data_club_pengguna)
@@ -624,16 +621,17 @@ def menu_login_biasa(user, club_pengguna, data_club_pengguna):
                         break
                     
                     else:
-                        input("\n(Input tidak valid, ketuk enter untuk kembali)")
+                        input(colored("\n(Input tidak valid, ketuk enter untuk kembali)", "red"))
                     
             elif pilihan_2 == "5":
                 buka_jendela_transfer(club_pengguna)
 
             elif pilihan_2 == "0":
+                bar_progres(3, "Keluar dari menu")
                 break
 
             else:
-                input("\n(Input tidak valid, ketuk enter untuk kembali)")
+                input(colored("\n(Input tidak valid, ketuk enter untuk kembali)", "red"))
 
     elif club_pengguna == "Arsenal":
         while True:
@@ -651,7 +649,7 @@ def menu_login_biasa(user, club_pengguna, data_club_pengguna):
                 ["[5]", "Jendela Transfer"],
                 ["[0]", "Keluar"]
                 ])
-            print(tabel_menu_admin)
+            print(colored(tabel_menu_admin, "green"))
 
             pilihan_2 = input("Pilih menu (1-5) = ").strip()
             
@@ -676,7 +674,7 @@ def menu_login_biasa(user, club_pengguna, data_club_pengguna):
                         ["[2]", "Jual pemain"],
                         ["[0]", "Kembali"]
                         ])
-                    print(tabel_transfer)
+                    print(colored(tabel_menu_admin, "green"))
 
                     pilihan_3 = input("Pilih menu (1-2) = ").strip()
 
@@ -696,7 +694,7 @@ def menu_login_biasa(user, club_pengguna, data_club_pengguna):
                                 ["[6]", "Pencari Bakat"],
                                 ["[0]", "Kembali"]
                                 ])
-                            print(tabel_pil_club)
+                            print(colored(tabel_pil_club, "green"))
 
                             pilihan_4 = input("Pilih menu (1-6) = ").strip()
 
@@ -721,7 +719,7 @@ def menu_login_biasa(user, club_pengguna, data_club_pengguna):
                             elif pilihan_4 == "0":
                                 break
                             else:
-                                input("\n(Input tidak valid, ketuk enter untuk kembali)")
+                                input(colored("\n(Input tidak valid, ketuk enter untuk kembali)", "red"))
 
                     elif pilihan_3 == "2":                                              
                         jual_pemain(club_pengguna, data_club_pengguna)
@@ -730,16 +728,17 @@ def menu_login_biasa(user, club_pengguna, data_club_pengguna):
                         break
                     
                     else:
-                        input("\n(Input tidak valid, ketuk enter untuk kembali)")
+                        input(colored("\n(Input tidak valid, ketuk enter untuk kembali)", "red"))
                     
             elif pilihan_2 == "5":
                 buka_jendela_transfer(club_pengguna)
 
             elif pilihan_2 == "0":
+                bar_progres(3, "Keluar dari menu")
                 break
 
             else:
-                input("\n(Input tidak valid, ketuk enter untuk kembali)")
+                input(colored("\n(Input tidak valid, ketuk enter untuk kembali)", "red"))
     
     elif club_pengguna == "PSG":
         while True:
@@ -757,7 +756,7 @@ def menu_login_biasa(user, club_pengguna, data_club_pengguna):
                 ["[5]", "Jendela Transfer"],
                 ["[0]", "Keluar"]
                 ])
-            print(tabel_menu_admin)
+            print(colored(tabel_menu_admin, "green"))
 
             pilihan_2 = input("Pilih menu (1-5) = ").strip()
             
@@ -782,7 +781,7 @@ def menu_login_biasa(user, club_pengguna, data_club_pengguna):
                         ["[2]", "Jual pemain"],
                         ["[0]", "Kembali"]
                         ])
-                    print(tabel_transfer)
+                    print(colored(tabel_menu_admin, "green"))
 
                     pilihan_3 = input("Pilih menu (1-2) = ").strip()
 
@@ -802,7 +801,7 @@ def menu_login_biasa(user, club_pengguna, data_club_pengguna):
                                 ["[6]", "Pencari Bakat"],
                                 ["[0]", "Kembali"]
                                 ])
-                            print(tabel_pil_club)
+                            print(colored(tabel_pil_club, "green"))
 
                             pilihan_4 = input("Pilih menu (1-6) = ").strip()
 
@@ -827,7 +826,7 @@ def menu_login_biasa(user, club_pengguna, data_club_pengguna):
                             elif pilihan_4 == "0":
                                 break
                             else:
-                                input("\n(Input tidak valid, ketuk enter untuk kembali)")
+                                input(colored("\n(Input tidak valid, ketuk enter untuk kembali)", "red"))
 
                     elif pilihan_3 == "2":                                              
                         jual_pemain(club_pengguna, data_club_pengguna)
@@ -836,16 +835,17 @@ def menu_login_biasa(user, club_pengguna, data_club_pengguna):
                         break
                     
                     else:
-                        input("\n(Input tidak valid, ketuk enter untuk kembali)")
+                        input(colored("\n(Input tidak valid, ketuk enter untuk kembali)", "red"))
                     
             elif pilihan_2 == "5":
                 buka_jendela_transfer(club_pengguna)
 
             elif pilihan_2 == "0":
+                bar_progres(3, "Keluar dari menu")
                 break
 
             else:
-                input("\n(Input tidak valid, ketuk enter untuk kembali)")
+                input(colored("\n(Input tidak valid, ketuk enter untuk kembali)", "red"))
     
     elif club_pengguna == "Borussia Dortmund":
         while True:
@@ -863,7 +863,7 @@ def menu_login_biasa(user, club_pengguna, data_club_pengguna):
                 ["[5]", "Jendela Transfer"],
                 ["[0]", "Keluar"]
                 ])
-            print(tabel_menu_admin)
+            print(colored(tabel_menu_admin, "green"))
 
             pilihan_2 = input("Pilih menu (1-5) = ").strip()
             
@@ -888,7 +888,7 @@ def menu_login_biasa(user, club_pengguna, data_club_pengguna):
                         ["[2]", "Jual pemain"],
                         ["[0]", "Kembali"]
                         ])
-                    print(tabel_transfer)
+                    print(colored(tabel_menu_admin, "green"))
 
                     pilihan_3 = input("Pilih menu (1-2) = ").strip()
 
@@ -908,7 +908,7 @@ def menu_login_biasa(user, club_pengguna, data_club_pengguna):
                                 ["[6]", "Pencari Bakat"],
                                 ["[0]", "Kembali"]
                                 ])
-                            print(tabel_pil_club)
+                            print(colored(tabel_pil_club, "green"))
 
                             pilihan_4 = input("Pilih menu (1-6) = ").strip()
 
@@ -933,7 +933,7 @@ def menu_login_biasa(user, club_pengguna, data_club_pengguna):
                             elif pilihan_4 == "0":
                                 break
                             else:
-                                input("\n(Input tidak valid, ketuk enter untuk kembali)")
+                                input(colored("\n(Input tidak valid, ketuk enter untuk kembali)", "red"))
 
                     elif pilihan_3 == "2":                                              
                         jual_pemain(club_pengguna, data_club_pengguna)
@@ -942,16 +942,17 @@ def menu_login_biasa(user, club_pengguna, data_club_pengguna):
                         break
                     
                     else:
-                        input("\n(Input tidak valid, ketuk enter untuk kembali)")
+                        input(colored("\n(Input tidak valid, ketuk enter untuk kembali)", "red"))
                     
             elif pilihan_2 == "5":
                 buka_jendela_transfer(club_pengguna)
 
             elif pilihan_2 == "0":
+                bar_progres(3, "Keluar dari menu")
                 break
 
             else:
-                input("\n(Input tidak valid, ketuk enter untuk kembali)")
+                input(colored("\n(Input tidak valid, ketuk enter untuk kembali)", "red"))
 
 def menu_login_mod(user, club_pengguna, data_club_pengguna):
     t1 = threading.Thread(target=lambda: pendapatan_club(data_club_pengguna), daemon=True)
@@ -972,7 +973,7 @@ def menu_login_mod(user, club_pengguna, data_club_pengguna):
             ["[5]", "Jendela Transfer"],
             ["[0]", "Keluar"]
             ])
-        print(tabel_menu_admin)
+        print(colored(tabel_menu_admin, "green"))
 
         pilihan_2 = input("Pilih menu (1-5) = ").strip()
         
@@ -997,7 +998,7 @@ def menu_login_mod(user, club_pengguna, data_club_pengguna):
                     ["[2]", "Jual pemain"],
                     ["[0]", "Kembali"]
                     ])
-                print(tabel_transfer)
+                print(colored(tabel_transfer, "green"))
 
                 pilihan_3 = input("Pilih menu (1-2) = ").strip()
 
@@ -1022,7 +1023,7 @@ def menu_login_mod(user, club_pengguna, data_club_pengguna):
                             ["[11]", "Most Wanted"],
                             ["[0]", "Kembali"]
                             ])
-                        print(tabel_pil_club)
+                        print(colored(tabel_pil_club, "green"))
 
                         pilihan_4 = input("Pilih menu (1-11) = ").strip()
 
@@ -1062,7 +1063,7 @@ def menu_login_mod(user, club_pengguna, data_club_pengguna):
                         elif pilihan_4 == "0":
                             break
                         else:
-                            input("\n(Input tidak valid, ketuk enter untuk kembali)")
+                            input(colored("\n(Input tidak valid, ketuk enter untuk kembali)", "red"))
 
                 elif pilihan_3 == "2":                                              
                     jual_pemain(club_pengguna, data_club_pengguna)
@@ -1071,13 +1072,14 @@ def menu_login_mod(user, club_pengguna, data_club_pengguna):
                     break
                 
                 else:
-                    input("\n(Input tidak valid, ketuk enter untuk kembali)")
+                    input(colored("\n(Input tidak valid, ketuk enter untuk kembali)", "red"))
                 
         elif pilihan_2 == "5":
             buka_jendela_transfer(club_pengguna)
 
         elif pilihan_2 == "0":
+            bar_progres(3, "Keluar dari menu")
             break
 
         else:
-            input("\n(Input tidak valid, ketuk enter untuk kembali)")
+            input(colored("\n(Input tidak valid, ketuk enter untuk kembali)", "red"))

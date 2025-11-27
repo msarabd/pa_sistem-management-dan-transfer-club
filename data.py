@@ -1,11 +1,11 @@
-data_pengguna =  {
-    "user_biasa" : {
-        "mahdi" : ["mahdi123", "Barcelona"],
-        "rahman" : ["rahman123", "Real Madrid"]
-        },
-    "user_mod" : {
-        "mbut" : ["mbut123", "Borneo"]
-        }
+data_pengguna = {
+    "user_biasa": {
+        "mahdi": ["mahdi123", "Barcelona"],
+        "rahman": ["rahman123", "Real Madrid"]
+    },
+    "user_mod": {
+        "mbut": ["mbut123", "Borneo"]
+    }
 }
 
 data_barcelona = {
@@ -15,7 +15,7 @@ data_barcelona = {
         ["Joan García", 7.4, 24, 26000000, 192, "Spanyol"],
         ["Adel Aller", 6.8, 18, 53000, 194, "Spanyol"]
     ],
-    "df": [ # Centre-Back/Pemain Belakang (Saya menggunakan "cb" untuk seluruh pemain Back)
+    "df": [  # Centre-Back/Pemain Belakang (Saya menggunakan "cb" untuk seluruh pemain Back)
         ["Alejandro Balde", 6.8, 22, 66000000, 175, "Spanyol"],
         ["Pau Cubarsí", 6.8, 18, 75000000, 184, "Spanyol"],
         ["Ronald Araújo", 6.9, 26, 38000000, 188, "Uruguay"],
@@ -23,7 +23,7 @@ data_barcelona = {
         ["Xavi Espart", 6.5, 18, 320000, 175, "Spanyol"],
         ["Gerard Martin", 6.9, 23, 10900000, 186, "Spanyol"]
     ],
-    "mf": [ # Midfield/Gelandang
+    "mf": [  # Midfield/Gelandang
         ["Pablo Gavi", 7.0, 21, 41000000, 173, "Spanyol"],
         ["Pedri", 7.6, 22, 153000000, 174, "Spanyol"],
         ["Dani Olmo", 7.0, 27, 58000000, 179, "Spanyol"],
@@ -33,7 +33,7 @@ data_barcelona = {
         ["Dro Fernandez", 6.6, 17, 4900000, 178, "Spanyol"],
         ["Roony Bardghji", 6.8, 19, 10300000, 177, "Denmark"]
     ],
-    "fw": [ # Forward/Penyerang
+    "fw": [  # Forward/Penyerang
         ["Marcus Rashford", 7.1, 28, 38000000, 185, "Inggris"],
         ["Robert Lewandowski", 6.9, 37, 9400000, 185, "Polandia"],
         ["Lamine Yamal", 7.8, 18, 215000000, 180, "Spanyol"],
@@ -52,7 +52,7 @@ data_madrid = {
         ["Andriy Lunin", 7.0, 26, 16900000, 191, "Ukraina"],
         ["Fran Gonzales", 7.0, 20, 910000, 199, "Spanyol"]
     ],
-    "df": [ # Centre-Back/Pemain Belakang (Saya menggunakan "cb" untuk seluruh pemain Back)
+    "df": [  # Centre-Back/Pemain Belakang (Saya menggunakan "cb" untuk seluruh pemain Back)
         ["Aurélien Tchouaméni", 7.2, 25, 78000000, 187, "Prancis"],
         ["Antonio Rüdiger", 6.8, 32, 15500000, 190, "Jerman"],
         ["Dean Huijsen", 7.3, 20, 77000000, 195, "Spanyol"],
@@ -60,7 +60,7 @@ data_madrid = {
         ["Éder Militão", 7.4, 27, 31000000, 186, "Brasil"],
         ["Dani Carvajal", 6.7, 33, 7700000, 173, "Spanyol"],
     ],
-    "mf": [ # Midfield/Gelandang
+    "mf": [  # Midfield/Gelandang
         ["Jude Bellingham", 7.4, 22, 170000000, 186, "Inggris"],
         ["Arda Güler", 7.8, 20, 58000000, 176, "Turki"],
         ["Federico Valverde", 7.3, 27, 126000000, 182, "Uruguay"],
@@ -69,7 +69,7 @@ data_madrid = {
         ["Dani Ceballos", 7.0, 29, 8400000, 179, "Spanyol"],
         ["Mario Martín", 6.7, 20, 3200000, 180, "Spanyol"]
     ],
-    "fw": [ # Forward/Penyerang
+    "fw": [  # Forward/Penyerang
         ["Vinícius Júnior", 7.2, 25, 156000000, 176, "Brasil"],
         ["Kylian Mbappé", 7.8, 26, 191000000, 178, "Prancis"],
         ["Rodrygo", 7.2, 24, 85000000, 174, "Brasil"],
@@ -89,7 +89,7 @@ data_arsenal = {
         ["David Raya", 6.9, 30, 43000000, 183, "Spanyol"],
         ["Alexei Rojas", 7.0, 20, 225000, 156, "Columbia"]
     ],
-    "df": [ # Centre-Back/Pemain Belakang (Saya menggunakan "cb" untuk seluruh pemain Back)
+    "df": [  # Centre-Back/Pemain Belakang (Saya menggunakan "cb" untuk seluruh pemain Back)
         ["Riccardo Calafiori", 7.0, 23, 39000000, 188, "Italia"],
         ["William Saliba", 7.0, 24, 75000000, 192, "Prancis"],
         ["Gabriel Magalhães", 7.2, 27, 70000000, 190, "Brasil"],
@@ -98,7 +98,7 @@ data_arsenal = {
         ["Jurriën Timber", 7.0, 24, 63000000, 182, "Belanda"],
         ["Christian Mosquera", 6.9, 21, 33000000, 191, "Spanyol"]
     ],
-    "mf": [ # Midfield/Gelandang
+    "mf": [  # Midfield/Gelandang
         ["Eberechi Eze", 7.2, 27, 50000000, 178, "Inggris"],
         ["Martin Ødegaard", 7.4, 26, 88000000, 178, "Norwegia"],
         ["Declan Rice", 7.4, 26, 114000000, 185, "Inggris"],
@@ -106,7 +106,7 @@ data_arsenal = {
         ["Mikel Merino", 7.1, 29, 36000000, 188, "Spanyol"],
         ["Ethan Nwaneri", 6.8, 18, 44000000, 176, "Inggris"]
     ],
-    "fw": [ # Forward/Penyerang
+    "fw": [  # Forward/Penyerang
         ["Bukayo Saka", 7.3, 24, 140000000, 178, "Inggris"],
         ["Viktor Gyökeres", 7.3, 27, 60000000, 187, "Swedia"],
         ["Gabriel Jesus", 7.2, 28, 45000000, 175, "Brasil"],
@@ -125,7 +125,7 @@ data_psg = {
         ["Lucas Chevaller", 7.0, 24, 41000000, 188, "Prancis"],
         ["Matvey Sofonov", 6.9, 26, 19000000, 191, "Rusia"]
     ],
-    "df": [ # Centre-Back/Pemain Belakang (Saya menggunakan "cb" untuk seluruh pemain Back)
+    "df": [  # Centre-Back/Pemain Belakang (Saya menggunakan "cb" untuk seluruh pemain Back)
         ["Nuno Mendes", 7.3, 23, 73000000, 176, "Portugal"],
         ["Marquinhos", 7.3, 31, 34000000, 183, "Brasil"],
         ["Lucas Beraldo", 7.1, 21, 23000000, 186, "Brasil"],
@@ -135,14 +135,14 @@ data_psg = {
         ["Ilya Zabarnyi", 6.9, 23, 51000000, 189, "Ukraina"],
         ["Noham Kamara", 7.0, 18, 960000, 183, "Prancis"]
     ],
-    "mf": [ # Midfield/Gelandang
+    "mf": [  # Midfield/Gelandang
         ["Vitinha", 7.5, 25, 83000000, 172, "Portugal"],
         ["Kang in Lee", 7.12, 24, 27000000, 174, "Korea Selatan"],
         ["Fabián Ruiz", 7.3, 29, 39000000, 189, "Spanyol"],
         ["João Neves", 7.3, 21, 95000000, 174, "Portugal"],
         ["Senny Mayulu", 6.9, 19, 24000000, 183, "Prancis"],
     ],
-    "fw": [ # Forward/Penyerang
+    "fw": [  # Forward/Penyerang
         ["Khvicha Kvaratskhelia", 7.4, 24, 93000000, 183, "Georgia"],
         ["Ousmane Dembélé", 7.6, 28, 97000000, 178, "Prancis"],
         ["Désiré Doué", 7.4, 20, 93000000, 181, "Prancis"],
@@ -162,7 +162,7 @@ data_dortmund = {
         ["Gregor Kobel", 7.0, 27, 41000000, 195, "Swiss"],
         ["Alexander Meyer", 7.0, 34, 760000, 195, "Jerman"]
     ],
-    "df": [ # Centre-Back/Pemain Belakang (Saya menggunakan "cb" untuk seluruh pemain Back)
+    "df": [  # Centre-Back/Pemain Belakang (Saya menggunakan "cb" untuk seluruh pemain Back)
         ["Nico Schlotterbeck", 7.2, 26, 41000000, 191, "Jerman"],
         ["Ramy Bensebaini", 7.0, 30, 7400000, 187, "Aljazair"],
         ["Emre Can", 8.0, 31, 7500000, 186, "Jerman"],
@@ -172,7 +172,7 @@ data_dortmund = {
         ["Waldemar Anton", 7.0, 29, 19700000, 189, "Jerman"],
         ["Aaron Anselmino", 7.0, 20, 8500000, 186, "Argentina"]
     ],
-    "mf": [ # Midfield/Gelandang
+    "mf": [  # Midfield/Gelandang
         ["Daniel Svensson", 6.9, 23, 20000000, 183, "Swedia"],
         ["Carney Chukwuemeka", 6.8, 22, 18100000, 187, "Inggris"],
         ["Jobe Bellingham", 7.0, 20, 29000000, 188, "Inggris"],
@@ -181,7 +181,7 @@ data_dortmund = {
         ["Pascal Groß", 7.0, 34, 4500000, 181, "Jerman"],
         ["Felix Nmecha", 7.0, 24, 34000000, 188, "Jerman"]
     ],
-    "fw": [ # Forward/Penyerang
+    "fw": [  # Forward/Penyerang
         ["Karim Adeyemi", 6.9, 23, 62000000, 177, "Jerman"],
         ["Serhou Guirassy", 7.1, 29, 41000000, 187, "Guinea"],
         ["Fábio Silva", 6.9, 23, 27000000, 185, "Portugal"],
@@ -194,26 +194,26 @@ data_dortmund = {
 }
 
 data_nassr = {
-    "gk": [ # Nama, Rating, Usia, Nilai Transfer (€), Tinggi (cm), Negara
+    "gk": [  # Nama, Rating, Usia, Nilai Transfer (€), Tinggi (cm), Negara
         ["Nawaf Al-Qidi", 7.1, 25, 700000, 188, "Arab Saudi"],
         ["Raghed Al-Najjar", 7.2, 29, 160000, 185, "Arab Saudi"],
         ["Bento", 6.8, 26, 10600000, 190, "Brasil"]
     ],
-    "df": [ # Centre-Back/Pemain Belakang (Saya menggunakan "cb" untuk seluruh pemain Back)
+    "df": [  # Centre-Back/Pemain Belakang (Saya menggunakan "cb" untuk seluruh pemain Back)
         ["Nawaf Boushal", 7.0, 24, 1400000, 168, "Arab Saudi"],
         ["Iñigo Martínez", 7.1, 34, 5200000, 182, "Spanyol"],
         ["Mohamed Simakan", 7.0, 25, 2500000, 187, "Prancis"],
         ["Sultan Al-Ghannam", 7.0, 31, 2100000, 173, "Arab Saudi"],
         ["Salem Al-Najdi", 6.8, 22, 615000, 178, "Arab Saudi"]
     ],
-    "mf": [# Midfield/Gelandang
+    "mf": [  # Midfield/Gelandang
         ["Marcelo Brozović", 7.3, 32, 9700000, 181, "Kroasia"],
         ["Angelo", 7.1, 20, 8600000, 182, "Brasil"],
         ["Abdullah Al-Khaibari", 6.8, 29, 815000, 177, "Arab Saudi"],
         ["Abdul Malik Al-Jabeer", 6.8, 21, 720000, 178, "Arab Saudi"],
         ["Ali Al Hassan", 6.8, 28, 570000, 183, "Arab Saudi"]
     ],
-    "fw": [ # Forward/Penyerang
+    "fw": [  # Forward/Penyerang
         ["Sadio Mané", 7.3, 33, 7500000, 174, "Senegal"],
         ["Cristiano Ronaldo", 7.5, 40, 12500000, 187, "Portugal"],
         ["João Félix", 7.3, 26, 19400000, 181, "Portugal"],
@@ -234,7 +234,7 @@ data_miami = {
         ["Rocco Ríos Novo", 6.9, 23, 515000, 178, "Argentina"],
         ["Óscar Ustari", 7.0, 39, 105000, 183, "Argentina"]
     ],
-    "df": [ # Centre-Back/Pemain Belakang (Saya menggunakan "cb" untuk seluruh pemain Back)
+    "df": [  # Centre-Back/Pemain Belakang (Saya menggunakan "cb" untuk seluruh pemain Back)
         ["Jordi Alba", 7.3, 36, 1600000, 170, "Spanyol"],
         ["Noah Allen", 6.8, 21, 1600000, 175, "USA"],
         ["Maximiliano Falcón", 6.7, 28, 1400000, 179, "Uruguay"],
@@ -246,14 +246,14 @@ data_miami = {
         ["Israel Boatwright", 6.4, 20, 52000, 180, "USA"],
         ["Tyler Hall", 6.6, 19, 110000, 178, "USA"]
     ],
-    "mf": [ # Midfield/Gelandang
+    "mf": [  # Midfield/Gelandang
         ["Sergio Busquets", 7.2, 37, 1400000, 189, "Spanyol"],
         ["Rodrigo De Paul", 7.3, 31, 21000000, 180, "Argentina"],
         ["Telasco Segovia", 7.0, 22, 3300000, 180, "Venezuela"],
         ["Mateo Silvetti", 6.8, 19, 4800000, 175, "Argentina"],
         ["David Ruíz", 6.7, 21, 2300000, 181, "USA"]
     ],
-    "fw": [ # Forward/Penyerang
+    "fw": [  # Forward/Penyerang
         ["Luis Suárez", 7.4, 38, 1600000, 182, "Uruguay"],
         ["Allen Obando", 6.8, 19, 1600000, 189, "Ekuador"],
         ["Lionel Messi", 8.3, 38, 19600000, 170, "Argentina"],
@@ -266,20 +266,20 @@ data_miami = {
 }
 
 data_borneo = {
-    "gk": [# Nama, Rating, Usia, Nilai Transfer (€), Tinggi (cm), Negara
+    "gk": [  # Nama, Rating, Usia, Nilai Transfer (€), Tinggi (cm), Negara
         ["Nadeo Argawinata", 7.0, 28, 325000, 187, "Indonesia"],
         ["Syahrul Trisna", 7.3, 29, 155000, 183, "Indonesia"],
         ["Daffa Fasya", 6.8, 21, 82000, 185, "Indonesia"],
         ["Alfharezzi Buffon", 6.4, 19, 45000, 173, "Indonesia"]
     ],
-    "df": [ # Centre-Back/Pemain Belakang (Saya menggunakan "cb" untuk seluruh pemain Back)
+    "df": [  # Centre-Back/Pemain Belakang (Saya menggunakan "cb" untuk seluruh pemain Back)
         ["Mohammad Al-Husseini", 6.6, 22, 170000, 182, "Lebanon"],
         ["Christophe Nduwarugira", 7.0, 31, 280000, 185, "Burundi"],
         ["Komang Teguh", 6.7, 23, 165000, 177, "Indonesia"],
         ["Muhammad Faturrahman", 6.9, 23, 300000, 170, "Indonesia"],
         ["Westherley Garcia Nogueira", 6.9, 28, 80000, 180, "Brasil"]
     ],
-    "mf": [ # Midfield/Gelandang
+    "mf": [  # Midfield/Gelandang
         ["Kei Hirose", 6.7, 29, 365000, 178, "Jepang"],
         ["Rivaldo Pakpahan", 6.8, 22, 130000, 172, "Indonesia"],
         ["Juan Felipe Villa", 7.4, 26, 430000, 175, "Kolombia"],
@@ -287,7 +287,7 @@ data_borneo = {
         ["Ahmad Agung", 6.5, 29, 73000, 180, "Indonesia"],
         ["Dwiky Herdiansyah", 6.5, 21, 49000, 181, "Indonesia"]
     ],
-    "fw": [ # Forward/Penyerang
+    "fw": [  # Forward/Penyerang
         ["Mariano Peralta Bauer", 8.1, 27, 410000, 177, "Argentina"],
         ["Muhammad Sihran", 6.8, 26, 185000, 171, "Indonesia"],
         ["Joel Vinícius Silva Don Anjos", 7.1, 30, 80000, 182, "Brasil"],
@@ -358,55 +358,55 @@ data_gratisan = {
 }
 
 data_pemuda = {
-    "gk" : [ # Nama, Rating, Usia, Nilai Transfer (€), Tinggi (cm), Negara, KLub
-         ["Guillaume Restes", 6.6, 20, 0, 187, "Prancis", "Toulouse"],
-         ["Dennis Seimen", 7.2, 19, 0, 190, "Jerman", "VfB Stuttgart"],
-         ["Gavin Beavers", 6.5, 19, 0, 193, "USA", "Real Salt Lake"],
-         ["Tomáš Vašásek", 6.4, 18, 0, 190, "Republik Ceko.", "SK Slavia Prague"],
-         ["Kasper Møller", 6.3, 17, 0, 189, "Denmark", " Midtjylland"],
-         ["Federico Magro", 6.4, 18, 0, 195, "Italia", "Lazio Primavera"],
-         ["André Gomes", 6.5, 18, 0, 190, "Portugal", "SL Benfica"]
+    "gk": [  # Nama, Rating, Usia, Nilai Transfer (€), Tinggi (cm), Negara, KLub
+        ["Guillaume Restes", 6.6, 20, 0, 187, "Prancis", "Toulouse"],
+        ["Dennis Seimen", 7.2, 19, 0, 190, "Jerman", "VfB Stuttgart"],
+        ["Gavin Beavers", 6.5, 19, 0, 193, "USA", "Real Salt Lake"],
+        ["Tomáš Vašásek", 6.4, 18, 0, 190, "Republik Ceko.", "SK Slavia Prague"],
+        ["Kasper Møller", 6.3, 17, 0, 189, "Denmark", " Midtjylland"],
+        ["Federico Magro", 6.4, 18, 0, 195, "Italia", "Lazio Primavera"],
+        ["André Gomes", 6.5, 18, 0, 190, "Portugal", "SL Benfica"]
     ],
-    "df" : [# Centre-Back/Pemain Belakang (Saya menggunakan "cb" untuk seluruh pemain Back)
-         ["Luka Vušković", 7.4, 18, 0, 193, "Kroasia", "Tottenham Hotspur"],
-         ["Rico Lewis", 6.8, 20, 0, 170, "Inggris", "Manchester City"],
-         ["António Silva", 7.1, 22, 0, 187, "Portugal", "SL Benfica"],
-         ["Mosquera", 6.8, 19, 0, 181, "Spanyol", "Valencia"],
-         ["Sael Kumbedi", 6.7, 20, 0, 178, "Prancis", "Olympique Lyonnais"],
-         ["Piero Hincapié", 7.0, 22, 0, 184, "Ekuador", "Bayer Leverkusen"],
-         ["Nestory Irankunda", 6.5, 18, 0, 173, "Australia", "Adelaide United"],
-         ["Noel Buck", 6.7, 19, 0, 183, "USA", "New England Revolution"],
-         ["Silas Ostrzinski", 6.4, 18, 0, 186, "Jerman", "Hertha Berlin"],
-         ["Diogo Monteiro", 6.4, 19, 0, 187, "Portugal", "Leeds United"]
+    "df": [  # Centre-Back/Pemain Belakang (Saya menggunakan "cb" untuk seluruh pemain Back)
+        ["Luka Vušković", 7.4, 18, 0, 193, "Kroasia", "Tottenham Hotspur"],
+        ["Rico Lewis", 6.8, 20, 0, 170, "Inggris", "Manchester City"],
+        ["António Silva", 7.1, 22, 0, 187, "Portugal", "SL Benfica"],
+        ["Mosquera", 6.8, 19, 0, 181, "Spanyol", "Valencia"],
+        ["Sael Kumbedi", 6.7, 20, 0, 178, "Prancis", "Olympique Lyonnais"],
+        ["Piero Hincapié", 7.0, 22, 0, 184, "Ekuador", "Bayer Leverkusen"],
+        ["Nestory Irankunda", 6.5, 18, 0, 173, "Australia", "Adelaide United"],
+        ["Noel Buck", 6.7, 19, 0, 183, "USA", "New England Revolution"],
+        ["Silas Ostrzinski", 6.4, 18, 0, 186, "Jerman", "Hertha Berlin"],
+        ["Diogo Monteiro", 6.4, 19, 0, 187, "Portugal", "Leeds United"]
     ],
-    "mf" : [# Midfield/Gelandang
-         ["Kendry Páez", 6.7, 18, 0, 177, "Ekuador", "Chelsea"],
-         ["Ethan Nwaneri", 6.8, 18, 0, 178, "Inggris", "Arsenal"],
-         ["Assan Ouédraogo", 7.0, 19, 0, 191, "Jerman", "Schalke 04"],
-         ["Eliot Matazo", 6.9, 21, 0, 174, "Belgia", "AS Monaco"],
-         ["Kacper Urbański", 6.6, 19, 0, 180, "Polandia", "Bologna"],
-         ["Nassim Boujellab", 6.8, 20, 0, 175, "Maroko", "Schalke 04 II"],
-         ["Jamal Musiala", 7.4, 22, 0, 184, "Jerman", "Bayern München"],
-         ["Florian Wirtz", 7.1, 22, 0, 176, "Jerman", "Liverpool"],
-         ["Gabriel Pirani", 6.7, 21, 0, 174, "Brasil", "DC United"],
-         ["Lesley Ugochukwu", 6.8, 20, 0, 191, "Prancis", "Chelsea"],
-         ["Chaka Traorè", 6.6, 19, 0, 174, "Republik Pantai Gading", "AC Milan"],
-         ["Oliver Tipton", 6.3, 18, 0, 182, "Inggris", "Stoke City"],
-         ["Gianluca Prestianni", 6.8, 18, 0, 167, "Argentina", "SL Benfica"],
-         ["Dário Essugo", 6.7, 19, 0, 178, "Portugal", "Sporting CP"]
+    "mf": [  # Midfield/Gelandang
+        ["Kendry Páez", 6.7, 18, 0, 177, "Ekuador", "Chelsea"],
+        ["Ethan Nwaneri", 6.8, 18, 0, 178, "Inggris", "Arsenal"],
+        ["Assan Ouédraogo", 7.0, 19, 0, 191, "Jerman", "Schalke 04"],
+        ["Eliot Matazo", 6.9, 21, 0, 174, "Belgia", "AS Monaco"],
+        ["Kacper Urbański", 6.6, 19, 0, 180, "Polandia", "Bologna"],
+        ["Nassim Boujellab", 6.8, 20, 0, 175, "Maroko", "Schalke 04 II"],
+        ["Jamal Musiala", 7.4, 22, 0, 184, "Jerman", "Bayern München"],
+        ["Florian Wirtz", 7.1, 22, 0, 176, "Jerman", "Liverpool"],
+        ["Gabriel Pirani", 6.7, 21, 0, 174, "Brasil", "DC United"],
+        ["Lesley Ugochukwu", 6.8, 20, 0, 191, "Prancis", "Chelsea"],
+        ["Chaka Traorè", 6.6, 19, 0, 174, "Republik Pantai Gading", "AC Milan"],
+        ["Oliver Tipton", 6.3, 18, 0, 182, "Inggris", "Stoke City"],
+        ["Gianluca Prestianni", 6.8, 18, 0, 167, "Argentina", "SL Benfica"],
+        ["Dário Essugo", 6.7, 19, 0, 178, "Portugal", "Sporting CP"]
     ],
-    "fw" : [# Forward/Penyerang
-         ["Francesco Camarda", 6.7, 17, 0, 184, "Italia", "AC Milan"],
-         ["Estêvão", 7.1, 18, 0, 176, "Brasil", "Chelsea"],
-         ["Guido Della Rovere", 6.5, 18, 0, 175, "Italia", "ChievoVerona"],
-         ["Mathys Tel", 6.7, 20, 0, 183, "Prancis", "Bayern München"],
-         ["Leo Sauer", 6.7, 19, 0, 177, "Slowakia", "Feyenoord"],
-         ["Mikey Moore", 6.6, 18, 0, 182, "Inggris", "Tottenham Hotspur"],
-         ["Antonio Nusa", 7.0, 20, 0, 180, "Norwegia", "Club Brugge KV"],
-         ["Rasmus Højlund", 6.7, 22, 0, 193, "Denmark", "Manchester United"],
-         ["Claudio Echeverri", 6.8, 18, 0, 171, "Argentina", "Manchester City"],
-         ["Dimitri de Condé", 6.4, 18, 0, 180, "Belgia", "KRC Genk"],
-         ["Roony Bardghji", 6.9, 19, 0, 175, "Swedia", " København"]
+    "fw": [  # Forward/Penyerang
+        ["Francesco Camarda", 6.7, 17, 0, 184, "Italia", "AC Milan"],
+        ["Estêvão", 7.1, 18, 0, 176, "Brasil", "Chelsea"],
+        ["Guido Della Rovere", 6.5, 18, 0, 175, "Italia", "ChievoVerona"],
+        ["Mathys Tel", 6.7, 20, 0, 183, "Prancis", "Bayern München"],
+        ["Leo Sauer", 6.7, 19, 0, 177, "Slowakia", "Feyenoord"],
+        ["Mikey Moore", 6.6, 18, 0, 182, "Inggris", "Tottenham Hotspur"],
+        ["Antonio Nusa", 7.0, 20, 0, 180, "Norwegia", "Club Brugge KV"],
+        ["Rasmus Højlund", 6.7, 22, 0, 193, "Denmark", "Manchester United"],
+        ["Claudio Echeverri", 6.8, 18, 0, 171, "Argentina", "Manchester City"],
+        ["Dimitri de Condé", 6.4, 18, 0, 180, "Belgia", "KRC Genk"],
+        ["Roony Bardghji", 6.9, 19, 0, 175, "Swedia", " København"]
     ]
 }
 
@@ -415,7 +415,8 @@ data_legend = {
         ["Lev Yashin", 9.8, 41, 2500000, 189, "Rusia", "Dynamo Moscow"],
         ["Gianluigi Buffon", 9.5, 45, 300000, 192, "Italia", "Juventus "],
         ["Dino Zoff", 9.3, 41, 3000000, 182, "Italia", "Juventus"],
-        ["Peter Schmeichel", 9.2, 39, 1500000, 193, "Denmark", "Manchester United"],
+        ["Peter Schmeichel", 9.2, 39, 1500000,
+            193, "Denmark", "Manchester United"],
         ["Oliver Kahn", 9.1, 38, 3100000, 188, "Jerman", "Bayern München"]
     ],
     "df": [
@@ -481,8 +482,8 @@ data_custom = {
         ["Perunggu", 6.5, 23, 0, 180, "Indonesia"]
     ],
     "df": [
-        ["Nur Rahman fadillah", 7.0, 25, 0, 175, "Indonesia"],
-        ["Edogawa conan", 8.0, 24, 0, 178, "Jepang"],
+        ["Nur Rahman Fadlilah", 7.0, 25, 0, 175, "Indonesia"],
+        ["Edogawa Conan", 8.0, 24, 0, 178, "Jepang"],
         ["Mario Bros", 7.5, 30, 0, 165, "Italia"],
         ["Ultraman Tiga", 8.5, 28, 0, 1000, "Jepang"],
         ["John Cena", 8.0, 29, 0, 185, "USA"],
@@ -493,7 +494,7 @@ data_custom = {
         ["Baskara", 7.5, 26, 0, 180, "Indonesia"]
     ],
     "mf": [
-        ["uzumaki Naruto", 8.5, 23, 0, 180, "Jepang"],
+        ["Uzumaki Naruto", 8.5, 23, 0, 180, "Jepang"],
         ["Raden Kian Santang", 7.5, 27, 0, 175, "Indonesia"],
         ["Arya Satya Rakha Phany Putra", 7.0, 22, 0, 178, "Indonesia"],
         ["I Show Speed", 8.0, 26, 0, 185, "USA"],
@@ -514,7 +515,7 @@ data_custom = {
         ["Dewa Kipas", 6.5, 22, 0, 170, "Indonesia"],
         ["Roro Jonggrang", 7.5, 21, 0, 165, "Indonesia"],
         ["Trex", 6.0, 19, 0, 400, "Afrika Selatan"],
-        ["Hitler", 5.0, 40, 0, 175, "Jerman"],
+        ["Satpam Pemalak 20K", 5.0, 40, 0, 175, "Jerman"],
         ["Nadin Amizah", 7.0, 30, 0, 165, "Indonesia"],
         ["KKJ", 6.5, 23, 0, 170, "Indonesia"]
     ]

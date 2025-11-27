@@ -1,6 +1,6 @@
 import os
 from data import data_pengguna
-from crud import jeda, bar_progres
+from crud import bar_progres
 from prettytable import PrettyTable
 import time
 from rich.progress import Progress
@@ -17,15 +17,15 @@ def input_biasa():
     while not ulang_1:
         awal_1 = False
         os.system("cls")
-        print(colored("=== Login Sebagai User Biasa ===\n","green", "on_grey", attrs=["bold"]))
+        print(colored("=== Login Sebagai User Biasa ===\n", "green"))
 
         try:
-            user = input(colored("Masukkan username Anda = ", "green")).strip().lower()
+            user = input(colored("Masukkan username Anda = ","green")).strip().lower()
             pw = input(colored("Masukkan password Anda = ", "green")).strip().lower()
 
             if user == "" or pw == "":
-                raise ValueError(
-                    "\n(Masukkan karakter, tekan enter untuk login kembali)")
+                raise ValueError(colored(
+                    "\n(Masukkan karakter, tekan enter untuk login kembali)", "red"))
 
             for i in data_pengguna["user_biasa"]:
                 if user == i and pw == data_pengguna["user_biasa"][i][0]:
@@ -34,23 +34,22 @@ def input_biasa():
                     ulang_1 = True
                     awal_1 = True
                     bar_progres(3, "Memproses login...")
-                    jeda()
                     return user, login_biasa, awal_1
                 elif user == i:
                     awal_1 = True
-                    raise ValueError(
-                        "\n(Password salah, ketuk enter untuk kembali)")
+                    raise ValueError(colored("\n(Password salah, ketuk enter untuk kembali)", "red"))
 
             if awal_1 == False:
-                raise ValueError(
-                    "\n(User tidak ditemukan, ketuk enter untuk login kembali)")
+                raise ValueError(colored(
+                    "\n(User tidak ditemukan, ketuk enter untuk login kembali)", "red"))
 
         except Exception as e:
-            tekan = input(e)
+            tekan = input(colored(e, "red"))
             if tekan == "0":
                 return user, login_biasa, awal_1
             else:
                 continue
+
 
 def input_mod():
     global user
@@ -83,17 +82,16 @@ def input_mod():
                             "\n(Username dan password salah, ketuk enter untuk kembali)", "red"))
 
         except Exception as e:
-            tekan = input(e)
+            tekan = input(colored(e,"red"))
             if tekan == "0":
                 return user, login_mod, awal_1
             else:
                 continue
 
-        input(colored("\n(Login berhasil, ketuk enter untuk lanjut)", "yellow"))
+        input(colored("\n(Login berhasil, ketuk enter untuk lanjut)", "light_yellow"))
         login_mod = True
         awal_1 = True
-        bar_progres(3, "Memproses login")    
-        jeda
+        bar_progres(3, "Memproses login")
         return user, login_mod, awal_1
 
 
@@ -107,28 +105,29 @@ def input_register():
     awal_1 = False
     while True:
         os.system("cls")
-        print("=== Menu Register ===\n")
+        print(colored("=== Menu Register ===\n", "green"))
 
         try:
-            user = input("Masukkan username Anda = ").strip()
-            pw = input("Masukkan password Anda = ").strip()
+            user = input(colored("Masukkan username Anda = ", "green")).strip()
+            pw = input(colored("Masukkan password Anda = ", "green")).strip()
 
             if user == "" or pw == "":
-                raise ValueError(
-                    "\n(Masukkan karakter, ketuk enter untuk kembali)")
+                raise ValueError(colored(
+                    "\n(Masukkan karakter, ketuk enter untuk kembali)", "red"))
             elif user in data_pengguna["user_biasa"]:
-                raise ValueError(
-                    "\n(Pengguna sudah ada, harap ganti username Anda)")
+                raise ValueError(colored(
+                    "\n(Pengguna sudah ada, harap ganti username Anda)", "red"))
 
         except Exception as e:
-            tekan = input(e)
+            tekan = input(colored(e, "red"))
             if tekan == "0":
                 return user, login_biasa, awal_1
             else:
                 continue
 
         data_pengguna["user_biasa"][user] = [pw]
-        input("\n(Register berhasil, ketuk enter untuk memilih club)")
+        input(colored(
+            "\n(Register berhasil, ketuk enter untuk memilih club)", "light_yellow"))
         break
 
     while True:
@@ -144,7 +143,7 @@ def input_register():
             ["[4]", "PSG"],
             ["[5]", "Borussia Dortmund"],
         ])
-        print(tabel_pil_club)
+        print(colored(tabel_pil_club, "green"))
 
         pilihan_4 = input("Pilih menu (1-5) = ").strip()
 
@@ -165,7 +164,6 @@ Management : "Selamat datang di Barcelona, {user}. Kontrak telah sah. Anda datan
             login_biasa = True
             awal_1 = True
             bar_progres(3, "Memproses login")
-            jeda()
             return user, login_biasa, awal_1
 
         elif pilihan_4 == "2":
@@ -241,4 +239,4 @@ Management : "Selamat datang di Dortmund, {user}. Kami adalah klub gairah dan bi
             return user, login_biasa, awal_1
 
         else:
-            input("\n(Input tidak valid, ketuk enter untuk kembali)")
+            input(colored("\n(Input tidak valid, ketuk enter untuk kembali)", "red"))
