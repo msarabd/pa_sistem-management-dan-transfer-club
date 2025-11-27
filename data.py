@@ -1,12 +1,3 @@
-# data_pengguna = {
-#     "user_mod" : ["mod"],
-#     "pw_mod" : ["admin123"],
-#     "club_mod" : ["barcelona"],
-#     "user_biasa" : ["mahdi", "rahman"],
-#     "pw_biasa" : ["mahdi123", "rahman123"],
-#     "club_biasa" : ["barcelona", "madrid"]
-# }
-
 data_pengguna =  {
     "user_biasa" : {
         "mahdi" : ["mahdi123", "Barcelona"],
