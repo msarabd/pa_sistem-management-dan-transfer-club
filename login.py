@@ -61,26 +61,26 @@ def input_mod():
     awal_1 = False
     while True:
         os.system("cls")
-        print("=== Login Sebagai User MOD ===\n")
+        print(colored("=== Login Sebagai User MOD ===\n",  "green"))
 
         try:
-            user = input("Masukkan username Anda = ").strip()
-            pw = input("Masukkan password Anda = ").strip()
+            user = input(colored("Masukkan username Anda = ", "green")).strip()
+            pw = input(colored("Masukkan password Anda = ", "green")).strip()
 
             for i in data_pengguna["user_mod"]:
                 if user != i or pw != data_pengguna["user_mod"][i][0]:
                     if user == "" or pw == "":
-                        raise ValueError(
-                            "\n(Masukkan karakter, ketuk enter untuk kembali)")
+                        raise ValueError(colored(
+                            "\n(Masukkan karakter, ketuk enter untuk kembali)", "red"))
                     elif user == i:
-                        raise ValueError(
-                            "\n(Password salah, ketuk enter untuk kembali)")
+                        raise ValueError(colored(
+                            "\n(Password salah, ketuk enter untuk kembali)", "red"))
                     elif pw == data_pengguna["user_mod"][i][0]:
-                        raise ValueError(
-                            "\n(Username salah, ketuk enter untuk kembali)")
+                        raise ValueError(colored(
+                            "\n(Username salah, ketuk enter untuk kembali)", "red"))
                     else:
-                        raise ValueError(
-                            "\n(Username dan password salah, ketuk enter untuk kembali)")
+                        raise ValueError(colored(
+                            "\n(Username dan password salah, ketuk enter untuk kembali)", "red"))
 
         except Exception as e:
             tekan = input(e)
@@ -89,7 +89,7 @@ def input_mod():
             else:
                 continue
 
-        input("\n(Login berhasil, ketuk enter untuk lanjut)")
+        input(colored("\n(Login berhasil, ketuk enter untuk lanjut)", "yellow"))
         login_mod = True
         awal_1 = True
         bar_progres(3, "Memproses login")    
