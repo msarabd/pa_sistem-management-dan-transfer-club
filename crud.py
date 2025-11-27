@@ -6,6 +6,21 @@ import random
 import climage
 import time
 import threading
+from rich.progress import Progress
+from termcolor import colored
+
+def jeda():
+    time.sleep(1)
+
+def bar_progres(detik, pesan="Loading"):
+    with Progress() as p:
+        rahman = p.add_task(f"[yellow]{pesan}", total=detik)
+        for i in range(detik):
+            time.sleep(1)
+            p.update(rahman, advance=1)
+
+def kuning():
+    pass
 
 def tampil_starting(data_club):
     data_starting = []
@@ -88,7 +103,7 @@ def tampil_saldo(data_club):
 def tampil_formasi(club_pengguna, data_club_pengguna):
     data_waktu = dt.datetime.now()
     os.system("cls")
-    print(f"Daftar Line Up {club_pengguna} ({data_waktu.strftime("%A")}, {data_waktu.day} - {data_waktu.month} - {data_waktu.year})\n")
+    print(colored(f"Daftar Line Up {club_pengguna} ({data_waktu.strftime("%A")}, {data_waktu.day} - {data_waktu.month} - {data_waktu.year})\n", attrs=["bold"]))
     
     tampil_starting(data_club_pengguna)
     print()
@@ -164,6 +179,8 @@ def beli_pemain(club_masuk, club_keluar, data_club_masuk, data_club_keluar):
 
             input(f"\n✅ Pemain berhasil dibeli: {daftar[idx_a][0]} -> {club_masuk} di lini {lini}, sisa saldo club: €{data_club_masuk["saldo"]:,}.")
             del daftar[idx_a]
+            bar_progres(3, "Memproses pembelian")
+            jeda()
             break
 
         except Exception as e:
@@ -245,7 +262,8 @@ def jual_pemain(club, data_club):
             data_club["saldo"] += harga_jual
 
             input(f"\n✅ Posisi berhasil dijual: {daftar[idx_a][0]} -> {club_masuk} di lini {lini}, sisa saldo club: €{data_club["saldo"]:,}.")
-
+            bar_progres(3, "Memproses penjualan")
+            jeda()
             # hapus pemain di club awal
             del daftar[idx_a]
             break
@@ -286,6 +304,8 @@ def ganti_pemain(data_club):
             daftar[idx_a], daftar[idx_b] = daftar[idx_b], daftar[idx_a]
 
             input(f"\n✅ Posisi berhasil ditukar: {daftar[idx_b][0]} ⇄ {daftar[idx_a][0]} di lini {lini}.")
+            bar_progres(3, "Memproses perubahan")
+            jeda()
             break
 
         except Exception as e:
@@ -442,7 +462,7 @@ def menu_login_biasa(user, club_pengguna, data_club_pengguna):
                         ["[2]", "Jual pemain"],
                         ["[0]", "Kembali"]
                         ])
-                    print(tabel_transfer)
+                    print(colored(tabel_transfer, "dark_grey"))
 
                     pilihan_3 = input("Pilih menu (1-2) = ").strip()
 
@@ -502,6 +522,8 @@ def menu_login_biasa(user, club_pengguna, data_club_pengguna):
                 buka_jendela_transfer(club_pengguna)
 
             elif pilihan_2 == "0":
+                bar_progres(3, "Keluar dari menu")
+                jeda()
                 break
 
             else:

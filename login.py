@@ -1,7 +1,10 @@
 import os
 from data import data_pengguna
+from crud import jeda, bar_progres
 from prettytable import PrettyTable
 import time
+from rich.progress import Progress
+from termcolor import colored
 
 
 def input_biasa():
@@ -14,11 +17,11 @@ def input_biasa():
     while not ulang_1:
         awal_1 = False
         os.system("cls")
-        print("=== Login Sebagai User Biasa ===\n")
+        print(colored("=== Login Sebagai User Biasa ===\n","green", "on_grey", attrs=["bold"]))
 
         try:
-            user = input("Masukkan username Anda = ").strip().lower()
-            pw = input("Masukkan password Anda = ").strip().lower()
+            user = input(colored("Masukkan username Anda = ", "green")).strip().lower()
+            pw = input(colored("Masukkan password Anda = ", "green")).strip().lower()
 
             if user == "" or pw == "":
                 raise ValueError(
@@ -26,10 +29,12 @@ def input_biasa():
 
             for i in data_pengguna["user_biasa"]:
                 if user == i and pw == data_pengguna["user_biasa"][i][0]:
-                    input("\n(Login berhasil, ketuk enter untuk lanjut)")
+                    input(colored("\n(Login berhasil, ketuk enter untuk lanjut)", "light_yellow"))
                     login_biasa = True
                     ulang_1 = True
                     awal_1 = True
+                    bar_progres(3, "Memproses login...")
+                    jeda()
                     return user, login_biasa, awal_1
                 elif user == i:
                     awal_1 = True
@@ -87,6 +92,8 @@ def input_mod():
         input("\n(Login berhasil, ketuk enter untuk lanjut)")
         login_mod = True
         awal_1 = True
+        bar_progres(3, "Memproses login")    
+        jeda
         return user, login_mod, awal_1
 
 
@@ -147,7 +154,7 @@ def input_register():
             teks = f"""
 Management : "Selamat datang di Barcelona, {user}. Kontrak telah sah. Anda datang di era restrukturisasi, di mana keuangan adalah prioritas setara dengan trofi. Kami menuntut Anda memberikan 5 pemain muda (U-20) menit bermain signifikan untuk menjaga DNA klub. Sudah terlalu lama kami puasa Eropa; segera bawa pulang trofi internasional untuk mengembalikan kehormatan. Bekerja cerdas, dan jangan boros. Visca el Barça!"
 """
-            kecepatan_ketik = 0.01  # Jeda waktu antar karakter (dalam detik)
+            kecepatan_ketik = 0.01  # jeda waktu antar karakter (dalam detik)
 
             for karakter in teks:
                 print(karakter, end='', flush=True)
@@ -157,6 +164,8 @@ Management : "Selamat datang di Barcelona, {user}. Kontrak telah sah. Anda datan
             input("akhir")
             login_biasa = True
             awal_1 = True
+            bar_progres(3, "Memproses login")
+            jeda()
             return user, login_biasa, awal_1
 
         elif pilihan_4 == "2":
