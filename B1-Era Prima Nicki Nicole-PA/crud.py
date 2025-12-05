@@ -42,7 +42,7 @@ def tampil_starting(data_club):
                                  [i][2], f"€{data_club["mf"][i][3]:,}", data_club["mf"][i][4], data_club["mf"][i][5]])
     for i in range(len(data_club["fw"])):
         if i <= 2:
-            nomor = i + 10
+            nomor = i + 9
             data_starting.append([f"{nomor}.", data_club["fw"][i][0], "FW", data_club["fw"][i][1], data_club["fw"]
                                  [i][2], f"€{data_club["fw"][i][3]:,}", data_club["fw"][i][4], data_club["fw"][i][5]])
 
@@ -68,15 +68,15 @@ def tampil_cadangan(data_club):
                                  [i][2], f"€{data_club["df"][i][3]:,}", data_club["df"][i][4], data_club["df"][i][5]])
     for i in range(len(data_club["mf"])):
         if i > 2:
-            nomor = i - 3 + \
-                (len(data_club["gk"]) - 1) + (len(data_club["df"]) - 3)
+            nomor = i - 2 + \
+                (len(data_club["gk"]) - 1) + (len(data_club["df"]) - 4)
             data_cadangan.append([f"{nomor}.", data_club["mf"][i][0], "MF", data_club["mf"][i][1], data_club["mf"]
                                  [i][2], f"€{data_club["mf"][i][3]:,}", data_club["mf"][i][4], data_club["mf"][i][5]])
     for i in range(len(data_club["fw"])):
         if i > 2:
-            nomor = i - 3 + \
+            nomor = i - 2 + \
                 (len(data_club["gk"]) - 1) + \
-                (len(data_club["df"]) - 3) + (len(data_club["mf"]) - 2)
+                (len(data_club["df"]) - 4) + (len(data_club["mf"]) - 3)
             data_cadangan.append([f"{nomor}.", data_club["fw"][i][0], "FW", data_club["fw"][i][1], data_club["fw"]
                                  [i][2], f"€{data_club["fw"][i][3]:,}", data_club["fw"][i][4], data_club["fw"][i][5]])
 
@@ -768,7 +768,7 @@ def menu_login_biasa(user, club_pengguna, data_club_pengguna):
                         ["[2]", "Jual pemain"],
                         ["[0]", "Kembali"]
                     ])
-                    print(colored(tabel_menu_admin, "green"))
+                    print(colored(tabel_transfer, "green"))
 
                     pilihan_3 = input("Pilih menu (1-2) = ").strip()
 
@@ -883,7 +883,7 @@ def menu_login_biasa(user, club_pengguna, data_club_pengguna):
                         ["[2]", "Jual pemain"],
                         ["[0]", "Kembali"]
                     ])
-                    print(colored(tabel_menu_admin, "green"))
+                    print(colored(tabel_transfer, "green"))
 
                     pilihan_3 = input("Pilih menu (1-2) = ").strip()
 
@@ -998,7 +998,7 @@ def menu_login_biasa(user, club_pengguna, data_club_pengguna):
                         ["[2]", "Jual pemain"],
                         ["[0]", "Kembali"]
                     ])
-                    print(colored(tabel_menu_admin, "green"))
+                    print(colored(tabel_transfer, "green"))
 
                     pilihan_3 = input("Pilih menu (1-2) = ").strip()
 
